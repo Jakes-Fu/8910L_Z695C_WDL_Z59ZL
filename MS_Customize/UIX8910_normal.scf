@@ -1,0 +1,322 @@
+
+
+#define RAM_EXEC_CORE_CODE_BASE   +0
+
+#define FLASH_PHY_ADDR	0x60000000
+
+#ifdef FLASH_SIZE_128MBIT
+#define FLASH_PHY_ADDR_B 0x60BA0000
+#endif
+
+#if defined(FLASH_SIZE_128MBITX64MBIT_NEW) || defined(FLASH_SIZE_128MBITX64MBIT_OLD)
+#define FLASH_PHY_ADDR_B 0x70000000
+#endif
+
+#if defined(CHIP_VER_UIS8910FF)
+#define IMAGE_ENTRY_ADDR_OFFSET	(0x00020000)
+#else
+#define IMAGE_ENTRY_ADDR_OFFSET	(0x00010000)
+#endif
+
+;;#ifdef NOR_BOOTLOADER_SUPPORT
+	#ifdef SECURE_BOOT_SUPPORT
+		;;1024 bytes is the Header added in signed kernel binary for Secure Boot
+		#define IMAGE_ENTRY_ADDR	(FLASH_PHY_ADDR+IMAGE_ENTRY_ADDR_OFFSET+1024)		
+	#else
+		#define IMAGE_ENTRY_ADDR	(FLASH_PHY_ADDR+IMAGE_ENTRY_ADDR_OFFSET)
+	#endif
+;;#else
+;;	#define IMAGE_ENTRY_ADDR	(FLASH_PHY_ADDR+0x10000)
+;;#endif
+
+#ifdef BLUETOOTH_SUPPORT_SPRD_BT
+#define BT_CODE_SIZE 0x3B000 
+#endif
+
+;---------------------------------------------------------------------;
+; USER image region                                                   ;
+; Be carefully to put your code in this image                         ;
+;     Cause it can't be called when startup                           ;
+;---------------------------------------------------------------------;
+
+LOAD_KERNEL_IMAGE IMAGE_ENTRY_ADDR 0x00A60000
+{
+    EXEC_KERNEL_IMAGE IMAGE_ENTRY_ADDR 0x64
+    {
+        tx_illdb.o (Init, +First)
+    }
+    
+    ROM_EXEC_FLASH (IMAGE_ENTRY_ADDR+0x64) FIXED
+    {
+    	spiflash_cfg.o(SPIFLASH_CFG_TABLE)
+    	spiflash_cfg.o(SPIFLASH_CFG_TABLE_DETAIL)
+    }
+    ROM_EXEC_DFILE +0x0
+    {
+    	;flash_cfg.o(DFILE_DOWNLOAD_CFG)
+    	spiflash_cfg.o(DFILE_DOWNLOAD_CFG)
+    }
+    
+    ROM_EXEC_SPIFLASH_TYPE +0x0
+    {
+    	spiflash_cfg.o(SPIFLASH_TYPE_CFG)
+    }
+    
+    ROM_EXEC_SFC_INIT +0x0
+    {
+    	sfc_phy_uix8910.o (SFC_INIT_IN_FLASH)
+    	spiflash_v2.o (SPIFLASH_INIT_IN_FLASH)
+    }
+
+    ROM_KERNAL_EXEC +0 0xC00000 	
+    {
+        __main.o               (+RO)
+        * (Region$$Table)
+        * (ZISection$$Table)
+         *armlib*              (+RO)
+        ; *cpplib*             (+RO)
+        ; *(C$$pi_ctorvec)
+        ;*(C$$pi_dtorvec)
+        main.a                (+RO)
+        main.o                (+RO)
+        *spzip.a              (+RO)
+        *chip_drv.a           (+RO)
+        ;*rtos.a               (+RO)
+		*mmk_main.a            (+RO)
+		*mmk_sys_main.a        (+RO)
+		*spml_main.a           (+RO)
+		*ctrl.a               (+RO)
+#if defined(SRAM_SIZE_16MBIT) || defined(SRAM_SIZE_32MBIT) || defined(SRAM_SIZE_128MBIT)
+    #if !defined(MODEM_PLATFORM)
+         ;*mpeg4_codec.a       (+RO)
+         ;*dv.a                (+RO)
+         ;*midisoundbank.a     (+RO)
+         *wav.a	               (+RO)
+         mmk_app.o             (.text, .constdata)
+         mmk_msg.o             (.text, .constdata)
+         mmk_window.o          (.text, .constdata)
+         mmk_shell.o           (.text, .constdata)
+         mmk_handle.o          (.text, .constdata)
+         mmk_applet.o          (.text, .constdata)
+         mmimain.o             (.text, .constdata)
+         guictrl.o             (.text, .constdata)
+         guigraph.o            (.text, .constdata)
+         guiwin.o              (.text, .constdata)
+         guires_img.o          (.text, .constdata)
+         guisoftkey.o          (.text, .constdata)
+         *theme*.o             (.text, .constdata)
+         mmi_common.o          (.text, .constdata)
+         mmi_default.o         (.text, .constdata)
+         mmi_resource.o        (.text, .constdata)
+    #endif
+#endif
+        *refbase.a             (+RO)
+         rpc.a             (+RO)
+        *custom_drv.a          (+RO)
+        *version.a             (+RO)
+        *efs.a                 (+RO)
+        *ucom.a                (+RO)
+    #if !defined(MODEM_PLATFORM)
+        *scm.a                 (+RO)
+        ;*isp_service.a        (+RO)
+        ;*img_proc.a           (+RO)
+        *img_proc_core.a       (+RO)
+        *ubot.a                (+RO)
+        *display_core.a        (+RO)
+        *lcd*.a                (+RO)
+        ;*dc.a                 (+RO)
+        ;*upcc.a               (+RO)
+        ;*scp.a                (+RO)
+        ;*vsp.a                (+RO)
+        ;*utility_performance.a (+RO)
+    #endif
+        *bsd.a                 (+RO)
+        ;*mux.a                (+RO)
+        *audioservice.a        (+RO)
+        *layer1.a              (+RO)
+        *logsave.a             (+RO)
+        ;*aud_dev.a            (+RO)
+        *usbservice.a          (+RO)
+        ;*ivMagicVoice.a       (+RO)
+        ;optinal, just to fill kernel image space
+        ;*bt_pal_*.a           (+RO)
+        ;*sfs.a                (+RO)
+        ;*sim.a                (+RO)
+        ;*ps.a                 (+RO)
+        ;*l4.a                 (+RO)
+        ;*midi.a               (+RO)
+        ;*daps.a               (+RO)
+        ;*spml.a               (+RO)
+        *chip_base.a           (+RO)
+#if defined(GPS_SUPPORT) && defined(GPS_CHIP_VER_GREENEYE2)
+        *qxsupl.a              (+RO)
+#endif
+		sleep_aon_init_uix8910.o    (+RO)
+		chip_phy_uix8910.o     (+RO)		
+#ifndef BZP_SUPPORT
+        *(+RO)
+#endif
+		;*mp3_new.a(.text, .constdata)
+		;*img_proc.a(.text, .constdata)
+		;*img_proc_core.a(.text, .constdata)
+		*mpeg4_codec.a(.text, .constdata)
+	    *aac.a(.text, .constdata)
+		*h264_codec.a(.text, .constdata)
+		
+	}
+
+	RAM_EXEC_CORE_CODE  CHIP_SRAM_BASE
+	{
+        ;*chip_base.a    (+RO)
+        *armlib/h_*  (+RO)
+		sleep_asm_uix8910.o   (C$$code,C$$data)
+        aeabi_sdivfast.o  (.text, .constdata, .text_udiv)
+        aeabi_memset.o  (.text, .constdata)
+        sfc_phy_uix8910_v2.o(SFC_DRV_CODE)
+        sfc_hal_v2.o(.text, .constdata)
+        spi_flash_common_v2.o(.text, .constdata)
+        secure_write_flash.o(.text, .constdata)
+        ;esmt.o(.text, .constdata)
+        ;fidelix.o(.text, .constdata)
+        fidelix_fm25m.o(.text, .constdata)
+        giga.o(.text, .constdata)
+        macronix.o(.text, .constdata)
+        ;micron.o(.text, .constdata)
+        ;spansion.o(.text, .constdata)
+        ;sst.o(.text, .constdata)
+        winbond.o(.text, .constdata)
+        berg.o(.text, .constdata)
+        spiflash_v2.o(SPIFLASH_CODE)
+        spiflash_cfg.o(SPIFLASH_CFG_CODE)
+        flash.o(FLASH_DRV_CODE)
+		uix8910_stub.o(.text, .constdata)
+		*rtos.a               (+RO)
+		*v7_mmu_cache.o (mmu_functions_in_ddr)
+		;mmu_bzp.o   (+RO)
+		
+#if defined(GPS_SUPPORT) && defined(GPS_CHIP_VER_GREENEYE2) && defined(GPS_MINI_LOG_SUPPORT)
+        greeneye2_comm.o              (GPS_MINILOG_RAM)
+#endif        
+	}
+
+    ;add jbed java
+	JBED_STACK_ZI +0
+	{
+	  jbed_app.o(+ZI)
+	}
+
+	RAM_ZI_UNINIT +0  UNINIT
+	{
+        mem_prod.o(LCD_FRAME_BUF_AREA)
+        mem_prod.o(BYTE_HEAP_AREA)
+	}
+    	;add ia java
+	jblend_ram +0
+	{
+	  jblend_*.o(+RW,+ZI)
+	}
+    ;IMG$$RAM_RW$$LIMIT will be used to check the case of overflow
+    RAM_RW +0
+    {
+        * (+RW)
+        * (+ZI)
+    }
+
+;;#if defined(VM_TABLE_CONFIG_TINY) || defined(VM_TABLE_CONFIG_SMALL)
+#ifdef BLUETOOTH_SUPPORT_SPRD_BT
+    BT_Code (CHIP_SRAM_BASE + CHIP_SRAM_SIZE - SYS_MMU_CACHE_SIZE - MMU_PSRAM_SWAP_SIZE)  EMPTY -BT_CODE_SIZE
+    {
+        ;Empty For BT Code
+    }
+#endif
+	SRAM_RES  (CHIP_SRAM_BASE + CHIP_SRAM_SIZE - SYS_MMU_CACHE_SIZE) -MMU_PSRAM_SWAP_SIZE
+    {
+       *custom_drv.a (PHY_MMU_PSRAM_SWAP)
+    }
+;;#else
+;;#ifdef BLUETOOTH_SUPPORT_SPRD_BT
+;;    BT_Code (CHIP_SRAM_BASE + CHIP_SRAM_SIZE - SYS_MMU_CACHE_SIZE)  EMPTY -BT_CODE_SIZE
+;;    {
+;;        ;Empty For BT Code
+;;    }
+;;#endif
+;;#endif
+
+    SYS_MMU_MEM_AREA  (CHIP_SRAM_BASE + CHIP_SRAM_SIZE)  EMPTY -SYS_MMU_CACHE_SIZE
+    {
+       ;Empty For MMU Cache
+    }
+
+    IRAM_FIXED   CHIP_IRAM_BASE   CHIP_RESET_CODE_OFF
+    {
+        ;*armlib/h_*  (+RO)
+        ;emc_phy_v5.o (EMC_FUNC_IN_IRAM)
+        ;emc_phy_v5.o (EMC_REG_BUF_IN_IRAM)
+        ;normcp_spec.o(NORMCP_SPEC_FUNC_IN_SRAM)
+
+        ;sleep_asm_uix8910.o (C$$code,C$$data)
+        fiq_misc_drv.o(DSP_FIQ_CODE_IRAM)
+        *chip_base.a (MMU_VM_CACHE)
+        ;*main.a (LOAD_RAM_KERNEL);;for multi_bin
+        auto_download.o (AUTODL_IRAM_RW)
+
+        ;smc_phy_6531efm.o (SMC_CFG_IN_IRAM)
+        ;smc_phy_6531efm.o (+RW, +ZI)
+        ;aeabi_sdivfast.o  (.text, .constdata, .text_udiv)
+        ;aeabi_memset.o  (.text, .constdata)
+    }
+
+    ; IRAM reset code allocation
+	RESET_CODE (CHIP_IRAM_BASE + CHIP_RESET_CODE_OFF)  CHIP_RESET_CODE_SIZE
+	{
+	    ;chip_phy_uix8910.o(CHIP_RESET_CODE)
+	}
+}
+
+#ifdef BZP_SUPPORT
+LOAD_USER_IMAGE 0xD0000000 0x00A60000
+{
+#ifdef WRE_VIRTUALDISK_SUPPORT
+    EXEC_USER_IMAGE +0x0 
+    {
+        mmiwre_adaptor.o (+RO-DATA)
+    }
+#else
+    EXEC_USER_IMAGE +0x0 0x00400000
+    {
+        .any (+RO)
+    }
+#endif
+    EXEC_USER_IMAGE_1 +0x0 0x00400000
+    {
+        .any (+RO)
+    }
+    EXEC_USER_IMAGE_2 +0x0 0x00400000
+    {
+        .any (+RO)
+    }
+    
+	EXEC_USER_IMAGE_3 +0x0 0x00400000
+	{
+	  .any(+RO)
+	}
+	EXEC_USER_IMAGE_4 +0x0 0x00400000
+	{
+	  .any(+RO)
+	}
+	EXEC_USER_IMAGE_5 +0x0 0x00400000
+	{
+	  .any(+RO)
+	}	
+}
+#endif
+
+;for modem bin bzp
+LOAD_FLASH_B_DFILE FLASH_PHY_ADDR_B 0x001000
+{
+    EXEC_FLASH_B_IMAGE +0x0 
+    {
+       spiflash_cfg.o(DFILE_DOWNLOAD_CFG_B)
+    }
+}
+

@@ -1,0 +1,65 @@
+
+[ Spinner usage ] 
+
+1.Create the spinner control with unique control id in window table. 
+   
+   CREATE_SPINNER_CTRL(ctrl_id)
+
+2. Set the parameters of ctrl_info and display_info as following while window-opening (MSG_OPEN_WINDOW).
+
+    GUIANIM_CTRL_INFO_T     ctrl_info = {0};
+    GUIANIM_DATA_INFO_T     data_info = {0};
+    GUIANIM_DISPLAY_INFO_T  display_info = {0};
+    MMI_STRING_T            spinner_text = {0};
+  
+    //set control info
+    ctrl_info.ctrl_id = MMI_TEST_SPINNER_CTRL_ID;
+    ctrl_info.is_ctrl_id = TRUE;
+    data_info.anim_id = ANIM_PUBWIN_WAIT;
+
+    //set display info 
+    display_info.align_style    = GUIANIM_ALIGN_NONE;
+    display_info.is_play_once   = FALSE;
+    display_info.is_bg_buf      = TRUE;
+    display_info.bg.bg_type     = GUI_BG_COLOR;
+    display_info.bg.color       = MAKE_BREW_RGB(0x02,0x59,0xA2);
+    
+    GUIANIM_SetParam(&ctrl_info, &data_info, PNULL, &display_info);
+  
+3. Set the text by text buffer or text id. 
+  
+    Two ways to set the text:
+
+    1) Set by text buffer 
+       PUBLIC BOOLEAN CTRLANIM_SetSpinnerText(
+                                               MMI_CTRL_ID_T  ctrl_id,    
+                                               MMI_STRING_T   *stText
+                                              );
+
+		   	********************************************************************************
+				*	example:																													        	 *									
+        * wchar label_text[] = L"Please wait...";                                      *
+        * spinner_text.wstr_ptr = label_text;                                          *
+        * spinner_text.wstr_len = MMIAPICOM_Wstrlen(label_text);                       *
+        * CTRLANIM_SetSpinnerText(MMI_TEST_SPINNER_CTRL_ID, &spinner_text);            *
+        ********************************************************************************          
+
+     2) Set by text id 
+        PUBLIC BOOLEAN CTRLANIM_SetSpinnerTextById(
+                                                   MMI_CTRL_ID_T  ctrl_id,
+                                                   MMI_TEXT_ID_T  text_id
+                                                   );
+         
+       	*********************************************************************************
+        * example:                                                                      *
+	  		* CTRLANIM_SetSpinnerTextById(MMI_TEST_SPINNER_CTRL_ID, TXT_COMMON_WAITING);    *
+       	*********************************************************************************
+         	
+======================================================================================================================
+
+[ References ]
+
+Please refer to sample code for details.
+
+- MS_MMI_Main\source\mmi_app\app\sample\c\sample_ms_spinner_ctrl.c
+- MS_MMI_Main\source\mmi_app\app\sample\h\sample_ms_spinner_ctrl.h

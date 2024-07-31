@@ -1,0 +1,50 @@
+#if 1 //def 
+
+//RES_ADD_STRING(STXT_CALL_DIVERT, "Call forwarding")
+RES_ADD_STRING(STR_FWD_HDR_FORWARD_EXT02, "Forward calls")
+RES_ADD_STRING(STR_FWD_LIST_FORWARD_EXT02, "Forward calls")
+RES_ADD_STRING(STR_FWD_HDR_NUM_EXT02, "SIM numbers")
+RES_ADD_STRING(STR_FWD_LIST_NUM_EXT02, "SIM numbers")
+RES_ADD_STRING(STR_SIM_LIST_SETT_EXT02, "SIM settings")
+RES_ADD_STRING(STR_WMLS_SETT_CONN_BEHAVIOR, "Mobile data connection")
+RES_ADD_STRING(STR_FWD_LIST_BTW_SIM_EXT02, "Between two SIMs")
+RES_ADD_STRING(STR_FWD_LIST_TO_SIM1_EXT02, "SIM 1 to SIM 2")
+RES_ADD_STRING(STR_FWD_LIST_TO_SIM2_EXT02, "SIM 2 to SIM 1")
+RES_ADD_STRING(STR_LIST_SIM_NUMBER_EXT01, "Enter SIM number")
+RES_ADD_STRING(STR_FWD_HDR_SMART_EXT02, "Smart Dual SIM")
+//RES_ADD_STRING(STR_ILIST_SIM_ONE, "SIM1")
+//RES_ADD_STRING(STR_ILIST_SIM_TWO, "SIM2")
+//RES_ADD_STRING(STR_FWD_LIST_SMART_EXT02, "Smart Dual SIM")
+RES_ADD_STRING(STR_FWD_LIST_OFF_EXT01, "Off")
+RES_ADD_STRING(STR_FWD_BETWEEN_SIMS_EXT01, "You can forward calls to one SIM when the other is unavailable.")
+
+RES_ADD_STRING(STR_SIM_LIST_NAME_EXT02, "SIM name")
+RES_ADD_STRING(STR_SIM_LIST_STATUS_EXT02, "Status")
+RES_ADD_STRING(STR_LIST_NETWORK_SELECTION_EXT01, "Network selection")
+RES_ADD_STRING(STXT_PIN_CODE_CNTRL, "PIN code request")
+RES_ADD_STRING(STXT_PIN_CHANGE, "Change PIN code")
+RES_ADD_STRING(STR_SIM_LIST_ONLINE_EXT02, "Online")
+RES_ADD_STRING(STR_SIM_LIST_OFFLINE_EXT02, "Offline")
+//RES_ADD_STRING(STR_HDR_NETWORK_SELECTION_EXT01, "Network selection (header)")
+
+RES_ADD_STRING(STR_DSSET_DSDS_ASKEVERYTIME, "Ask every time")
+
+//RES_ADD_STRING(STR_FWD_QUERY_ENABLE_EXT01,"Enable call forwarding between your two SIM cards? \nExtra charges may occur.")
+RES_ADD_STRING(STR_SMART_DUAL_SIM_EXT01,"Do you want to set up your Smart Dual SIM settings now?")
+RES_ADD_STRING(STR_FWD_NOTE_STATUS_1_EXT02, "SIM1\nCall forwarding: OK\nCall waiting: OK\nIf SIM1 is not reached, calls\nwill now be forwarded to No.")
+RES_ADD_STRING(STR_FWD_NOTE_STATUS_2_EXT02,"SIM2\nCall forwarding: OK\nCall waiting: OK\nIf SIM2 is not reached, calls\nwill now be forwarded to No.")
+//RES_ADD_STRING(STXT_OLD_PIN, "Enter current PIN code")
+
+RES_ADD_STRING(STR_FWD_NOTE_TWO_SIM_EXT01, "Can¡¯t enable. Please insert two SIM cards then choose this feature.")
+RES_ADD_STRING(STR_FWD_NOTE_SIM_NUMBER_EXT01, "Can¡¯t enable. SIM numbers not set successfully.")
+//RES_ADD_STRING(STXT_PIN_CHANGED, "Code changed.")
+RES_ADD_STRING(STR_SIM_NUMBER_SAVED_EXT01, "SIM numbers saved.")
+
+RES_ADD_STRING(STR_CONNECTIVITY_HDR_GPRS, "Preferred data SIM")
+
+RES_ADD_STRING(STR_LIST_PRE_SIM_CALL, "Call preferred SIM")
+RES_ADD_STRING(STR_HDR_PRE_SIM_CALL, "Call preferred SIM")
+RES_ADD_STRING(STR_LIST_PRE_SIM_MSG, "Message preferred SIM")
+RES_ADD_STRING(STR_HDR_PRE_SIM_MSG, "Message preferred SIM")
+
+#endif

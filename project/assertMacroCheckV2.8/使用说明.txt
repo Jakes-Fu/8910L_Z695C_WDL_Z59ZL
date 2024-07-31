@@ -1,0 +1,8 @@
+1 cmd 命令到 assertMacroCheckV2.8所在的文件夹目录下
+2 assertCheckDailyBuild.bat 扫描目录（如E:\lina_work\MOCOR_12C\MS_Code） 结果存放目录（如：E:\lina_work\MOCOR_12C\MS_Code\build）
+敲回车
+
+第二步骤举例：
+perl assertMacroCheck.pl E:\lina_work\MOCOR_12C\MS_Code E:\lina_work\MOCOR_12C\MS_Code\build
+
+3 去E:\lina_work\MOCOR_12C\MS_Code\build目录下查看扫描结果

@@ -1,0 +1,45 @@
+活动窗口
+s_zorder_system
+
+s_handle_list
+
+s_applet_system
+
+使用图层
+s_layer_arr
+
+s_mmk_timer
+
+tcb类型
+SCI_THREAD_T
+
+内存申请数据
+dbg_head
+
+大于SCI_SYSTEM_SPACE_ALLOC_THRESHOD的内存申请、释放记录
+s_sci_mem_alloc_rec_list
+
+s_app_mem_list[i]
+
+线程数据(Tasks info)
+s_static_thread_ptr_table
+
+线程数据(Stack info)
+_tx_thread_created_ptr
+
+内存头部信息(4*6=24)
+typedef struct MEM_HEADER_tag{
+    struct MEM_HEADER_tag * pre;
+    struct MEM_HEADER_tag * succ;
+    char                  * file_name;
+    int                   line;
+    unsigned long         size;
+    unsigned long         block_num;
+} MEM_HEADER_T;
+
+内存尾部校验字节
+#define MEM_DEBUG_END_FLAG   0xAA
+
+static_byte_heap
+
+sys_byte_heap_app

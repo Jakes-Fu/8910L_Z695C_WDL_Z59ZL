@@ -1,0 +1,1 @@
+make p=UIS8910_ROM_16MB_DS_DEBUG m=resource_main job=12

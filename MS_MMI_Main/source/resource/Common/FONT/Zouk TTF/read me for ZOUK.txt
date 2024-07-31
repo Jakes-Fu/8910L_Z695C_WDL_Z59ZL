@@ -1,0 +1,208 @@
+Malayalam Font
+NotoSansMalayalamUI-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 0
+     Shrink Percent: 85%
+  SPML:
+	   Max Brearing Y Delta: 3
+     Adjust Bearing Y for all font size: 3
+
+Tamil Font
+NotoSansTamilUI-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 4
+     Shrink Percent: 90%
+  SPML:
+     Point Size   14  13
+                  16  15
+     Max Brearing Y Delta: 3
+     Adjust Bearing Y for all font size: 0
+   
+Punjabi Font
+NotoSansGurmukhi-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 5
+     Shrink Percent: 90%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+   
+Bengali Font
+NotoSansBengaliUI-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 90%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+     
+Telugu Font
+NotoSerifTelugu-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 8
+     Shrink Percent: 85%
+     Adjust Bearing Y : 4
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 2
+
+Kannada Font
+NotoSansKannadaUI-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 82%
+     Adjust Bearing Y for all font size: 6
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+     
+Oriya Font
+NotoSansOriyaUI-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 90%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+     
+Arabic Font
+NotoKufiArabic-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 75%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+
+Latin Font
+Latin Basic Font
+NotoSans.ttf
+  Vector:
+   	 Max Brearing Y Delta: 4
+     Shrink Percent: 85%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+20170606 For Bug 679238, Add unicode 0xF858, 0xF859, 0xF85D, 0xF85E, 0xF862, 0xF863, 0xF867, 0xF868.
+20170628 For Bug 683437, 调整0x00E3, 0x00F1, 0x00F5, 0x0129上方"~"位置
+20211123 Adjust 0x0300 + gravecomb() GPOS in NotoSans-Regular.ttf
+
+Cyrillic(Russian)
+NotoSans-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 90%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+
+Ethiopic
+NotoSansEthiopic-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 90%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+
+Greek
+NotoSans-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 90%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+
+Gujarati
+NotoSerifGujarati-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 0
+     Shrink Percent: 88%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+ 
+Hebrew
+NotoSansHebrew-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 90%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+  
+Khmer
+NotoSansKhmerUI.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 85%
+     Adjust Bearing Y for all font size: 2
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+    
+Myanmar
+NotoSansMyanmarUI-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 90%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+    
+Sinhala
+NotoSansSinhala-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 90%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+    
+Thai
+NotoSansThaiUI-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 0
+     Shrink Percent: 85%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+    
+Tibetan
+NotoSansTibetan-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 90%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+    
+Simple Chinese
+HAN-GB2312
+NotoSansCJKsc-Regular.ttc
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 98%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+0xFF03  Adjust Bearing Y : -2
+
+Traditional Chinese / Traditional Chinese HK
+NotoSansCJKtc-Regular.ttc
+  Vector:
+   	 Max Brearing Y Delta: 2
+     Shrink Percent: 98%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0
+
+Hindi
+NotoSansDevanagari-Regular.ttf
+  Vector:
+   	 Max Brearing Y Delta: 4
+     Shrink Percent: 85%
+  SPML:
+     Max Brearing Y Delta: 2
+     Adjust Bearing Y for all font size: 0

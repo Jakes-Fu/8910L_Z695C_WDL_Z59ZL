@@ -1,0 +1,45 @@
+[ divider usage ] 
+
+1.Create the divider control with unique control id in window table. 
+   
+    CREATE_HEADER_AND_DIVIDER_CTRL(ctrl_id)
+
+2. Set divider theme 
+   
+    PUBLIC void CTRLHEADERANDDIVIDER_SetThemeColor(
+                                  		   MMI_HANDLE_T      win_handle,
+                                  		   MMI_CTRL_ID_T        ctrl_id,
+                                  		   GUI_COLOR_T       theme_color
+                                  		   );                                                       
+
+
+3. Set the label text 
+
+   PUBLIC void CTRLHEADERANDDIVIDER_SetText(
+  					    MMI_HANDLE_T    win_handle,
+                                	    MMI_CTRL_ID_T   ctrl_id,
+                                	    const wchar*    wstr_ptr, //[IN] string pointer
+                                	    uint16          wstr_len, //[IN] string length, <=16
+                                	    BOOLEAN         is_need_update //[IN] is flash
+ 					    );      
+
+
+
+5. Set the label text by text id
+   
+   PUBLIC void CTRLPROGRESSBAR_SetPos (
+ 					MMI_HANDLE_T    win_handle,
+                                	MMI_CTRL_ID_T   ctrl_id,
+                                  	MMI_TEXT_ID_T        text_id, //[IN] the string id
+                                  	BOOLEAN            is_need_update //[IN] is flash
+					);
+
+
+======================================================================================================================
+
+[ References ]
+
+Please refer to sample code for details.
+
+- MS_MMI_Main\source\mmi_app\app\sample\c\sample_ms_divider_ctrl.c
+- MS_MMI_Main\source\mmi_app\app\sample\h\sample_ms_divider_ctrl.h

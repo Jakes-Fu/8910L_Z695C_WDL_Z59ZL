@@ -1,0 +1,9 @@
+========shell script========
+shell_8910M_chip_cat1_UIS8910FF_ROM_16M_user
+
+========svn info==========
+URL: http://shsvn05/svn/prj_src/modem_iot/branches/Integration/2020/modem_iot_20B_uis8910ff
+Last Changed Rev: 64611
+Repository Root: http://shsvn05/svn/prj_src
+Revision: 64611
+========end==========

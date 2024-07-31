@@ -1,0 +1,12 @@
+load \MS_Code\atc\export\doc
+load \MS_Code\chip_drv\export\doc
+load \MS_Code\DAPS\export\doc
+load \MS_Code\l4\export\doc
+load \MS_Code\MS_MMI\export\doc
+load \MS_Code\MS_Ref\export\doc
+load \MS_Code\RTOS\export\doc
+
+load "\MS_Code\version\documents\Mocor Application Notes.doc"
+load \MS_Code\Build_Environment_Manual.doc
+load \MS_Code\MS_Customize\export\doc
+load \MS_Code\common\export\doc

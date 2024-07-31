@@ -1,0 +1,16 @@
+ROM_LOAD 0x0 0x300000
+{
+     EXEC_FOTA  0x0  0x300000
+     {
+          entry.o(vect, +First)
+          *(+RO)
+          *(+RW)
+          *(+ZI)
+     }
+     
+     EXEC_IRAM 0x40004000  0x00000D00
+     {
+         reboot.o(+RO)
+     }
+}
+

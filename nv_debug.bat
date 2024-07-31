@@ -1,0 +1,1 @@
+make p=UIS8910_ROM_16MB_DS_DEBUG m=nv_parameter update job=12

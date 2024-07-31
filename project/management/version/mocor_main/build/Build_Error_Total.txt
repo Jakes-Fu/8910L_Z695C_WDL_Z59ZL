@@ -1,0 +1,8 @@
+2011-12-5	14:56	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\app.log	11
+
+2011-12-5	14:56	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\fromelf.log	1
+
+2011-12-5	14:56	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\link.log	1
+
+2011-12-5	14:56	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\tmp\error.log	11
+

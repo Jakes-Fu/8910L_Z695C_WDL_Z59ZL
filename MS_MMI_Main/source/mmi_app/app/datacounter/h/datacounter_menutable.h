@@ -1,0 +1,103 @@
+#ifndef __DATACOUNTER_MENU_TABLE__
+#define __DATACOUNTER_MENU_TABLE__
+
+#include "guimenu.h"
+#include "mmi_text.h"
+#include "mmi_image.h"
+#include "mmi_common.h"
+#include "mmi_nv.h"
+#include "mmi_module.h"
+/**---------------------------------------------------------------------------*
+ **                         Compiler Flag                                     *
+ **---------------------------------------------------------------------------*/
+#ifdef __cplusplus
+    extern   "C"
+    {
+#endif
+
+
+typedef enum
+{
+// dataCounter main
+	MMI_DATACOUNTER_SIM_SETTINGS_SIM1 =0, 
+	MMI_DATACOUNTER_SIM_SETTINGS_SIM2,
+	MMI_DATACOUNTER_SIM_SETTINGS_ITEM_NUM
+}MMI_DATACOUNTER_SIM_SETTINGS_ITEM_ID_E;
+
+typedef enum
+{
+// dataCounter result
+	MMI_DATACOUNTER_PERIOD =0, 
+	MMI_DATACOUNTER_DATA,
+	MMI_DATACOUNTER_CALL,
+	MMI_DATACOUNTER_SMS,
+	MMI_DATACOUNTER_MMS,
+	MMI_DATACOUNTER_RESULT_ITEM_NUM
+}MMI_DATACOUNTER_OPTION_ITEM_ID_E;
+
+typedef enum
+{
+//   data set
+	MMI_DATACOUNTER_OFF =0, 
+	MMI_DATACOUNTER_ALL,
+	MMI_DATACOUNTER_SENT,
+	MMI_DATACOUNTER_RECEIVED,
+	MMI_DATACOUNTER_SET_ITEM_NUM
+}MMI_DATACOUNTER_SET_ITEM_ID_E;
+
+
+
+typedef enum
+{
+	MMI_DATACOUNTER_MENU_START = (MMI_MODULE_DATA_COUNTER << 16),
+	MMI_DATACOUNTER_CLEAR_ALL_COUNTER_DATA_MENU,
+	MMI_DATACOUNTER_CLEAR_DATA_COUNTER_DATA_MENU,
+	MMI_DATACOUNTER_CLEAR_CALL_COUNTER_DATA_MENU,
+	MMI_DATACOUNTER_CLEAR_SMS_COUNTER_DATA_MENU,
+	MMI_DATACOUNTER_CLEAR_MMS_COUNTER_DATA_MENU,
+	MMI_DATACOUNTER_PEROID_SET_LIST,
+	MMI_DATACOUNTER_DATA_ALERT_SET_OFF_MENU,
+	MMI_DATACOUNTER_DATA_ALERT_SET_ALL_MENU,
+	MMI_DATACOUNTER_DATA_ALERT_SET_SENT_MENU,
+	MMI_DATACOUNTER_DATA_ALERT_SET_RECEIVED_MENU,
+	MMI_DATACOUNTER_CALL_ALERT_SET_OFF_MENU,
+	MMI_DATACOUNTER_CALL_ALERT_SET_ALL_MENU,
+	MMI_DATACOUNTER_CALL_ALERT_SET_OUTGOING_MENU,
+	MMI_DATACOUNTER_CALL_ALERT_SET_INCOMING_MENU,
+	MMI_DATACOUNTER_SMS_ALERT_SET_OFF_MENU,
+	MMI_DATACOUNTER_SMS_ALERT_SET_ALL_MENU,
+	MMI_DATACOUNTER_SMS_ALERT_SET_SENT_MENU,
+	MMI_DATACOUNTER_SMS_ALERT_SET_RECEIVED_MENU,
+	MMI_DATACOUNTER_MMS_ALERT_SET_OFF_MENU,
+	MMI_DATACOUNTER_MMS_ALERT_SET_ALL_MENU,
+	MMI_DATACOUNTER_MMS_ALERT_SET_SENT_MENU,
+	MMI_DATACOUNTER_MMS_ALERT_SET_RECEIVED_MENU,
+	ID_DATACOUNTER_TOTAL
+}MMI_DATACOUNTER_MENU_ID_E;
+
+
+#define MENU_DEF(_TABLEID, _ITEMPTR, _STYLE, _TITLESTR, _TITLE_ICON, _TITLE_NUMICON, _TITLE_BACKGROUND, \
+	_ITEMCOUNT) \
+     _TABLEID,
+
+typedef enum
+{
+	DATACOUNTER_MENU_START_LABEL = (MMI_MODULE_DATA_COUNTER << 16),
+    #include "dataCounter_menutable.def"
+	DATACOUNTER_MENU_MAX_LABEL
+} DATACOUNTER_MENU_LABEL_E;
+
+#undef MENU_DEF
+PUBLIC void MMI_DataCounter_RegMenuGroup(void);
+
+/**---------------------------------------------------------------------------*
+ **                         Compiler Flag                                     *
+ **---------------------------------------------------------------------------*/
+#ifdef   __cplusplus
+    }
+#endif
+/*-------------------------------------------------------------------------*/
+
+
+#endif //__SMARTDUALSIM_MENU_TABLE__
+

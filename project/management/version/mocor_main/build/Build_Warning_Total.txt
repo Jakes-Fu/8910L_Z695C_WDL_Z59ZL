@@ -1,0 +1,52 @@
+2011-12-2	13:26	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\aac.log	18
+
+2011-12-2	13:26	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\bootloader.log	7
+
+2011-12-2	13:26	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\link.log	12
+
+2011-12-2	13:26	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\mp3_new.log	19
+
+2011-12-2	13:26	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\record.log	69
+
+2011-12-2	13:26	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\resource.log	3
+
+2011-12-2	14:59	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\bootloader.log	7
+
+2011-12-2	14:59	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\link.log	12
+
+2011-12-2	14:59	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\resource.log	3
+
+2011-12-2	16:50	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\aac.log	18
+
+2011-12-2	16:50	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\bootloader.log	7
+
+2011-12-2	16:50	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\link.log	12
+
+2011-12-2	16:50	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\mp3_new.log	19
+
+2011-12-2	16:50	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\record.log	69
+
+2011-12-2	16:50	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\resource.log	3
+
+2011-12-2	19:24	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\aac.log	18
+
+2011-12-2	19:24	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\bootloader.log	7
+
+2011-12-2	19:24	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\link.log	12
+
+2011-12-2	19:24	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\mp3_new.log	19
+
+2011-12-2	19:24	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\record.log	69
+
+2011-12-2	19:24	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\resource.log	3
+
+2011-12-5	14:56	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\aac.log	18
+
+2011-12-5	14:56	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\bootloader.log	7
+
+2011-12-5	14:56	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\mp3_new.log	19
+
+2011-12-5	14:56	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\record.log	69
+
+2011-12-5	14:56	guowen.li	\sc8800g2_openphone_240x400PDA_le_builddir\log\resource.log	3
+

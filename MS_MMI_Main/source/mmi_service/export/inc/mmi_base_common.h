@@ -1,0 +1,143 @@
+#ifndef __MMI_BASE_COMMON_H__
+#define __MMI_BASE_COMMON_H__
+
+#include "sci_types.h"
+#include "caf.h"
+#include "os_api.h"
+
+//the type of language, the sequence of language  in resource editor must be identical to it
+typedef enum
+{
+#ifdef MMI_SIM_LANGUAGE_SUPPORT
+    MMISET_LANGUAGE_AUTO,          // Auto.
+#endif
+    MMISET_LANGUAGE_ENGLISH,        //英文
+    MMISET_LANGUAGE_SIMP_CHINESE,   //中文简体 
+    MMISET_LANGUAGE_TRAD_CHINESE,   //中文繁体（台湾）
+    MMISET_LANGUAGE_ARABIC,         //阿拉伯
+    MMISET_LANGUAGE_FRENCH,         //法语
+    MMISET_LANGUAGE_HINDI,          //印第
+    MMISET_LANGUAGE_HUNGARIAN,      //匈牙利
+    MMISET_LANGUAGE_INDONESIAN,     //印度尼西亚
+    MMISET_LANGUAGE_MALAY,          //马来
+    MMISET_LANGUAGE_PORTUGUESE,     //葡萄牙
+    MMISET_LANGUAGE_RUSSIAN,        //俄语
+    MMISET_LANGUAGE_SPANISH,        //西班牙
+    MMISET_LANGUAGE_TAGALOG,        //他加诺
+    MMISET_LANGUAGE_THAI,           //泰语
+    MMISET_LANGUAGE_VIETNAMESE,     //越南语
+    MMISET_LANGUAGE_URDU,           //乌尔都
+    MMISET_LANGUAGE_ITALIAN,        //意大利
+    MMISET_LANGUAGE_PERSIAN,        //波斯
+    MMISET_LANGUAGE_TURKISH,        //土耳其
+    MMISET_LANGUAGE_GERMAN,         //德语
+    MMISET_LANGUAGE_GREEK,          //希腊
+    MMISET_LANGUAGE_HEBREW,         //希伯莱
+    MMISET_LANGUAGE_BENGALI,        //孟加拉
+    MMISET_LANGUAGE_CZECH,          //捷克
+    MMISET_LANGUAGE_SLOVENIAN,      //斯诺文尼亚
+    MMISET_LANGUAGE_ROMANIAN,       //罗马尼亚
+    MMISET_LANGUAGE_TELUGU,
+    MMISET_LANGUAGE_MARATHI,
+    MMISET_LANGUAGE_TAMIL,
+    MMISET_LANGUAGE_GUJARATI,
+    MMISET_LANGUAGE_KANNADA,
+    MMISET_LANGUAGE_MALAYALAM,
+    MMISET_LANGUAGE_ORIYA,
+    MMISET_LANGUAGE_PUNJABI,
+    MMISET_LANGUAGE_AFRIKAANS,
+    MMISET_LANGUAGE_ALBANIAN,
+    MMISET_LANGUAGE_ARMENIAN,
+    MMISET_LANGUAGE_AZERBAIJANI,
+    MMISET_LANGUAGE_BASQUE,
+    MMISET_LANGUAGE_BULGARIAN,
+    MMISET_LANGUAGE_CATALAN,
+    MMISET_LANGUAGE_CROATIAN,
+    MMISET_LANGUAGE_DANISH,
+    MMISET_LANGUAGE_DUTCH,
+    MMISET_LANGUAGE_ESTONIAN,
+    MMISET_LANGUAGE_FILIPINO,
+    MMISET_LANGUAGE_FINNISH,
+    MMISET_LANGUAGE_GALICIAN,
+    MMISET_LANGUAGE_GEORGIAN,
+    MMISET_LANGUAGE_HAUSA,
+    MMISET_LANGUAGE_ICELANDIC,
+    MMISET_LANGUAGE_IGBO,
+    MMISET_LANGUAGE_IRISH,
+    MMISET_LANGUAGE_KAZAKH,
+    MMISET_LANGUAGE_LATVIAN,
+    MMISET_LANGUAGE_LITHUANIAN,
+    MMISET_LANGUAGE_MACEDONIAN,
+    MMISET_LANGUAGE_MOLDOVAN,
+    MMISET_LANGUAGE_NORWEGIAN,
+    MMISET_LANGUAGE_POLISH,
+    MMISET_LANGUAGE_SERBIAN,
+    MMISET_LANGUAGE_SESOTHO,
+    MMISET_LANGUAGE_SLOVAK,
+    MMISET_LANGUAGE_SWEDISH,
+    MMISET_LANGUAGE_UKRAINIAN,
+    MMISET_LANGUAGE_YORUBA,
+
+    MMISET_LANGUAGE_XHOSA,		//科萨语	add. chenyg@spread. 2011-05-12
+    MMISET_LANGUAGE_ZULU,		//祖鲁语	add. chenyg@spread. 2011-05-12
+    MMISET_LANGUAGE_ASSAMESE,		//(印度语支的)阿萨姆语	add. chenyg@spread. 2011-05-12
+    MMISET_LANGUAGE_SWAHILI,	//斯瓦西里	add. chenyg@spread. 2011-05-12
+    MMISET_LANGUAGE_MYANMAR,    //缅甸语
+    MMISET_LANGUAGE_AMHARIC,    //阿姆哈拉
+    MMISET_LANGUAGE_KHMER,    //柬埔寨
+    MMISET_LANGUAGE_LAO,    //老挝
+    MMISET_LANGUAGE_UYGHUR,    //维吾尔语
+    MMISET_LANGUAGE_TIBETAN,   //藏语
+    MMISET_LANGUAGE_SINHALESE,	//僧伽罗
+    MMISET_LANGUAGE_BOSNIAN,
+    MMISET_LANGUAGE_TRAD_CHINESE_HK,
+    MMISET_LANGUAGE_AMERICAN,	//English-US
+    MMISET_LANGUAGE_PORTUGUESE_BR,
+    MMISET_LANGUAGE_TURKMEN_LATIN,
+    MMISET_LANGUAGE_SPANISH_AM,
+    MMISET_LANGUAGE_BELARUS,
+    MMISET_LANGUAGE_LINGALA,
+    MMISET_LANGUAGE_MALAGASY,
+    MMISET_LANGUAGE_PASHTO,
+    MMISET_LANGUAGE_UZBEK,
+    MMISET_LANGUAGE_BENGALI_BD,
+    MMISET_LANGUAGE_TEST,
+	
+    MMISET_MAX_LANGUAGE
+} MMISET_LANGUAGE_TYPE_E;
+
+#ifdef STANDALONE_TEST
+//#define _MMI_SLST_UNIT_TEST_
+//#define _MMI_DLST_UNIT_TEST_
+//#define _MMI_STCK_UNIT_TEST_
+//#define _MMI_QUEUE_UNIT_TEST_
+//#define _MMI_ALST_UNIT_TEST_
+//#define _MMI_HASHMAP_UNIT_TEST_
+//#define _MMI_STRING_UNIT_TEST_
+//#define _MMI_TIMEDATE_STRING_UNIT_TEST_
+//#define _MMI_TREE_UNIT_TEST_
+
+//#define MMIBD_ASSERT_DEBUG  assert
+#define SCI_ALLOCA          malloc
+#define SCI_ReAlloc         realloc
+#define SCI_MEMCPY          memcpy
+#define SCI_MEMMOVE         memmove
+#define SCI_FREE            free
+#define SCI_Free            free
+#define SCI_MallocEx        malloc
+#define PNULL               0
+
+typedef unsigned int    uint32;
+typedef int             int32;
+typedef unsigned short  uint16;
+typedef short           int16;
+typedef unsigned char   uint8;
+typedef uint16          wchar;
+typedef int             bool32;
+typedef int             status_t;
+typedef int             ssize_t;
+#endif
+
+#define MMIBD_ASSERT_DEBUG(x)
+
+#endif

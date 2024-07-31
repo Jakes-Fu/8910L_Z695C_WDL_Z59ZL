@@ -1,0 +1,17 @@
+/*
+ * Copyright 2011 Myriad Group AG. All Rights Reserved.
+ * $Id: //depot/dev/project/spreadtrum/6530_new/export/inc/mmijava_menutable.def#1 $
+ */
+
+MENU_DEF(JAVA_MAIN_POPUP_MENU, java_main_popup_menu, GUIMENU_STYLE_POPUP, TXT_NULL, \
+    COMMON_IMAGE_NULL, COMMON_IMAGE_NULL, COMMON_IMAGE_NULL, GUIMENU_ITEM_NUM(java_main_popup_menu))
+
+#ifdef SUPPORT_DOWNLOAD
+MENU_DEF(MENU_DOWNLOAD_BOX,menu_download_box, GUIMENU_STYLE_POPUP, STXT_OPTION, \
+    IMAGE_NULL, IMAGE_NULL, IMAGE_NULL, GUIMENU_ITEM_NUM(menu_download_box))
+#endif
+
+#ifdef MMI_PDA_SUPPORT
+MENU_DEF(JAVA_LONG_PRESS_POPUP_MENU, java_long_press_popup_menu, GUIMENU_STYLE_POPUP_AUTO, TXT_NULL, \
+    COMMON_IMAGE_NULL, COMMON_IMAGE_NULL, COMMON_IMAGE_NULL, GUIMENU_ITEM_NUM(java_long_press_popup_menu))
+#endif

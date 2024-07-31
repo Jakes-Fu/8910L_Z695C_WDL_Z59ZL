@@ -1,0 +1,41 @@
+
+
+
+E:\guowenli\main_6530\MS_Code\build\sc8800g2_openphone_240x400PDA_le_builddir\log\app.log
+
+001------>"MS_MMI\source\mmi_app\app\setting\h\mmiset_menutable.def", line 115: Error: C2456E: undeclared name, inventing 'extern int menu_lock_effect_settype'
+002------>"MS_MMI\source\mmi_app\app\setting\h\mmiset_menutable.def", line 115: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEYLOCK_TYPE_SELECT'
+003------>"MS_MMI\source\mmi_app\app\setting\h\mmiset_menutable.def", line 115: Serious error: C2432E: non-constant initialiser
+004------>"MS_MMI\source\mmi_app\app\setting\h\mmiset_menutable.def", line 115: Serious error: C2432E: non-constant initialiser
+005------>"MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 522: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_LONG_TP'
+006------>"MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 527: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_SLIDEDOWN'
+007------>"MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 533: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_SLIDE_SCROLLKEY'
+008------>"MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 539: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_SMART_SLIDEDOWN'
+009------>"MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 545: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_SLIDE_IPHONE'
+010------>"MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 551: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_GRAPHIC'
+011------>"MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 557: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_ICON_RING'
+
+
+E:\guowenli\main_6530\MS_Code\build\sc8800g2_openphone_240x400PDA_le_builddir\log\fromelf.log
+
+001------>Error: Q0122E: Could not open file 'build/sc8800g2_openphone_240x400PDA_le_builddir/img/SC8800G_sc8800g2_openphone_240x400PDA_le.axf'.
+
+
+E:\guowenli\main_6530\MS_Code\build\sc8800g2_openphone_240x400PDA_le_builddir\log\link.log
+
+001------>Fatal error: L6002U: Could not open file build/sc8800g2_openphone_240x400PDA_le_builddir/lib/app.a.
+
+
+E:\guowenli\main_6530\MS_Code\build\sc8800g2_openphone_240x400PDA_le_builddir\tmp\error.log
+
+001------>[app] "MS_MMI\source\mmi_app\app\setting\h\mmiset_menutable.def", line 115: Error: C2456E: undeclared name, inventing 'extern int menu_lock_effect_settype'
+002------>[app] "MS_MMI\source\mmi_app\app\setting\h\mmiset_menutable.def", line 115: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEYLOCK_TYPE_SELECT'
+003------>[app] "MS_MMI\source\mmi_app\app\setting\h\mmiset_menutable.def", line 115: Serious error: C2432E: non-constant initialiser
+004------>[app] "MS_MMI\source\mmi_app\app\setting\h\mmiset_menutable.def", line 115: Serious error: C2432E: non-constant initialiser
+005------>[app] "MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 522: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_LONG_TP'
+006------>[app] "MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 527: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_SLIDEDOWN'
+007------>[app] "MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 533: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_SLIDE_SCROLLKEY'
+008------>[app] "MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 539: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_SMART_SLIDEDOWN'
+009------>[app] "MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 545: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_SLIDE_IPHONE'
+010------>[app] "MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 551: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_GRAPHIC'
+011------>[app] "MS_MMI\source\mmi_app\app\setting\c\mmiset_lock_effect.c", line 557: Error: C2456E: undeclared name, inventing 'extern int TXT_SET_KEY_LOCK_ICON_RING'

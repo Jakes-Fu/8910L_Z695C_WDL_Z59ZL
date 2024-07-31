@@ -1,0 +1,380 @@
+element * CHECKEDOUT
+
+# Begin
+
+element \MS_MMI\documents\... /main/LATEST
+element \MS_Customize\documents\... /main/LATEST
+
+# Before Apply Label
+element \MS_Code\atc_3g\... BASE_10A.W11.35
+element \MS_Code\dm_2g_layer1\... BASE_10A.W11.35
+element \MS_Code\dm_2g_layer1_dsp\... BASE_10A.W11.35
+element \MS_Code\dm_2g_ps\... BASE_10A.W11.35
+
+
+element \MS_APP\Third-party\IA_JAVA\... /main/LATEST
+element \Third-party\cstar\... /main/LATEST
+element \MS_APP\Third-party\cstar\... /main/LATEST
+element \MS_APP\Third-party\Mplapi\... /main/LATEST
+element \Third-party\dm\... /main/LATEST
+element \MS_APP\Third-party\Dm\... /main/LATEST
+element \Third-party\hw\... /main/LATEST
+element \MS_APP\Third-party\hw\... /main/LATEST
+element \Third-party\sogou\... /main/LATEST
+element \Third-party\t9... /main/LATEST
+element \Third-party\opera\... /main/LATEST
+element \Third-party\myriad_java\... /main/LATEST
+
+element \MS_Code\tools\... /main/LATEST
+element \Tools\Common\Bin\ASN1DPSrv.dll ...\r7_for_hsupa\1
+element \Tools\Common\Bin\ASN1DPSrv.lib ...\r7_for_hsupa\1
+element \Tools\Common\Bin\ASN1DPSrv_sys.dll ...\r7_for_hsupa\1
+element \Tools\Common\Bin\ASN1DPSrv_sys.lib ...\r7_for_hsupa\1
+element \Tools\... /main/LATEST
+element \Diagnostic\... /main/LATEST
+element \MS_MMI\source\winsimulator_tp\... /main/LATEST
+
+# 2.5G Base Version Selector
+# update for TD
+element \MS_Code\l4\export\inc BASE_10A.W11.35.03
+element \MS_Code\l4\export\inc\mn_api_td.h BASE_10A.W11.35.03
+element \MS_Code\l4\export\inc\mn_type_td.h BASE_10A.W11.35.03
+element \MS_Code\l4\export\inc\mn_em_api.h BASE_10A.W11.35.03
+
+element \MS_Code\l4\export\... BASE_10A.W11.35.03
+element \MS_Code\common\export\inc\tasks_id.h BASE_10A.W11.35.03
+element \MS_Code\common\export\inc\sig_code.h BASE_10A.W11.35.03
+element \MS_Code\common\export\inc\tasks_def.h BASE_10A.W11.35.03
+
+element \Layer1\... BASE_10A.W11.35.03
+element \PS\... BASE_10A.W11.35.03
+element \MS_Code\atc\... BASE_10A.W11.35.03
+element \MS_Code\char_lib\... BASE_10A.W11.35.03
+element \MS_Code\layer1_dsp\... BASE_10A.W11.35.03
+element \MS_Code\logsave\... BASE_10A.W11.35.03
+element \MS_Code\l4\... BASE_10A.W11.35.03
+element \MS_Code\sim\... BASE_10A.W11.35.03
+
+element \MS_Code\make\atc\atc.mk BASE_10A.W11.35.03
+element \MS_Code\make\char_lib\char_lib.mk BASE_10A.W11.35.03
+element \MS_Code\make\layer1\layer1.mk BASE_10A.W11.35.03
+element \MS_Code\make\layer1_dsp\layer1_dsp.mk BASE_10A.W11.35.03
+element \MS_Code\make\logsave\logsave.mk BASE_10A.W11.35.03
+element \MS_Code\make\l4\l4.mk BASE_10A.W11.35.03
+element \MS_Code\make\ps\ps.mk BASE_10A.W11.35.03
+element \MS_Code\make\sim\sim.mk BASE_10A.W11.35.03
+
+element \MS_Code\common\nv_parameters\... DM_BASE_DMPS_W11.35
+
+element \MS_Code\common\documents\... BASE_10A.W11.35.03
+element \MS_Code\common\source\... BASE_10A.W11.35.03
+element \MS_Code\common\nv_parameters BASE_10A.W11.35.03
+element \MS_Code\common\nv_parameters\Calibrationparam\... BASE_10A.W11.35.03
+element \MS_Code\common\nv_parameters\DownloadParam\... BASE_10A.W11.35.03
+element \MS_Code\common\nv_parameters\nv_classmark\... BASE_10A.W11.35.03
+element \MS_Code\common\nv_parameters\NVParameters_sample\... BASE_10A.W11.35.03
+element \MS_Code\common\nv_parameters\NVParameters_sc6600r3_qs518_rfmd\... BASE_10A.W11.35.03
+element \MS_Code\common\nv_parameters\sc6600x_qs518_rfmd\... BASE_10A.W11.35.03
+element \MS_Code\common\nv_parameters\sc6600x_qs518_skyworks\... BASE_10A.W11.35.03
+
+element \DSP\Source\DSP_6600V\... SEINE_DSP_R2.0.0014
+element \DSP\... MOCOR.DSP_V2.1.0125
+
+element \MS_MMI\source\resource\mmi_res_240x320\str_table.xls /main/LATEST
+
+element \P_TianJi2\Source\msd\build\obj\gen\debug /main/LATEST
+element \P_TianJi2\Source\msd\build\obj\gen\production /main/LATEST
+element \P_TianJi2\Source\msd\build\obj\gen\debug\... /main/LATEST
+element \P_TianJi2\Source\msd\build\obj\gen\production\... /main/LATEST
+element \P_TianJi2\Source\msd\build\libuetoolsup.lib /main/LATEST
+element \P_TianJi2\Source\msd\build\libuetoolsup.so /main/LATEST
+element \P_TianJi2\Source\infra\Common\Bin\ms_offsize.dat  /main/LATEST
+element \P_TianJi2\Source\infra\Common\Bin\ms_offsize_little_endian.dat /main/LATEST
+element \P_TianJi2\Source\msd\build\rps_config.mk /main/LATEST
+
+#element * MOCOR_10A.W11.40
+element * .../mocor_10a/LATEST
+mkbranch mocor_10a
+
+# After Apply Label
+#element * MOCOR_8801H.TDPS_W09.53
+element \P_TianJi2\Source\msd\build\obj\gen\debug MOCOR_8801H.TDPS_W09.41
+element \P_TianJi2\Source\msd\build\obj\gen\production MOCOR_8801H.TDPS_W09.40
+element \P_TianJi2\Source\msd\build\obj\gen\debug\... MOCOR_W10.43
+element \P_TianJi2\Source\msd\build\obj\gen\production\... MOCOR_W10.43
+element \P_TianJi2\Source\msd\build\libuetoolsup.lib MOCOR_W10.43
+element \P_TianJi2\Source\msd\build\libuetoolsup.so MOCOR_W10.43
+element \P_TianJi2\Source\infra\Common\Bin\ms_offsize.dat  MOCOR_W10.43
+element \P_TianJi2\Source\msd\build\rps_config.mk MOCOR_W10.43
+# End
+
+element \MS_Code MOCOR_10A.W11.01
+element \MS_Code\common\export\inc MOCOR_10A.W11.01
+element \MS_Code\common\export\inc\nv_item_id.h MOCOR_10A.W11.01
+element \MS_Code\common\export\inc\version.h  MOCOR_10A.W11.01
+element \MS_Code\common\nv_parameters\audio\...  MOCOR_10A.W11.01
+element \MS_Code\common\nv_parameters\nv_type\...  MOCOR_10A.W11.01
+element \MS_Code\common\nv_parameters\ProductionParam\...  MOCOR_10A.W11.01
+
+element \8850_TDBASE\8800G\Code\PRJ\...  DM_BASE_8800G_TDDSP_W11.35
+element \8850_TDBASE\8800G\Code\PRJ\...  .../dsp.sc8800g_integration/LATEST
+element \DSP_CEVAX\... DM_BASE_8800G_GSMDSP_W11.35
+element \DSP_CEVAX\... ...\dsp.sc8800h_integration\LATEST
+
+element \P_TianJi2\Source\msd\code\config\stack\gprs\src MOCOR_8801H.TDPS_W09.35
+element \P_TianJi2\Source\msd\code\config\stack\gprs\include MOCOR_8801H.TDPS_W10.33
+element \P_TianJi2\Source\infra\test-infra\sme\include MOCOR_8801H.TDPS_W09.35
+
+element \P_TianJi2\Source\...\unittest -none
+element \P_TianJi2\Source\msd\code\ue_it -none
+element \P_TianJi2\Source\msd\code\...\*.tcl -none
+element \P_TianJi2\Source\infra\kal\test_cases -none
+element \P_TianJi2\Source\infra\kal\testing -none
+element \MS_APP\Third-party\Mplapi\stacks\docs -none
+
+element \Third-party\formal\bt_csr\bt_csr_15_1 -none
+
+element \P_TianJi2\... DM_BASE_DMPS_W11.35
+element \P_TianJi2\... DM_BASE_DMPS_W11.20
+element \P_TianJi2\... TIANJI2_BL11.BUILD05
+
+element * BASE_10A.W11.35.03
+element * MOCOR_10A.W11.01
+
+element \MS_Code\Third-party\Source\Mplapi\stacks\docs -none
+
+element  \MS_APP\Third-party\... MOCOR_10A.W11.01
+element  \Third-party\... MOCOR_10A.W11.01
+element ...\lost+found -none
+
+element * /main/LATEST
+element * /main/LATEST
+
+load \MS_Code\ARMRomCode\seine
+load \MS_Code\ARMRomCode\Third-party
+
+load \MS_Code\atc_3g
+load \MS_Code\atc
+
+load \MS_Code\build
+load \MS_Code\Build_Environment_Manual.doc
+
+load \MS_Code\CAF
+
+load \MS_Code\chip_drv
+load \MS_Code\char_lib
+
+load \MS_Code\CMMB
+
+load \MS_Code\common
+
+load \MS_Code\DAPS\export
+load \MS_Code\DAPS\source
+
+load \MS_Code\dm_2g_layer1
+load \MS_Code\dm_2g_layer1_dsp
+load \MS_Code\dm_2g_ps
+
+load \MS_Code\external
+
+load \MS_Code\8850_TDBASE\8800G\Code\PRJ\SC8800G2_QS3200_TD_DSP.bin
+load \MS_Code\DSP_CEVAX\DSP_8800G1\Source\GSM\SC8800G_QS3200_GSM_DSP.bin
+#load \MS_Code\DSP_CEVAX\DSP_8800H\GSM\SC8800G_QS3200_GSM_DSP_DUALSIM.bin
+load \MS_Code\DSP_CEVAX\DSP_8800H\GSM\SC8800G_QS3200_GSM_DSP.bin
+
+load \MS_Code\fdl_bootloader
+
+load \MS_Code\l4\export
+load \MS_Code\l4\source
+
+load \MS_Code\layer1_dsp
+
+load \MS_Code\Layer1\export
+load \MS_Code\Layer1\source
+
+load \MS_Code\logsave
+
+load \MS_Code\lib
+
+load \MS_Code\make
+load \MS_Code\Makefile
+load \MS_Code\make.bat
+load \MS_Code\Makefile.rules
+load \MS_Code\Makefile.verify
+load \MS_Code\Makefile.modules
+load \MS_Code\Makefile.third-party
+load \MS_Code\make_lnt.bat
+load \MS_Code\makewre.bat
+
+load \MS_Code\mocor10a_cs.txt
+
+load \MS_Code\MS_Customize
+
+load \MS_Code\MS_MMI\export
+load \MS_Code\MS_MMI\source
+
+load \MS_Code\MS_Ref\export
+load \MS_Code\MS_Ref\source
+
+load \MS_Code\PARSER\export
+load \MS_Code\PARSER\source
+
+load \MS_Code\P_TianJi2\Layer1\Include
+load \MS_Code\P_TianJi2\Layer1\Source
+load \MS_Code\P_TianJi2\Layer1\Source_8800S
+load \MS_Code\P_TianJi2\modmake.mk
+load \MS_Code\P_TianJi2\Makefile
+load \MS_Code\P_TianJi2\Project\TD_PS\win\tdps_vc_common.h
+load \MS_Code\P_TianJi2\Source\infra
+load \MS_Code\P_TianJi2\Source\msd
+
+load \MS_Code\project\management\version\mocor_10a
+load \MS_Code\project\management\report\pc-lint\MOCOR_10A
+load \MS_Code\project\management\version\idh_loadrule.txt
+load \MS_Code\project\management\version\idh_doc_loadrule.txt
+load \MS_Code\project\pclint_tool
+load \MS_Code\project\assertMacroCheckV2.8
+
+load \MS_Code\project_sc8800g_dualsim.mk
+load \MS_Code\project_sc8800g2_sp8803g_le_rvds.mk
+load \MS_Code\project_sc8800g2_sp8803g_le_mc.mk
+
+load \MS_Code\project_sc8800g2_sp8803g_be.mk
+load \MS_Code\project_sc8800g2_sp8801g_le.mk
+load \MS_Code\project_sc8800g2_sp8803g_le.mk
+load \MS_Code\project_sc8800g2_openphone_le.mk
+load \MS_Code\project_fp880xg2_dualsim.mk
+
+load \MS_Code\project_sc8800g2_openphone_240X400_le.mk
+load \MS_Code\project_sc8800g2_sp8803g_le_modem.mk
+load \MS_Code\project_sc8800g2_openphone_240X400_le.mk
+load \MS_Code\project_sc8800g2_dphone.mk
+load \MS_Code\project_sc8800g_cmmb.mk
+load \MS_Code\project_sc8800g_wifi.mk
+
+load \MS_Code\project_sc6800h_sp6801h.mk
+load \MS_Code\project_sc6800h_sp6801h_slide.mk
+load \MS_Code\project_sc6800h_sp6801h_duallcd.mk
+load \MS_Code\project_sc6800h_sp6801h_176X220.mk
+load \MS_Code\project_sc6800h_sp6801h_gsm_only.mk
+load \MS_Code\project_sc6800h_sp6801h_yz988.mk
+load \MS_Code\project_sc6800h_sp6804h_240x400.mk
+load \MS_Code\project_sc6800h_sp6804h_240x320.mk
+load \MS_Code\project_sc6800h_openphone_240X400.mk
+load \MS_Code\project_sc6800h_openphone.mk
+
+load \MS_Code\project_sc6800h_sp6801h_nor.mk
+load \MS_Code\project_sc6800h_sp6801h_nor_128X64.mk
+load \MS_Code\project_sc6800h_sp6801h_nor_128X32.mk
+load \MS_Code\project_sc6800h_sp6804h.mk
+load \MS_Code\project_sc6800h_sp6803h_quasim.mk
+load \MS_Code\project_sc6800h_s509h.mk
+load \MS_Code\project_sc6800h_sp6804h_sogou.mk
+load \MS_Code\project_sc6800h_sp6804h_ml.mk
+load \MS_Code\project_sc6800h_sp6804h_ml_1.mk
+
+load \MS_Code\SC6600L.modules
+load \MS_Code\SC6800H.modules
+load \MS_Code\SC8800G.modules
+load \MS_Code\SC8800H.modules
+
+load \MS_Code\pri_code
+
+load \MS_Code\PS\AutoTest
+load \MS_Code\PS\export
+load \MS_Code\PS\source
+load \MS_Code\PS\project
+
+load \MS_Code\RTOS
+
+load \MS_Code\sim
+load \MS_Code\spload
+
+load \MS_Code\Third-party\bt_csr\bt_pal_csr_dummy.a
+load \MS_Code\Third-party\bt_csr\bt_pal_csr_nostackcheck_dummy.a
+load \MS_Code\Third-party\cstar
+load \MS_Code\Third-party\dictionary
+load \MS_Code\Third-party\dm
+load \MS_Code\Third-party\email
+load \MS_Code\Third-party\formal
+load \MS_Code\Third-party\fota
+load \MS_Code\Third-party\Gps
+load \MS_Code\Third-party\hw
+load \MS_Code\Third-party\innofidei
+load \MS_Code\Third-party\InterSound4
+load \MS_Code\Third-party\myriad_java
+load \MS_Code\Third-party\Mplapi\include
+load \MS_Code\Third-party\Mplapi\Arm_lib\normal\mplapi_threadx_8801h.a
+load \MS_Code\Third-party\Mplapi\Arm_lib\normal\mplapi_intg_8801h.a
+load \MS_Code\Third-party\mv
+load \MS_Code\Third-party\netfront
+load \MS_Code\Third-party\ocr
+load \MS_Code\Third-party\opera
+load \MS_Code\Third-party\push_mail
+load \MS_Code\Third-party\qq
+load \MS_Code\Third-party\Readme.txt
+load \MS_Code\Third-party\Release_Notes.xls
+load \MS_Code\Third-party\s9
+load \MS_Code\Third-party\siano
+load \MS_Code\Third-party\sogou
+load \MS_Code\Third-party\Source\Mplapi\common
+load \MS_Code\Third-party\Source\Mplapi\stacks
+load \MS_Code\Third-party\Sun_java
+load \MS_Code\Third-party\t9
+load \MS_Code\Third-party\TencentMcare
+load \MS_Code\Third-party\wap
+load \MS_Code\Third-party\wifi_atheros
+load \MS_Code\Third-party\wifi_csr
+load \MS_Code\Third-party\wintone
+load \MS_Code\Third-party\xsr
+load \MS_Code\Third-party\xsr_stlmp
+load \MS_Code\Third-party\youngtone 
+load \MS_Code\Third-party\zlib
+
+load \MS_Code\version
+load \MS_Code\win_simulator_lnt.mk
+load \MS_Code\wre
+
+load \MS_Code\tools
+load \MS_Code\UpdateView.BAT
+
+load \Tools\Common\Resource
+
+load \Tools\Common\Include
+load \Tools\Common\Bin\ArmLogel.exe
+load \Tools\Common\Bin\ArmLogelC.exe
+load \Tools\Common\Bin\ASN1DPSrv.dll
+load \Tools\Common\Bin\ASN1DPSrv.lib
+load \Tools\Common\Bin\ASN1DPSrv_sys.dll
+load \Tools\Common\Bin\ASN1DPSrv_sys.lib
+load \Tools\Common\Bin\ChanMan.dll
+load \Tools\Common\Bin\Channel.dll
+load \Tools\Common\Bin\CommSock.dll
+load \Tools\Common\Bin\CommUart.dll
+load \Tools\Common\Bin\DiagChan.dll
+load \Tools\Common\Bin\DPSrv.dll
+load \Tools\Common\Bin\Message_Define.def
+load \Tools\Common\Bin\MsgDefBuild
+load \Tools\Common\Bin\task_id_header_gen.h
+load \Tools\Common\Bin\signal_id_header_gen.h
+load \Tools\Common\Bin\LogelSidedPS.dll
+load \Tools\Common\Bin\CJ609Libd.dll
+load \Tools\Common\Bin\CommSockd.dll
+load \Tools\Common\Bin\DPSrvd.dll
+load \Tools\Common\Bin\LogelSidedPSd.dll
+load \Tools\Common\Bin\logel.ini
+
+load \Tools\Common\Lib\CommSock.lib
+load \Tools\Common\Lib\CommSockd.lib
+load \Tools\Common\Lib\CJ609Libd.lib
+load \Tools\Common\Lib\CJ609Lib.lib
+load \Tools\Common\Lib\CrashReport.lib
+load \Tools\Common\Lib\CrashReportd.lib
+load \Tools\Common\Lib\DiagChan.lib
+load \Tools\Common\Lib\DPSrv.lib
+load \Tools\Common\Lib\DPSrvd.lib
+load \Tools\Common\Lib\LogelSidedPSd.lib
+load \Tools\Common\Lib\tcl80.lib
+load \Tools\Diagnostic\ChannelServer\Source
+load \Tools\Diagnostic\Logel
+load \Tools\Release\Logel

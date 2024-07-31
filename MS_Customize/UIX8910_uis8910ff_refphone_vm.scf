@@ -1,0 +1,27 @@
+#include "UIX8910.def"
+
+#define CHIP_IRAM_BASE   0x00800000
+#define CHIP_RESET_CODE_OFF   0x2800
+#define CHIP_RESET_CODE_SIZE  0x800
+#define CHIP_IRAM_APCP_SHR_SIZE     0x1000
+
+
+
+
+#define CHIP_SRAM_BASE    0x80B00000
+#define CHIP_SRAM_SIZE    0x00500000 
+
+
+
+;;if defined(VM_TABLE_CONFIG_SMALL)
+#if defined(BZP_SUPPORT)
+#define SYS_MMU_CACHE_SIZE        0x70000
+#define MMU_PSRAM_SWAP_SIZE       0x2000
+#else
+#define SYS_MMU_CACHE_SIZE        0x8000
+#define MMU_PSRAM_SWAP_SIZE       0x1000
+#endif
+
+
+#include "UIX8910_normal.scf"
+

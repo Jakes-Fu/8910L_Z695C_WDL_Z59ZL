@@ -1,0 +1,229 @@
+# Load Rule
+load \MS_Code\atc\export\inc
+load \MS_Code\atc\source
+load \MS_Code\atc\tools
+
+load \MS_Code\atc_3g\export\inc
+load \MS_Code\atc_3g\source
+load \MS_Code\atc_3g\tools
+load \MS_Code\atc_3g\project\tdd_atc_hsdpa.mk
+
+load \MS_Code\build
+load \MS_Code\Build_Environment_Manual.doc
+
+load \MS_Code\CAF\Interface
+load \MS_Code\CAF\Template
+
+load \MS_Code\char_lib\export\inc
+
+load \MS_Code\chip_drv\chip_module
+load \MS_Code\chip_drv\chip_plf
+load \MS_Code\chip_drv\export\inc
+load \MS_Code\chip_drv\source
+
+load \MS_Code\CMMB\engtest
+load \MS_Code\CMMB\export\inc
+load \MS_Code\CMMB\export\Arm_lib\normal
+load \MS_Code\CMMB\export\winlib
+load \MS_Code\CMMB\source\dtl
+
+load \MS_Code\common\export\inc
+load \MS_Code\common\nv_parameters\audio
+load \MS_Code\common\nv_parameters\Calibrationparam
+load \MS_Code\common\nv_parameters\DownloadParam
+load \MS_Code\common\nv_parameters\dsp_common
+load \MS_Code\common\nv_parameters\nv_classmark
+load \MS_Code\common\nv_parameters\nv_type
+load \MS_Code\common\nv_parameters\nv_type_td
+load \MS_Code\common\nv_parameters\ProductionParam
+load \MS_Code\common\source
+
+load \MS_Code\DAPS\export\inc
+load \MS_Code\DAPS\source\wbxml_parser\inc
+load \MS_Code\DAPS\source\wsp_header_decoder\inc
+load \MS_Code\DAPS\source\xml_expat\inc
+
+load \MS_Code\dm_2g_layer1\export\inc
+load \MS_Code\dm_2g_layer1_dsp\export\inc
+load \MS_Code\dm_2g_ps\export\inc
+
+load \MS_Code\fdl_bootloader
+
+load \MS_Code\IDH使用说明.txt
+
+load \MS_Code\Layer1\export\inc\layer1_audio.h
+load \MS_Code\Layer1\export\inc\layer1_diag.h
+load \MS_Code\Layer1\export\inc\layer1_engineering.h
+load \MS_Code\Layer1\export\inc\layer1_midi.h
+load \MS_Code\Layer1\export\inc\layer1_sbc.h
+load \MS_Code\Layer1\export\inc\env_layer1_signal.h
+
+load \MS_Code\l4\export\inc
+
+load \MS_Code\lib
+
+load \MS_Code\logsave\export
+
+load \MS_Code\make
+load \MS_Code\make.bat
+load \MS_Code\Makefile
+load \MS_Code\Makefile.rules
+load \MS_Code\Makefile.modules
+load \MS_Code\Makefile.verify
+load \MS_Code\Makefile.third-party
+
+load \MS_Code\MS_Customize\export\inc
+load \MS_Code\MS_Customize\source
+load \MS_Code\MS_Customize\SC6800H_sc6800h_sp6801h.scf
+load \MS_Code\MS_Customize\SC6800H_sc6800h_openphone.scf
+load \MS_Code\MS_Customize\SC6800H_sc6800h_sp6801h_vm.scf
+load \MS_Code\MS_Customize\SC8800G_sc8800g_sp8803g.scf
+load \MS_Code\MS_Customize\SC8800G_sc8800g_sp8803g_VM.scf
+
+load \MS_Code\MS_MMI\source\lib
+load \MS_Code\MS_MMI\source\mmi_app
+load \MS_Code\MS_MMI\source\mmi_gui
+load \MS_Code\MS_MMI\source\mmi_kernel
+load \MS_Code\MS_MMI\source\mmi_kernel_sys
+load \MS_Code\MS_MMI\source\mmi_spml\include
+load \MS_Code\MS_MMI\source\mmi_utility
+load \MS_Code\MS_MMI\source\pim
+load \MS_Code\MS_MMI\source\resource
+load \MS_Code\MS_MMI\source\sun_java\h
+load \MS_Code\MS_MMI\source\winsimulator_tp\Build_Script
+load \MS_Code\MS_MMI\source\winsimulator_tp\Documents
+load \MS_Code\MS_MMI\source\winsimulator_tp\skin
+load \MS_Code\MS_MMI\source\winsimulator_tp\win_platform\bin
+load \MS_Code\MS_MMI\source\winsimulator_tp\win_platform\include
+load \MS_Code\MS_MMI\source\winsimulator_tp\win_platform\MSKernel\MSBridge
+load \MS_Code\MS_MMI\source\winsimulator_tp\win_platform\MSKernel\Include
+load \MS_Code\MS_MMI\source\winsimulator_tp\win_platform\MSDevBridge
+load \MS_Code\MS_MMI\source\winsimulator_tp\win_platform\msdevkernel
+load \MS_Code\MS_MMI\source\winsimulator_tp\win_platform\sim_set_files(dualsim)
+load \MS_Code\MS_MMI\source\winsimulator_tp\win_platform\SIM_Set_Files
+
+load \MS_Code\MS_Ref\source\aud_config
+load \MS_Code\MS_Ref\source\aud_dev
+load \MS_Code\MS_Ref\source\aud_exp\transsamplerate\inc\transsamplerate.h
+load \MS_Code\MS_Ref\source\base
+load \MS_Code\MS_Ref\source\dc
+load \MS_Code\MS_Ref\source\display\inc
+load \MS_Code\MS_Ref\source\display\src\graphics\inc
+load \MS_Code\MS_Ref\source\display\src\lcd
+load \MS_Code\MS_Ref\source\display\src\graphics\src
+load \MS_Code\MS_Ref\source\display\src\img
+load \MS_Code\MS_Ref\source\fota
+load \MS_Code\MS_Ref\export\inc
+load \MS_Code\MS_Ref\source\isp_service
+load \MS_Code\MS_Ref\source\image_proc\inc
+load \MS_Code\MS_Ref\source\image_proc\src\jpeg_codec\inc\DCamera_JPG_Codec.h
+load \MS_Code\MS_Ref\source\mux\inc
+load \MS_Code\MS_Ref\source\scm
+load \MS_Code\MS_Ref\source\scp
+load \MS_Code\MS_Ref\source\streaming_codec
+load \MS_Code\MS_Ref\source\ubot
+load \MS_Code\MS_Ref\source\ucom
+load \MS_Code\MS_Ref\source\umod
+load \MS_Code\MS_Ref\source\ucom20
+load \MS_Code\MS_Ref\source\upcc
+load \MS_Code\MS_Ref\source\ubot20
+
+load \MS_Code\PARSER\export\inc
+
+load \MS_Code\PS\export\inc
+
+load \MS_Code\P_TianJi2\Source\msd\build\tdd_atc_hsdpa.mk
+load \MS_Code\P_TianJi2\Source\msd\code\sim\common\include
+
+load \MS_Code\project_sc6800h_sp6801h.mk
+load \MS_Code\project_sc6800h_sp6801h_240X320_ml.mk
+load \MS_Code\project_sc6800h_openphone_320x480.mk
+load \MS_Code\project_sc6800h_openphone_240X400.mk
+load \MS_Code\project_sc8800g_sp8803g.mk
+
+load \MS_Code\RTOS\export\inc
+load \MS_Code\RTOS\source\src_kal\inc
+
+load \MS_Code\SC6800H.modules
+load \MS_Code\SC8800G.modules
+
+load \MS_Code\sim\source\h
+load \MS_Code\sim\export\inc
+load \MS_Code\sim\source\c
+
+load \MS_Code\Third-party\bt_csr\bt_pal_csr_dummy.a
+load \MS_Code\Third-party\bt_csr\bt_pal_csr_nostackcheck_dummy.a
+load \MS_Code\Third-party\cstar
+load \MS_Code\Third-party\dictionary
+load \MS_Code\Third-party\dm
+load \MS_Code\Third-party\fota
+load \MS_Code\Third-party\Gps
+load \MS_Code\Third-party\hw
+load \MS_Code\Third-party\InterSound4
+load \MS_Code\Third-party\Java
+load \MS_Code\Third-party\Mplapi\include
+load \MS_Code\Third-party\Mplapi\Arm_lib\normal\mplapi_threadx_8801h.a
+load \MS_Code\Third-party\Mplapi\Arm_lib\normal\mplapi_intg_8801h.a
+load \MS_Code\Third-party\mv
+load \MS_Code\Third-party\netfront
+load \MS_Code\Third-party\ocr
+load \MS_Code\Third-party\qq
+load \MS_Code\Third-party\Readme.txt
+load \MS_Code\Third-party\Release_Notes.xls
+load \MS_Code\Third-party\s9
+load \MS_Code\Third-party\Sun_java
+load \MS_Code\Third-party\t9
+load \MS_Code\Third-party\wap
+load \MS_Code\Third-party\wifi_atheros
+load \MS_Code\Third-party\wifi_csr
+load \MS_Code\Third-party\wintone
+load \MS_Code\Third-party\xsr
+load \MS_Code\Third-party\xsr_stlmp
+load \MS_Code\Third-party\zlib
+
+load \MS_Code\tools
+
+load \MS_Code\version\version_common.c
+load \MS_Code\version\SC6800H_sc6800h_sp6801h_version.c
+load \MS_Code\version\SC8800G_sc8800g_sp8803g_version.c
+load \MS_Code\version\SC6800H_sc6800h_openphone_version.c
+
+load \Tools\Common\Resource
+load \Tools\Common\Lib\LogelSidedPS.lib
+load \Tools\Common\Include
+load \Tools\Common\Bin\Message_Define.def
+load \Tools\Common\Bin\MsgDefBuild
+load \Tools\Common\Bin\task_id_header_gen.h
+load \Tools\Common\Bin\signal_id_header_gen.h
+load \Tools\Common\Bin\LogelSidedPS.dll
+load \Tools\Common\Bin\CJ609Libd.dll
+load \Tools\Common\Bin\CommSock.dll
+load \Tools\Common\Bin\DPSrv.dll
+load \Tools\Common\Lib\CJ609Libd.lib
+load \Tools\Common\Lib\DPSrv.lib
+load \Tools\Common\Lib\CommSock.lib
+load \Tools\Common\Lib\CJ609Lib.lib
+load \Tools\Common\Lib\DPSrvd.lib
+load \Tools\Common\Lib\LogelSidedPSd.lib
+load \Tools\Common\Lib\CommSockd.lib
+load \Tools\Common\Lib\DiagChan.lib
+
+load \Tools\Common\Bin\CommSockd.dll
+load \Tools\Common\Bin\DPSrvd.dll
+load \Tools\Common\Bin\LogelSidedPSd.dll
+load \Tools\Common\Lib\CrashReportd.lib
+load \Tools\Common\Lib\tcl80.lib
+
+load \Tools\Common\Bin\ASN1DPSrv.lib
+load \Tools\Common\Bin\ASN1DPSrv_sys.lib
+load \Tools\Common\Lib\CrashReport.lib
+load \Tools\Diagnostic\ChannelServer\Source
+load \Tools\Diagnostic\Logel
+load \Tools\Release\Logel
+load \Tools\Common\Bin\Channel.ini
+load \Tools\Common\Bin\Channel.dll
+load \Tools\Common\Bin\ChanMand.dll
+load \Tools\Common\Bin\ChanMan.dll
+load \Tools\Common\Bin\ArmLogelC.exe
+load \Tools\Common\Bin\ArmLogel.exe
+load \Tools\Common\Bin\CJ609Lib.dll

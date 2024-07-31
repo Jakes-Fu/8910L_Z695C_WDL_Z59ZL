@@ -1,0 +1,232 @@
+/******************************************************************************
+ ** File Name:      pinmap_cfg.c                                              *
+ ** Author:         Sunny.Fei                                                 *
+ ** DATE:           2011.01.12                                                *
+ ** Copyright:      2011 Spreadtrum, Incoporated. All Rights Reserved.        *
+ ** Description:                                                              *
+ **                                                                           *
+ **                                                                           *
+ ******************************************************************************
+ **---------------------------------------------------------------------------*
+ **                         Dependencies                                      *
+ **---------------------------------------------------------------------------*/
+#include "arm_reg.h"/*lint -esym(766, chip_drv\export\inc\outdated\arm_reg.h)*/
+#include "../../../../../chip_drv/chip_module/pin/uix8910/pinmap.h"
+#include "sc_reg.h"/*lint -esym(766, chip_drv\export\inc\outdated\sc_reg.h)*/
+#include "../../../../../chip_drv/chip_plf/uix8910/global_macros.h"
+#include "pinmap_drvapi.h"
+
+/**---------------------------------------------------------------------------*
+ **                         Compiler Flag                                     *
+ **---------------------------------------------------------------------------*/
+#ifdef   __cplusplus
+    extern   "C" 
+    {
+#endif
+
+/**---------------------------------------------------------------------------*
+ **                         Data                                              *
+ **---------------------------------------------------------------------------*/
+const PM_PINFUNC_T pm_func[]=
+{
+//| Pin Register                                 | IO | PU/PD| Func Select| 
+  {PIN_SDMMC1_CLK_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//TF_SD0_CLK0
+//analog_reg pin                               | drv strength | smitt energy | input enable
+  {ANALOG_PIN_SDMMC1_OTHERS_CFG,			(ANALOG_PIN_SDMMC1_CLK_DRV(5))}, 
+  
+  {PIN_SDMMC1_CMD_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//TF_SD0_CMD
+  {ANALOG_PIN_SDMMC1_OTHERS_CFG,			(ANALOG_PIN_SDMMC1_CMD_DRV(5) | ANALOG_PIN_SDMMC1_CMD_SPU | ANALOG_PIN_SDMMC1_CMD_IE)}, 
+  {PIN_SDMMC1_DATA_0_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//TF_SD0_D0  
+  {ANALOG_PIN_SDMMC1_DATA_CFG,				(ANALOG_PIN_SDMMC1_DATA_0_DRV(5) | ANALOG_PIN_SDMMC1_DATA_0_SPU | ANALOG_PIN_SDMMC1_DATA_0_IE)}, 
+  {PIN_SDMMC1_DATA_1_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//TF_SD0_D1 
+  {ANALOG_PIN_SDMMC1_DATA_CFG,				(ANALOG_PIN_SDMMC1_DATA_1_DRV(5) | ANALOG_PIN_SDMMC1_DATA_1_SPU | ANALOG_PIN_SDMMC1_DATA_1_IE)}, 
+  {PIN_SDMMC1_DATA_2_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//TF_SD0_D2  
+  {ANALOG_PIN_SDMMC1_DATA_CFG,				(ANALOG_PIN_SDMMC1_DATA_2_DRV(5) | ANALOG_PIN_SDMMC1_DATA_2_SPU | ANALOG_PIN_SDMMC1_DATA_2_IE)}, 
+  {PIN_SDMMC1_DATA_3_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//TF_SD0_D3  
+  {ANALOG_PIN_SDMMC1_DATA_CFG,				(ANALOG_PIN_SDMMC1_DATA_3_DRV(5) | ANALOG_PIN_SDMMC1_DATA_3_SPU | ANALOG_PIN_SDMMC1_DATA_3_IE)}, 
+  {PIN_ADI_SDA_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))},	//ADI_SDA  
+  {ANALOG_PIN_ADI_CFG,						(ANALOG_PIN_ADI_SDA_DRV(1) | ANALOG_PIN_ADI_SDA_IE)}, 
+  {PIN_ADI_SYNC_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))},	//NC  
+  {ANALOG_PIN_ADI_CFG,						(ANALOG_PIN_ADI_SYNC_DRV(1))}, 
+  {PIN_ADI_SCL_CFG_REG,						(PIN_IO_DEFAULT) | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0)},	//ADC_SCL  
+  {ANALOG_PIN_ADI_CFG,						(ANALOG_PIN_ADI_SCL_DRV(1))}, 
+  {PIN_SPI_LCD_SIO_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//LCM_SPI_DIO
+  {ANALOG_PIN_SPI_LCD_CFG2,					(ANALOG_PIN_SPI_LCD_SIO_DRV(2) | ANALOG_PIN_SPI_LCD_SIO_IE)}, 
+  {PIN_SPI_LCD_SDC_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//LCM_SPI_RS  
+  {ANALOG_PIN_SPI_LCD_CFG2,					(ANALOG_PIN_SPI_LCD_SDC_DRV(2))}, 
+  {PIN_SPI_LCD_CLK_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//LCM_SPI_CLK  
+  {ANALOG_PIN_SPI_LCD_CFG1,					(ANALOG_PIN_SPI_LCD_CLK_DRV(2))}, 
+  {PIN_SPI_LCD_CS_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//LCM_SPI_CSN  
+  {ANALOG_PIN_SPI_LCD_CFG1,					(ANALOG_PIN_SPI_LCD_CS_DRV(2))}, 
+  {PIN_SPI_LCD_SELECT_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_DN | PIN_FUNC_SEL(0))},	//NC  
+  {ANALOG_PIN_SPI_LCD_CFG2,					(ANALOG_PIN_SPI_LCD_SELECT_DRV(2))}, 
+  {PIN_LCD_FMARK_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//LCM_FMARK  
+  {ANALOG_PIN_LCD_CFG,						(ANALOG_PIN_LCD_FMARK_DRV(2) | ANALOG_PIN_LCD_FMARK_IE)}, 
+  {PIN_LCD_RSTB_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//LCM_RSTN  
+  {ANALOG_PIN_LCD_CFG,						(ANALOG_PIN_LCD_RSTB_DRV(2))}, 
+  {PIN_I2C_M1_SCL_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//CAM_I2C_SCL 
+  {ANALOG_PIN_I2C_CFG,						(ANALOG_PIN_I2C_M1_SCL_DRV(1) | ANALOG_PIN_I2C_M1_SCL_WPUS | ANALOG_PIN_I2C_M1_SCL_IE)}, 
+  {PIN_I2C_M1_SDA_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//CAM_I2C_SDA  
+  {ANALOG_PIN_I2C_CFG,						(ANALOG_PIN_I2C_M1_SDA_DRV(1) | ANALOG_PIN_I2C_M1_SDA_WPUS | ANALOG_PIN_I2C_M1_SDA_IE)}, 
+  {PIN_CAMERA_RST_L_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//CAM_RST  
+  {ANALOG_PIN_CAMERA_CFG,					(ANALOG_PIN_CAMERA_RST_L_DRV(1))}, 
+  {PIN_CAMERA_PWDN_CFG_REG,				    (PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//CAM_PWDN  
+  {ANALOG_PIN_CAMERA_CFG,					(ANALOG_PIN_CAMERA_PWDN_DRV(1))}, 
+  {PIN_CAMERA_REF_CLK_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//CAM_MCLK  
+  {ANALOG_PIN_CAMERA_CFG,					(ANALOG_PIN_CAMERA_REF_CLK_DRV(1))}, 
+  {PIN_SPI_CAMERA_SI_0_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))},	//SPI_CAMERA_SI_0 
+  {ANALOG_PIN_SPI_CAMERA_CFG,				(ANALOG_PIN_SPI_CAMERA_SI_0_DRV(1) | ANALOG_PIN_SPI_CAMERA_SI_0_IE)}, 
+  {PIN_SPI_CAMERA_SI_1_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))},	//SPI_CAMERA_SI_1
+  {ANALOG_PIN_SPI_CAMERA_CFG,				(ANALOG_PIN_SPI_CAMERA_SI_1_DRV(1) | ANALOG_PIN_SPI_CAMERA_SI_1_IE)}, 
+  {PIN_SPI_CAMERA_SCK_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))},	//SPI_CAMERA_SCK  
+  {ANALOG_PIN_SPI_CAMERA_CFG,				(ANALOG_PIN_SPI_CAMERA_SCK_DRV(1) | ANALOG_PIN_SPI_CAMERA_SCK_IE)}, 
+  {PIN_GPIO_13_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))}, 	//NC (TB2103) 
+  {ANALOG_PIN_GPIO13_CFG,					(ANALOG_PIN_GPIO_13_DRV(1) | ANALOG_PIN_GPIO_13_IE)}, 
+  //{PIN_GPIO_0_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(1))},	//spiflash1_clk 
+  //{ANALOG_PIN_GPIO_CFG1,					(ANALOG_PIN_GPIO_0_DRV(0))}, 
+  //{PIN_GPIO_1_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(1))},	//spiflash1_cs
+  //{ANALOG_PIN_GPIO_CFG1,					(ANALOG_PIN_GPIO_1_DRV(0))}, 
+  //{PIN_GPIO_2_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(1))},	//spiflash1_sio0
+  //{ANALOG_PIN_GPIO_CFG1,					(ANALOG_PIN_GPIO_2_DRV(0))}, 
+  //{PIN_GPIO_3_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(1))},	//spiflash1_sio1
+  //{ANALOG_PIN_GPIO_CFG1,					(ANALOG_PIN_GPIO_3_DRV(0))}, 
+ // {PIN_GPIO_4_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(1))},	//spiflash1_sio2  
+  //{ANALOG_PIN_GPIO_CFG1,					(ANALOG_PIN_GPIO_4_DRV(1))}, 
+  //{PIN_GPIO_5_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(1))},	//spiflash1_sio3  
+  //{ANALOG_PIN_GPIO_CFG1,					(ANALOG_PIN_GPIO_5_DRV(1))}, 
+  {PIN_GPIO_7_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//gpio06--ANA_INT 
+  {ANALOG_PIN_GPIO_CFG2,					(ANALOG_PIN_GPIO_7_DRV(1))}, 
+#if 1
+  {PIN_AP_JTAG_TCK_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//MTCK  
+  {ANALOG_PIN_AP_JTAG_CFG,					(ANALOG_PIN_AP_JTAG_TCK_DRV(1) | ANALOG_PIN_AP_JTAG_TCK_WPUS | ANALOG_PIN_AP_JTAG_TCK_IE)}, 
+  {PIN_AP_JTAG_TRST_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//NC  
+  {ANALOG_PIN_AP_JTAG_CFG,					(ANALOG_PIN_AP_JTAG_TRST_DRV(1) | ANALOG_PIN_AP_JTAG_TRST_WPUS | ANALOG_PIN_AP_JTAG_TRST_IE)}, 
+  {PIN_AP_JTAG_TMS_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//MTMS  
+  {ANALOG_PIN_AP_JTAG_CFG,					(ANALOG_PIN_AP_JTAG_TMS_DRV(1) | ANALOG_PIN_AP_JTAG_TMS_WPUS | ANALOG_PIN_AP_JTAG_TMS_IE)}, 
+  {PIN_AP_JTAG_TDI_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(0))},	//NC  
+  {ANALOG_PIN_AP_JTAG_CFG,					(ANALOG_PIN_AP_JTAG_TDI_DRV(1) | ANALOG_PIN_AP_JTAG_TDI_WPUS | ANALOG_PIN_AP_JTAG_TDI_IE)}, 
+  {PIN_AP_JTAG_TDO_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//NC  
+  {ANALOG_PIN_AP_JTAG_CFG,					(ANALOG_PIN_AP_JTAG_TDO_DRV(1) | ANALOG_PIN_AP_JTAG_TDO_WPUS)}, 
+#endif
+  {PIN_GPIO_14_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(1))},	//I2C_M2_SCL  
+  {ANALOG_PIN_I2C_CFG,						(ANALOG_PIN_GPIO_14_DRV(1) | ANALOG_PIN_GPIO_14_WPUS | ANALOG_PIN_GPIO_14_IE)}, 
+  {PIN_GPIO_15_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(1))},	//I2C_M2_SDA  
+  {ANALOG_PIN_I2C_CFG,						(ANALOG_PIN_GPIO_15_DRV(1) | ANALOG_PIN_GPIO_15_WPUS | ANALOG_PIN_GPIO_15_IE)}, 
+  {PIN_GPIO_18_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(3))},	//UART1_CTS
+  {ANALOG_PIN_UART_1_CFG,					(ANALOG_PIN_GPIO_18_DRV(1))}, 
+  {PIN_GPIO_19_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(3))},	//UART1_RTS  
+  {ANALOG_PIN_UART_1_CFG,					(ANALOG_PIN_GPIO_19_DRV(1))}, 
+#if defined(MOS_SUPPORT)
+  {PIN_GPIO_20_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(1))},	//UART2_RXD  
+  {ANALOG_PIN_UART_2_CFG,					(ANALOG_PIN_GPIO_20_DRV(1) | ANALOG_PIN_GPIO_20_IE)}, 
+  {PIN_GPIO_21_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(1))},	//UART2_TXD  
+  {ANALOG_PIN_UART_2_CFG,					(ANALOG_PIN_GPIO_21_DRV(1))}, 
+  {PIN_GPIO_22_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DN | PIN_FUNC_SEL(1))},	//UART2_CTS  
+  {ANALOG_PIN_UART_2_CFG,					(ANALOG_PIN_GPIO_22_DRV(1) | ANALOG_PIN_GPIO_22_IE)}, 
+  {PIN_GPIO_23_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(1))},	//UART2_RTS  
+  {ANALOG_PIN_UART_2_CFG,					(ANALOG_PIN_GPIO_23_DRV(1))}, 
+#else
+  {PIN_GPIO_20_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_UP | PIN_FUNC_SEL(2))},	//UART3_RXD  
+  {ANALOG_PIN_UART_2_CFG,					(ANALOG_PIN_GPIO_20_DRV(1) | ANALOG_PIN_GPIO_20_IE)}, 
+  {PIN_GPIO_21_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(2))},	//UART3_TXD  
+  {ANALOG_PIN_UART_2_CFG,					(ANALOG_PIN_GPIO_21_DRV(1))}, 
+  {PIN_GPIO_22_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DN | PIN_FUNC_SEL(2))},	//UART3_CTS  
+  {ANALOG_PIN_UART_2_CFG,					(ANALOG_PIN_GPIO_22_DRV(1) | ANALOG_PIN_GPIO_22_IE)}, 
+  {PIN_GPIO_23_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(2))},	//UART3_RTS  
+  {ANALOG_PIN_UART_2_CFG,					(ANALOG_PIN_GPIO_23_DRV(1))}, 
+#endif
+#ifdef Z695_KEYLOCK_INT_SUPPORT
+  {PIN_GPIO_8_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},//GPIO 8 Keylock
+  {ANALOG_PIN_GPO_CFG,						(ANALOG_PIN_GPIO_8_DRV(1) | ANALOG_PIN_GPIO_8_IE)}, 
+#else
+  //{PIN_GPIO_8_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},//MTCK  
+  //{ANALOG_PIN_GPO_CFG,						(ANALOG_PIN_GPIO_8_DRV(1))}, 
+#endif
+  {PIN_GPIO_9_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//NC  
+  {ANALOG_PIN_GPO_CFG,						(ANALOG_PIN_GPIO_9_DRV(1))}, 
+  {PIN_GPIO_10_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},//MTMS  
+  {ANALOG_PIN_GPO_CFG,						(ANALOG_PIN_GPIO_10_DRV(1))}, 
+  {PIN_GPIO_11_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//NC  
+  {ANALOG_PIN_GPO_CFG,						(ANALOG_PIN_GPIO_11_DRV(1))}, 
+  {PIN_GPIO_12_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//NC  
+  {ANALOG_PIN_GPO_CFG,						(ANALOG_PIN_GPIO_12_DRV(1))}, 
+  {PIN_KEYIN_0_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DN | PIN_FUNC_SEL(0))},	//KEYIN0  
+  {ANALOG_PIN_KEYIN_CFG,					(ANALOG_PIN_KEYIN_0_DRV(1) | ANALOG_PIN_KEYIN_0_IE)}, 
+  {PIN_KEYIN_1_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DN | PIN_FUNC_SEL(0))},	//KEYIN1  
+  {ANALOG_PIN_KEYIN_CFG,					(ANALOG_PIN_KEYIN_1_DRV(1) | ANALOG_PIN_KEYIN_1_IE)}, 
+  {PIN_KEYIN_2_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DN | PIN_FUNC_SEL(0))},	//KEYIN2  
+  {ANALOG_PIN_KEYIN_CFG,					(ANALOG_PIN_KEYIN_2_DRV(1) | ANALOG_PIN_KEYIN_2_IE)}, 
+  {PIN_KEYIN_3_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DN | PIN_FUNC_SEL(0))},	//KEYIN3  
+  {ANALOG_PIN_KEYIN_CFG,					(ANALOG_PIN_KEYIN_3_DRV(1) | ANALOG_PIN_KEYIN_3_IE)}, 
+  {PIN_KEYIN_4_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DN | PIN_FUNC_SEL(0))},	//KEYIN4  
+  {ANALOG_PIN_KEYIN_CFG,					(ANALOG_PIN_KEYIN_4_DRV(1) | ANALOG_PIN_KEYIN_4_IE)}, 
+  {PIN_KEYIN_5_CFG_REG,						(PIN_IO_DEFAULT | PIN_PULL_FRC_DN | PIN_FUNC_SEL(0))},	//NC  
+  {ANALOG_PIN_KEYIN_CFG,					(ANALOG_PIN_KEYIN_5_DRV(1))}, 
+  {PIN_KEYOUT_0_CFG_REG,                    (PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//KEYOUT0  
+  {ANALOG_PIN_KEYOUT_CFG,					(ANALOG_PIN_KEYOUT_0_DRV(1))}, 
+  {PIN_KEYOUT_1_CFG_REG,                    (PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//KEYOUT1  
+  {ANALOG_PIN_KEYOUT_CFG,					(ANALOG_PIN_KEYOUT_1_DRV(1))}, 
+  {PIN_KEYOUT_2_CFG_REG,                    (PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//KEYOUT2  
+  {ANALOG_PIN_KEYOUT_CFG,					(ANALOG_PIN_KEYOUT_2_DRV(1))}, 
+  {PIN_KEYOUT_3_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//KEYOUT3  
+  {ANALOG_PIN_KEYOUT_CFG,					(ANALOG_PIN_KEYOUT_3_DRV(1))}, 
+  {PIN_KEYOUT_4_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//KEYOUT4  
+  {ANALOG_PIN_KEYOUT_CFG,					(ANALOG_PIN_KEYOUT_4_DRV(1))}, 
+  {PIN_KEYOUT_5_CFG_REG,                    (PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//NC  
+  {ANALOG_PIN_KEYOUT_CFG,					(ANALOG_PIN_KEYOUT_5_DRV(1))}, 
+  {PIN_DEBUG_HOST_RX_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))},//DBG_HOST_RX  
+  {ANALOG_PIN_DEBUG_HOST_CFG,				(ANALOG_PIN_DEBUG_HOST_RX_DRV(1) | ANALOG_PIN_DEBUG_HOST_RX_IE)}, 
+  {PIN_DEBUG_HOST_TX_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))},//DBG_HOST_TX  
+  {ANALOG_PIN_DEBUG_HOST_CFG,				(ANALOG_PIN_DEBUG_HOST_TX_DRV(1))}, 
+  {PIN_DEBUG_HOST_CLK_CFG_REG,				(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))},//NC  
+  {ANALOG_PIN_DEBUG_HOST_CFG,				(ANALOG_PIN_DEBUG_HOST_CLK_DRV(1)  | ANALOG_PIN_DEBUG_HOST_CLK_IE)}, 
+  {PIN_SIM_1_CLK_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//SIM0_CLK  
+  {ANALOG_PIN_SIM_1_CFG,					(ANALOG_PIN_SIM_1_CLK_DRV(1))}, 
+  {PIN_SIM_1_DIO_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//SIM0_DA  frc=1 up=0 dn=0 spu=1 4.7K_up
+  {ANALOG_PIN_SIM_1_CFG,					(ANALOG_PIN_SIM_1_DIO_DRV(1) | ANALOG_PIN_SIM_1_DIO_SPU | ANALOG_PIN_SIM_1_DIO_IE)}, 
+  {PIN_SIM_1_RST_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))},	//SIM0_RST  
+  {ANALOG_PIN_SIM_1_CFG,					(ANALOG_PIN_SIM_1_RST_DRV(1))}, 
+  {PIN_SIM_2_CLK_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//SIM1_CLK  
+  {ANALOG_PIN_SIM_2_CFG,					(ANALOG_PIN_SIM_2_CLK_DRV(1))}, 
+  {PIN_SIM_2_DIO_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_NONE | PIN_FUNC_SEL(0))},	//SIM1_DA  frc=1 up=0 dn=0 spu=1 4.7K_up
+  {ANALOG_PIN_SIM_2_CFG,					(ANALOG_PIN_SIM_2_DIO_DRV(1) | ANALOG_PIN_SIM_2_DIO_SPU | ANALOG_PIN_SIM_2_DIO_IE)}, 
+  {PIN_SIM_2_RST_CFG_REG,					(PIN_IO_DEFAULT | PIN_PULL_FRC_DEFAULT | PIN_FUNC_SEL(0))},	//SIM1_RST  
+  {ANALOG_PIN_SIM_2_CFG,					(ANALOG_PIN_SIM_2_RST_DRV(1))}, 
+#if 0
+/* A-DIE */
+  {ANA_PIN_ADI_SCLK_REG,         ( ANA_PIN_Z_EN | ANA_PIN_SPX_EN  | ANA_PIN_FUNC_DEF | ANA_PIN_FPX_EN | ANA_PIN_DS_1 )},
+  {ANA_PIN_ADI_D_REG,               ( ANA_PIN_Z_EN | ANA_PIN_SPX_EN  | ANA_PIN_FUNC_DEF | ANA_PIN_FPX_EN | ANA_PIN_DS_3 )},
+#endif
+  {0xffffffff,                  0xffffffff}
+};
+
+const PM_GPIO_CTL_T  pm_gpio_default_map[]=
+{
+#if 0
+//|NO.	|Def Value as OUT |  Direct 		        |INT Sense|   
+    {21,       0,                               PM_OUTPUT,          PM_NO_INT         },//FM_LNA_EN
+    {23,       0,                               PM_OUTPUT,          PM_NO_INT         },//SYSRSTB of 6302
+    {53,       0,                               PM_OUTPUT,          PM_NO_INT         },//CAM_RST0
+    {52,       1,                               PM_OUTPUT,          PM_NO_INT         },//CAM_PWDN0  
+    //{44,       0,                               PM_OUTPUT,          PM_NO_INT         },  SENSOR PWD_B
+    //{69,       0,                               PM_INPUT,             PM_LEVEL          },//HP_DET
+#else
+    {6,       0,                               PM_INPUT,           PM_LEVEL          },
+    {10,       0,                               PM_OUTPUT,          PM_NO_INT         },
+    {11,     0,                               PM_OUTPUT,          PM_NO_INT         },   //FM_LNA_EN
+#endif
+#ifdef Z695_KEYLOCK_INT_SUPPORT
+    {8,       0,                               PM_INPUT,           PM_LEVEL          },
+#endif
+    {12,       0,                               PM_OUTPUT,          PM_NO_INT         }, //SPK
+    {0xffff, 	 0, 			  PM_INVALID_DIR, 	  PM_INVALID_INT    }
+};
+
+/**---------------------------------------------------------------------------*
+ **                         Compiler Flag                                     *
+ **---------------------------------------------------------------------------*/
+#ifdef   __cplusplus
+    }
+#endif
+
+// End of pinmap_cfg.c

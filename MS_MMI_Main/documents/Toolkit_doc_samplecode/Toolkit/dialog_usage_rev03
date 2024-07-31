@@ -1,0 +1,308 @@
+
+[ Dialog usage ] 
+
+1. Progressbar dialog 
+
+   (1) By text ptr
+       PUBLIC void MMIPUB_OpenProgressWinByTextPtr(
+                                  MMI_STRING_T              *text1_ptr,         //text 1
+                                  MMI_WIN_ID_T              *win_id_ptr,        //win id,default is MMIPUB_ALERT_WIN_ID
+                                  MMI_WIN_PRIORITY_E        *win_priority_ptr,  //win priority,default is WIN_ONE_LEVEL
+                                  MMIPUB_SOFTKEY_STYLE_E    softkey_style,      //softkey style
+                                  MMIPUB_HANDLE_FUNC        handle_func         //handle function
+                                  );
+
+   (2) By text id 
+       PUBLIC void MMIPUB_OpenProgressWinByTextId(
+                                 MMI_TEXT_ID_T              text1_id,           //text 1,no default TXT_NULL
+                                 MMI_WIN_ID_T               *win_id_ptr,        //win id,default is MMIPUB_ALERT_WIN_ID
+                                 MMI_WIN_PRIORITY_E         *win_priority_ptr,  //win priority,default is WIN_ONE_LEVEL
+                                 MMIPUB_SOFTKEY_STYLE_E     softkey_style,      //softkey style
+                                 MMIPUB_HANDLE_FUNC         handle_func         //handle function
+                                 );
+
+
+	[Set total size]
+	PUBLIC void MMIPUB_SetProgressTotalSize(MMI_WIN_ID_T *win_id_ptr, uint32 total_size);
+	
+  [Set finished size]
+	PUBLIC void MMIPUB_UpdateProgressBarEx(MMI_WIN_ID_T *win_id_ptr, uint32 finished_size, BOOLEAN is_flash );
+
+
+
+2. Alarm dialog 
+
+   PUBLIC void MMIPUB_OpenAlarmDialogWin(
+                               uint8                   text_num,       //text number
+                               MMI_STRING_T            *text1_ptr,     //text 1
+                               MMI_STRING_T            *text2_ptr,     //text 2
+                               MMI_STRING_T            *text3_ptr,     //text 3
+                               MMI_WIN_ID_T            win_id,         //win id
+                               MMI_IMAGE_ID_T          image_id,       //image id
+                               MMI_ANIM_ID_T           anim_id,        //anim id
+                               MMI_WIN_PRIORITY_E      win_priority,   //priority
+                               MMIPUB_SOFTKEY_STYLE_E  softkey_style,  //softkey style
+                               MMIPUB_HANDLE_FUNC      handle_func     //handle function
+                               );
+
+3. Text dialog 
+	
+   Set text:
+   (1) By text ptr
+       PUBLIC void MMIPUB_OpenTextDialogByTextPtr(
+                                         uint32                    *time_period_ptr,   //time period,default is 3s
+                                         MMI_STRING_T              *text1_ptr,         //text 1
+                                         MMI_STRING_T              *text2_ptr,         //text 2
+                                         MMI_IMAGE_ID_T            image_id,           //alert image id
+                                         MMI_WIN_ID_T              *win_id_ptr,        //win id,default is MMIPUB_ALERT_WIN_ID
+                                         MMI_WIN_PRIORITY_E        *win_priority_ptr,  //win priority,default is WIN_ONE_LEVEL
+                                         MMIPUB_SOFTKEY_STYLE_E    softkey_style,      //softkey style
+                                         MMIPUB_HANDLE_FUNC        handle_func,        //handle function                                                   
+                                         );
+
+   (2) By text id 
+       PUBLIC void MMIPUB_OpenTextDialogByTextId(
+                                        uint32                     *time_period_ptr,   //time period,default is 2s
+                                        MMI_TEXT_ID_T              text1_id,           //text 1,no default TXT_NULL
+                                        MMI_TEXT_ID_T              text2_id,           //text 2,no default TXT_NULL
+                                        MMI_IMAGE_ID_T             image_id,           //alert image id
+                                        MMI_WIN_ID_T               *win_id_ptr,        //win id,default is MMIPUB_ALERT_WIN_ID
+                                        MMI_WIN_PRIORITY_E         *win_priority_ptr,  //win priority,default is WIN_ONE_LEVEL
+                                        MMIPUB_SOFTKEY_STYLE_E     softkey_style,      //softkey style
+                                        MMIPUB_HANDLE_FUNC         handle_func,        //handle function
+                                        );
+
+	[Set title]
+	PUBLIC void MMIPUB_SetWinTitleText(
+                                   MMI_WIN_ID_T     win_id,
+                                   MMI_STRING_T     *text_ptr,
+                                   BOOLEAN          is_fresh
+                                   );
+
+
+4. Confirmation dialog 
+
+   (1) By text ptr 
+       PUBLIC void MMIPUB_OpenConfirmationDialogByTextPtr(
+                                         uint32                    *time_period_ptr,   //time period,default is 3s
+                                         MMI_STRING_T              *text1_ptr,         //text 1
+                                         MMI_STRING_T              *text2_ptr,         //text 2
+                                         MMI_IMAGE_ID_T            image_id,           //alert image id
+                                         MMI_WIN_ID_T              *win_id_ptr,        //win id,default is MMIPUB_ALERT_WIN_ID
+                                         MMI_WIN_PRIORITY_E        *win_priority_ptr,  //win priority,default is WIN_ONE_LEVEL
+                                         MMIPUB_SOFTKEY_STYLE_E    softkey_style,      //softkey style
+                                         MMIPUB_HANDLE_FUNC        handle_func         //handle function                                         
+                                         );
+
+   (2) By text id 
+       PUBLIC void MMIPUB_OpenConfirmationDialogByTextId(
+                                        uint32                     *time_period_ptr,   //time period,default is 2s
+                                        MMI_TEXT_ID_T              text1_id,           //text 1,no default TXT_NULL
+                                        MMI_TEXT_ID_T              text2_id,           //text 2,no default TXT_NULL
+                                        MMI_IMAGE_ID_T             image_id,           //alert image id
+                                        MMI_WIN_ID_T               *win_id_ptr,        //win id,default is MMIPUB_ALERT_WIN_ID
+                                        MMI_WIN_PRIORITY_E         *win_priority_ptr,  //win priority,default is WIN_ONE_LEVEL
+                                        MMIPUB_SOFTKEY_STYLE_E     softkey_style,      //softkey style
+                                        MMIPUB_HANDLE_FUNC         handle_func         //handle function
+                                        );
+
+   (3) By text ptr for applet handle                                         
+       PUBLIC void MMIPUB_OpenConfirmationDialogWinByTextPtrEx(
+                                           MMI_HANDLE_T              applet_handle,
+                                           uint32                    *time_period_ptr,   //time period,default is 3s
+                                           MMI_STRING_T              *text1_ptr,         //text 1
+                                           MMI_STRING_T              *text2_ptr,         //text 2
+                                           MMI_IMAGE_ID_T            image_id,           //alert image id
+                                           MMI_WIN_ID_T              *win_id_ptr,        //win id,default is MMIPUB_ALERT_WIN_ID
+                                           MMI_WIN_PRIORITY_E        *win_priority_ptr,  //win priority,default is WIN_ONE_LEVEL
+                                           MMIPUB_SOFTKEY_STYLE_E    softkey_style,      //softkey style
+                                           MMIPUB_HANDLE_FUNC        handle_func,        //handle function
+                                           uint32                    user_data           //user_data
+                                           );
+                                           
+     (4) By text id for applet handle   
+         PUBLIC void MMIPUB_OpenConfirmationDialogWinByTextIdEx(
+                                          MMI_HANDLE_T               applet_handle,
+                                          uint32                     *time_period_ptr,   //time period,default is 2s
+                                          MMI_TEXT_ID_T              text1_id,           //text 1,no default TXT_NULL
+                                          MMI_TEXT_ID_T              text2_id,           //text 2,no default TXT_NULL
+                                          MMI_IMAGE_ID_T             image_id,           //alert image id
+                                          MMI_WIN_ID_T               *win_id_ptr,        //win id,default is MMIPUB_ALERT_WIN_ID
+                                          MMI_WIN_PRIORITY_E         *win_priority_ptr,  //win priority,default is WIN_ONE_LEVEL
+                                          MMIPUB_SOFTKEY_STYLE_E     softkey_style,      //softkey style
+                                          MMIPUB_HANDLE_FUNC         handle_func,        //handle function
+                                          uint32                     user_data           //user_data
+                                          );                       
+              
+
+
+5. Dialog with input field 
+
+   (1) By text ptr 
+       PUBLIC void MMIPUB_OpenDialogInputFieldWinByTextPtr(
+                                  MMI_STRING_T              *text1_ptr,         //text1_ptr for title 
+                                  MMI_WIN_ID_T              *win_id_ptr,        //win id,default is MMIPUB_ALERT_WIN_ID
+                                  MMI_WIN_PRIORITY_E        *win_priority_ptr,  //win priority,default is WIN_ONE_LEVEL
+                                  MMIPUB_SOFTKEY_STYLE_E    softkey_style,      //softkey style
+                                  MMIPUB_HANDLE_FUNC        handle_func         //handle function
+                                  );
+
+
+  (2) By text ptr for applet handle    
+	    PUBLIC void MMIPUB_OpenDialogInputFieldWinByTextPtrEx(
+                                  MMI_HANDLE_T              applet_handle,
+                                  MMI_STRING_T              *text1_ptr,         //text 1
+                                  MMI_WIN_ID_T              *win_id_ptr,        //win id,default is MMIPUB_ALERT_WIN_ID
+                                  MMI_WIN_PRIORITY_E        *win_priority_ptr,  //win priority,default is WIN_ONE_LEVEL
+                                  MMIPUB_SOFTKEY_STYLE_E    softkey_style,      //softkey style
+                                  MMIPUB_HANDLE_FUNC        handle_func,        //handle function
+                                  uint32                    user_data           //user_data
+                                  )
+
+		 [Get input field ctrl_id]
+			PUBLIC MMI_CTRL_ID_T MMIPUB_GetInputFieldDialogCtrlId(
+                                                     MMI_WIN_ID_T       win_id
+                                                     );
+                                                     
+                                                     
+     [Sample code for Set/Get editbox string ]                                                
+       ----------------------------------------------------------------------------------------------------------
+				PUBLIC void MMIHELLO_CreateDialogInputFieldWin(void)
+				{
+				    MMI_STRING_T      title_str = {0};
+				    wchar             title_text[] = L"You name it"; 
+				    //DIALOG_CUSTOM_SOFTKEY init_data;
+				    GUI_LCD_DEV_INFO lcd_dev_info_ptr = {GUI_MAIN_LCD_ID, GUI_BLOCK_MAIN};   
+				    GUI_RECT_T       win_rect = {0};
+				    uint16           logic_width = 0;
+				    uint16           logic_height = 0;   
+				    MMIPUB_DIALOG_SOFTKEY_T dialog_softkey = {0};
+				    
+				    title_str.wstr_ptr = title_text;
+				    title_str.wstr_len = MMIAPICOM_Wstrlen(title_text);
+				
+				    MMIPUB_OpenDialogInputFieldWinByTextPtr(&title_str, PNULL, PNULL, PNULL, HandleInputFieldDialogWindow);
+				}            
+				
+		   ----------------------------------------------------------------------------------------------------------                                                     
+				LOCAL MMI_RESULT_E  HandleInputFieldDialogWindow(
+				                                        MMI_WIN_ID_T     win_id, 
+				                                        MMI_MESSAGE_ID_E msg_id, 
+				                                        DPARAM           param 
+				                                        )
+				{
+				    MMI_RESULT_E        recode = MMI_RESULT_TRUE;
+				    wchar               input_default_text[] = L"This is a test";   
+				    GUI_LCD_DEV_INFO    lcd_dev_info_ptr = {GUI_MAIN_LCD_ID, GUI_BLOCK_MAIN};   
+				    GUI_RECT_T          win_rect = {0};    
+				    GUI_RECT_T          text_rect = {0};
+				    uint16              logic_width = 0;
+				    uint16              logic_height = 0;
+				    GUISTR_STYLE_T      text_style = {0};     
+					  MMI_CTRL_ID_T       input_field_ctrl_id = MMIPUB_GetInputFieldDialogCtrlId(win_id);    
+				    MMI_STRING_T        inputstr = {0};
+				
+				    switch(msg_id)
+				    {
+				     
+				    case MSG_OPEN_WINDOW:
+				        {            
+				            GUIEDIT_SetString(input_field_ctrl_id,input_default_text,100);
+				        }        
+				        break;
+				        
+				     case MSG_CTL_MIDSK:
+				         {                         
+				            GUIEDIT_GetString(input_field_ctrl_id,&inputstr);
+				            
+				            text_style.align      = ALIGN_LEFT;
+				            text_style.font       = SONG_FONT_20;
+				            text_style.font_color = MMI_WHITE_COLOR;
+				            
+				            GUILCD_GetLogicWidthHeight(lcd_dev_info_ptr.lcd_id, &logic_width, &logic_height);        
+				            text_rect.left        = 10;
+				            text_rect.right       = text_rect.left + logic_width;
+				            text_rect.top         = 10;
+				            text_rect.bottom      = text_rect.top + logic_height;                                
+				            GUISTR_DrawTextToLCDInRect((const GUI_LCD_DEV_INFO *)&lcd_dev_info_ptr, &text_rect, &text_rect, &inputstr, &text_style, GUISTR_STATE_ALIGN | GUISTR_STATE_SINGLE_LINE | GUISTR_STATE_ELLIPSIS, GUISTR_TEXT_DIR_AUTO);
+				        }
+				        break;
+				        
+				    case MSG_APP_OK:
+				    case MSG_CTL_OK:
+				    case MSG_CTL_CANCEL:
+				    case MSG_APP_CANCEL:  
+				    case MSG_CLOSE_WINDOW:        
+				        MMK_CloseWin(win_id);      
+				        break;
+				        
+				    default:
+				        recode = MMIPUB_HandleDialogInputFieldWinMsg(win_id, msg_id, param);
+				        break;
+				    }
+				
+				    return (recode);
+				}                                                     
+				                                                                                                         
+===============================================================================================================================================                          
+
+[Dialog softkey 設定方式]
+1. 在開啟窗口時設定softkey_style,如果傳入PNULL或傳入非dialog之softkey_style則會設定為預設風格。                                                                  
+    MMIPUB_OpenProgressWinByTextPtr(&progress_str, PNULL, PNULL, MMIPUB_SOFTKEY_DIALOG_CLOSE, HandleProgressbarDialogWindow);
+
+    可供設置之風格如下:
+    MMIPUB_SOFTKEY_DIALOG_NONE
+    MMIPUB_SOFTKEY_DIALOG_OK
+    MMIPUB_SOFTKEY_DIALOG_ALARM
+    MMIPUB_SOFTKEY_DIALOG_CLOSE
+    MMIPUB_SOFTKEY_DIALOG_CLOSE_OK_RETURN
+    MMIPUB_SOFTKEY_DIALOG_OK_CLOSE
+    
+2. 客製化softkey    
+   
+   (接口)
+   PUBLIC void MMIPUB_SetDialogSoftkey(
+                                    MMI_WIN_ID_T				      *win_id_ptr,   
+                                    DIALOG_TYPE                 dialog_type,
+                                    MMIPUB_DIALOG_SOFTKEY_T		*dialog_softkey
+                                    );
+             
+    
+   (使用方式)          
+   在開啟窗口後設置MMIPUB_DIALOG_SOFTKEY_T型態變數,並調用接口MMIPUB_SetDialogSoftkey。
+   -----------------------------------------------------------------------------
+   index - 左鍵為0, 中鍵為1, 右鍵為2
+   content - text_id 或image_id
+   type - DIALOG_SOFTKEY_TEXT_ID 或DIALOG_SOFTKEY_IMAGE_ID
+   -----------------------------------------------------------------------------
+   
+   
+   (範例)
+   MMIPUB_DIALOG_SOFTKEY_T dialog_softkey = {0};
+
+   MMIPUB_OpenProgressWinByTextPtr(&progress_str, PNULL, PNULL, MMIPUB_SOFTKEY_DIALOG_ALARM, HandleProgressbarDialogWindow);
+                       
+   dialog_softkey.index = 1;
+   dialog_softkey.content = TXT_COMMON_OK;
+   dialog_softkey.type = DIALOG_SOFTKEY_TEXT_ID;    
+   MMIPUB_SetDialogSoftkey(PNULL,DIALOG_WITH_PROGRESSBAR,&dialog_softkey);
+    
+   dialog_softkey.index = 2;
+   dialog_softkey.content = IMAGE_COMMON_CANCEL;
+   dialog_softkey.type = DIALOG_SOFTKEY_IMAGE_ID;    
+   MMIPUB_SetDialogSoftkey(PNULL,DIALOG_WITH_PROGRESSBAR,&dialog_softkey);
+   
+                                 
+  (注意項目)
+   - MMIPUB_DIALOG_SOFTKEY_T型態變數的content與type需相符合,否則會造成無法顯示softkey或顯示異常.
+   - MMIPUB_SetDialogSoftkey接口的調用需在窗口開啟後,否則設定無效。
+   - 接口MMIPUB_SetDialogSoftkey若第一個參數win_id_ptr沒有設置,將依據第二個參數使用窗口類型設定預設win_id。
+   - MMIPUB_SOFTKEY_DIALOG_NONE 為無softkey的情況,布局不會有softkey bar。
+                                    
+======================================================================================================================
+
+[ References ]
+
+Please refer to sample code for details.
+- sample_dialog_ctrl.c
+- sample_dialog_ctrl.h

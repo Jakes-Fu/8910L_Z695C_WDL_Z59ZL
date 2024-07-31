@@ -1,0 +1,185 @@
+﻿生成启动时间为 2024/7/29 15:17:38。
+     1>项目“H:\8910L_Z695C_WDL_Z59ZL\MS_MMI_Main\source\winsimulator_tp\win_platform\MSDevBridge\MSDevBridge_Mod.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“.\Debug\MSDevBridge.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         d:\vs2010\VC\bin\CL.exe /c /I../../../../../common/export/inc /I../../../../../Base/ps/export/inc /I../include /I../../../../../ms_ref/export/inc /I../../../../../transform/export/inc /I../mskernelapi /I../../../../../rtos/export/inc /I../../../../../ps/include /I../../../../../chip_drv/export/inc /I../../../../../chip_drv/export/inc/outdated /I../../../../../ms_ref/source/display/inc /I../../../../../ms_ref/source/lcd/inc /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _RTOS /D _FEATURE_BSSIM_TEST /D EXTERNAL_SDL_DEBUG /D LOG_DEBUG /D SDL /D FLASH_EMU /D _MSSIM /D FEATURE_TEST /D SIM_TEST_IN_WIN32 /D _ENABLE_LOG_TOOL /D _CONTROL_PANEL /D _PS_BL7 /D _REF_SC6800_ /D MSCODE_MOD /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /Zp4 /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\vc100.pdb" /FR".\Debug\\" /Gd /TP /analyze- /errorReport:prompt BridgeLayer.cpp
+         BridgeLayer.cpp
+     1>h:\8910l_z695c_wdl_z59zl\rtos\export\inc\os_api.h(48): warning C4117: 保留“__FUNCTION__”宏名，忽略“#define”
+     1>h:\8910l_z695c_wdl_z59zl\rtos\export\inc\sci_log.h(535): warning C4005: “SCI_TRACE_ID”: 宏重定义
+                 h:\8910l_z695c_wdl_z59zl\rtos\export\inc\os_api.h(313) : 参见“SCI_TRACE_ID”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\chip_drv\export\inc\com_drvapi.h(75): warning C4005: “BAUD_1200”: 宏重定义
+                 c:\program files (x86)\microsoft sdks\windows\v7.0a\include\winbase.h(624) : 参见“BAUD_1200”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\chip_drv\export\inc\com_drvapi.h(76): warning C4005: “BAUD_2400”: 宏重定义
+                 c:\program files (x86)\microsoft sdks\windows\v7.0a\include\winbase.h(626) : 参见“BAUD_2400”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\chip_drv\export\inc\com_drvapi.h(77): warning C4005: “BAUD_4800”: 宏重定义
+                 c:\program files (x86)\microsoft sdks\windows\v7.0a\include\winbase.h(627) : 参见“BAUD_4800”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\chip_drv\export\inc\com_drvapi.h(78): warning C4005: “BAUD_9600”: 宏重定义
+                 c:\program files (x86)\microsoft sdks\windows\v7.0a\include\winbase.h(629) : 参见“BAUD_9600”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\chip_drv\export\inc\com_drvapi.h(79): warning C4005: “BAUD_19200”: 宏重定义
+                 c:\program files (x86)\microsoft sdks\windows\v7.0a\include\winbase.h(631) : 参见“BAUD_19200”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\chip_drv\export\inc\com_drvapi.h(80): warning C4005: “BAUD_38400”: 宏重定义
+                 c:\program files (x86)\microsoft sdks\windows\v7.0a\include\winbase.h(632) : 参见“BAUD_38400”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\chip_drv\export\inc\com_drvapi.h(81): warning C4005: “BAUD_57600”: 宏重定义
+                 c:\program files (x86)\microsoft sdks\windows\v7.0a\include\winbase.h(636) : 参见“BAUD_57600”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\chip_drv\export\inc\com_drvapi.h(82): warning C4005: “BAUD_115200”: 宏重定义
+                 c:\program files (x86)\microsoft sdks\windows\v7.0a\include\winbase.h(635) : 参见“BAUD_115200”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\chip_drv\export\inc\timer_drvapi.h(59): warning C4005: “REG32”: 宏重定义
+                 h:\8910l_z695c_wdl_z59zl\chip_drv\chip_plf\common\inc\chip_drv_common_io.h(79) : 参见“REG32”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(46): warning C4005: “SCI_TRACE_ID”: 宏重定义
+                 h:\8910l_z695c_wdl_z59zl\rtos\export\inc\sci_log.h(535) : 参见“SCI_TRACE_ID”的前一个定义
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(207): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(207): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(238): warning C4244: “=”: 从“UINT”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(270): warning C4244: “=”: 从“UINT”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(298): warning C4100: “nLength”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(371): warning C4100: “x”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(436): warning C4244: “=”: 从“int”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(494): warning C4244: “参数”: 从“uint32”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(510): warning C4244: “=”: 从“uint32”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(465): warning C4100: “wait_option”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(601): warning C4245: “初始化”: 从“int”转换到“uint32”，有符号/无符号不匹配
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(613): warning C4245: “初始化”: 从“int”转换到“uint32”，有符号/无符号不匹配
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(662): warning C4244: “=”: 从“int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(682): warning C4244: “参数”: 从“int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(684): warning C4244: “参数”: 从“int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(613): warning C4189: “status”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(868): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(898): warning C4244: “参数”: 从“LCD_ID_E”转换到“BYTE”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1010): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1010): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1019): warning C4244: “=”: 从“int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1030): warning C4244: “=”: 从“unsigned long”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1037): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1098): warning C4244: “=”: 从“uint32”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1102): warning C4244: “=”: 从“uint32”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1111): warning C4244: “=”: 从“uint32”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1130): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(990): warning C4101: “b0”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(990): warning C4101: “g0”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(989): warning C4189: “alpha”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(992): warning C4101: “g2”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(987): warning C4189: “cr_3”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(991): warning C4101: “r1”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(985): warning C4189: “cr_old”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(993): warning C4189: “a_f”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(992): warning C4101: “b2”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(992): warning C4101: “r2”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(974): warning C4189: “priority”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(991): warning C4101: “g1”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(990): warning C4101: “r0”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(991): warning C4101: “b1”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1070): warning C4101: “dst_g”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1069): warning C4101: “dst_r”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1071): warning C4101: “dst_b”: 未引用的局部变量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1214): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1214): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1270): warning C4100: “block_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1270): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1275): warning C4100: “block_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1275): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1284): warning C4100: “config”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1282): warning C4100: “blk_num”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1281): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1293): warning C4100: “cfg_ptr”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1291): warning C4100: “blk_num”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1290): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1298): warning C4100: “blk_num”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1298): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1303): warning C4100: “blk_num”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1303): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1356): warning C4244: “return”: 从“uint16”转换到“BOOLEAN”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1403): warning C4100: “display_on”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1411): warning C4100: “is_sleep”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1426): warning C4100: “contrast”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1438): warning C4100: “bInc”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1454): warning C4100: “brightness”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1452): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1473): warning C4100: “bottom”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1471): warning C4100: “right”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1470): warning C4100: “top”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1469): warning C4100: “left”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1468): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1489): warning C4100: “top”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1487): warning C4100: “left”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1486): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1500): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1510): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1521): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1532): warning C4100: “mode”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1532): warning C4100: “lcd_id”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1545): warning C4100: “size”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1557): warning C4100: “addr_ptr”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1582): warning C4100: “ahb_clk”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1638): warning C4244: “初始化”: 从“int”转换到“char”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1747): warning C4100: “display_on”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1752): warning C4100: “sleep_in”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1757): warning C4100: “contrast”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1762): warning C4100: “bInc”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1801): warning C4996: '_vsnprintf': This function or variable may be unsafe. Consider using _vsnprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\vs2010\vc\include\stdio.h(363) : 参见“_vsnprintf”的声明
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1815): warning C4244: “=”: 从“unsigned int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1868): warning C4996: '_vsnprintf': This function or variable may be unsafe. Consider using _vsnprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\vs2010\vc\include\stdio.h(363) : 参见“_vsnprintf”的声明
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1882): warning C4244: “=”: 从“unsigned int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1842): warning C4100: “trc_calss”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1928): warning C4244: “=”: 从“int”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(1980): warning C4244: “=”: 从“unsigned int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2044): warning C4100: “mode”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2080): warning C4100: “IsEcho”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2113): warning C4100: “b_light”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2135): warning C4100: “b_aux_device”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2146): warning C4100: “b_light”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2157): warning C4100: “b_light”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2168): warning C4100: “b_light”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2180): warning C4100: “b_light”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2190): warning C4100: “volume”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2221): warning C4100: “baud_rate”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2221): warning C4100: “port”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2240): warning C4100: “port”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2291): warning C4244: “参数”: 从“int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2295): warning C4244: “参数”: 从“int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2309): warning C4244: “参数”: 从“long”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2309): warning C4244: “参数”: 从“int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2309): warning C4244: “参数”: 从“int”转换到“uint16”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2316): warning C4100: “mode”: 未引用的形参
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2590): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2613): warning C4244: “=”: 从“uint32”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2618): warning C4244: “=”: 从“uint32”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2660): warning C4244: “=”: 从“uint32”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2665): warning C4244: “=”: 从“uint32”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2713): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2731): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2748): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2750): warning C4244: “=”: 从“uint32”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2755): warning C4244: “=”: 从“uint32”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2787): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2812): warning C4127: 条件表达式是常量
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2820): warning C4244: “=”: 从“uint32”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2824): warning C4244: “=”: 从“uint32”转换到“uint8”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2861): warning C4244: “参数”: 从“LCD_ID_E”转换到“BYTE”，可能丢失数据
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(3018): warning C4018: “<”: 有符号/无符号不匹配
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2855): warning C4189: “nEnablLayerNum”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2916): warning C4189: “value_565”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2917): warning C4189: “l”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2918): warning C4189: “j”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2966): warning C4189: “value_888”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2965): warning C4189: “src_u32_buf”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2967): warning C4189: “l”: 局部变量已初始化但不引用
+     1>h:\8910l_z695c_wdl_z59zl\ms_mmi_main\source\winsimulator_tp\win_platform\msdevbridge\bridgelayer.cpp(2968): warning C4189: “j”: 局部变量已初始化但不引用
+       PreLinkEvent:
+         ATTRIB -R ../Bin/MSDevBridge.lib
+         :VCEnd
+       Lib:
+         d:\vs2010\VC\bin\Lib.exe /OUT:"../bin/MSDevBridge.lib" /NOLOGO .\Debug\BridgeLayer.obj
+         MSDevBridge_Mod.vcxproj -> H:\8910L_Z695C_WDL_Z59ZL\MS_MMI_Main\source\winsimulator_tp\win_platform\MSDevBridge\.\../bin\MSDevBridge.lib
+       BscMake:
+         d:\vs2010\VC\bin\bscmake.exe /nologo /o".\../bin\MSDevBridge_Mod.bsc" .\Debug\BridgeLayer.sbr
+       FinalizeBuildStatus:
+         正在删除文件“.\Debug\MSDevBridge.unsuccessfulbuild”。
+         正在对“.\Debug\MSDevBridge.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“H:\8910L_Z695C_WDL_Z59ZL\MS_MMI_Main\source\winsimulator_tp\win_platform\MSDevBridge\MSDevBridge_Mod.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:42.62

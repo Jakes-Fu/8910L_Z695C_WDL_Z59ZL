@@ -1,0 +1,11 @@
+#if 1
+MENU_DEF( MENU_DATACOUNTER_CLEAR_ALL_TABLE_ID, menu_datacounter_clear_all_table, GUIMENU_STYLE_POPUP, STR_HDR_COUNTERS, TXT_NULL, TXT_NULL, TXT_NULL, GUIMENU_ITEM_NUM(menu_datacounter_clear_all_table)) 
+MENU_DEF( MENU_DATACOUNTER_CLEAR_DATA_TABLE_ID, menu_datacounter_clear_data_table, GUIMENU_STYLE_POPUP, STR_HDR_COUNTERS, TXT_NULL, TXT_NULL, TXT_NULL, GUIMENU_ITEM_NUM(menu_datacounter_clear_data_table)) 
+MENU_DEF( MENU_DATACOUNTER_CLEAR_CALL_TABLE_ID, menu_datacounter_clear_call_table, GUIMENU_STYLE_POPUP, STR_HDR_COUNTERS, TXT_NULL, TXT_NULL, TXT_NULL, GUIMENU_ITEM_NUM(menu_datacounter_clear_call_table)) 
+MENU_DEF( MENU_DATACOUNTER_CLEAR_SMS_TABLE_ID, menu_datacounter_clear_sms_table, GUIMENU_STYLE_POPUP, STR_HDR_COUNTERS, TXT_NULL, TXT_NULL, TXT_NULL, GUIMENU_ITEM_NUM(menu_datacounter_clear_sms_table)) 
+MENU_DEF( MENU_DATACOUNTER_CLEAR_MMS_TABLE_ID, menu_datacounter_clear_mms_table, GUIMENU_STYLE_POPUP, STR_HDR_COUNTERS, TXT_NULL, TXT_NULL, TXT_NULL, GUIMENU_ITEM_NUM(menu_datacounter_clear_mms_table)) 
+MENU_DEF( MENU_DATACOUNTER_DATA_ALERT_SET_TABLE_ID, menu_datacounter_data_alert_set_table, GUIMENU_STYLE_POPUP_RADIO, STR_HDR_SET_ALERT, TXT_NULL, TXT_NULL, TXT_NULL, GUIMENU_ITEM_NUM(menu_datacounter_data_alert_set_table))
+MENU_DEF( MENU_DATACOUNTER_CALL_ALERT_SET_TABLE_ID, menu_datacounter_call_alert_set_table, GUIMENU_STYLE_POPUP_RADIO, STR_HDR_SET_ALERT, TXT_NULL, TXT_NULL, TXT_NULL, GUIMENU_ITEM_NUM(menu_datacounter_call_alert_set_table)) 
+MENU_DEF( MENU_DATACOUNTER_SMS_ALERT_SET_TABLE_ID, menu_datacounter_sms_alert_set_table, GUIMENU_STYLE_POPUP_RADIO, STR_HDR_SET_ALERT, TXT_NULL, TXT_NULL, TXT_NULL, GUIMENU_ITEM_NUM(menu_datacounter_sms_alert_set_table)) 
+MENU_DEF( MENU_DATACOUNTER_MMS_ALERT_SET_TABLE_ID, menu_datacounter_mms_alert_set_table, GUIMENU_STYLE_POPUP_RADIO, STR_HDR_SET_ALERT, TXT_NULL, TXT_NULL, TXT_NULL, GUIMENU_ITEM_NUM(menu_datacounter_mms_alert_set_table)) 
+#endif

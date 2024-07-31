@@ -1,0 +1,45 @@
+
+[ Progressbar usage ] 
+
+1.Create the progressbar control with type "GUIPRGBOX_STYLE_HORIZONTAL_PROCESS" and unique control id in window table. 
+   
+    CREATE_PRGBOX_CTRL(GUIPRGBOX_STYLE_HORIZONTAL_PROCESS, ctrl_id)
+
+2. Set the location of progressbar. 
+
+   PUBLIC void CTRLPROGRESSBAR_SetRectBarPosition (
+						    MMI_CTRL_ID_T  ctrl_id,
+						    uint16         x_position,    
+						    uint16         y_position);
+
+3. Set progressbar theme (DEFAULT/DIALOG)
+   
+   PUBLIC void CTRLPROGRESSBAR_SetIsRectBarInDialog (
+                                                     MMI_CTRL_ID_T  	ctrl_id,
+                                                     BOOLEAN       	is_in_dialog);                                                         
+
+
+4. Set the parameters (total_item_count / items_per_page)
+
+   PUBLIC void CTRLPROGRESSBAR_SetParam(
+  					MMI_CTRL_ID_T  ctrl_id,
+                                        uint32         total_item_count,	
+                                        uint32         items_per_page);
+
+
+5. Display current progress 
+   
+   PUBLIC void CTRLPROGRESSBAR_SetPos (
+   				       BOOLEAN                 is_update,      
+                                       uint32                  cur_item_index,
+                                       uint32		       first_item_index,
+                                       MMI_CTRL_ID_T           ctrl_id);
+
+======================================================================================================================
+
+[ References ]
+
+Please refer to sample code for details.
+
+- MS_MMI_Main\source\mmi_app\app\sample\c\sample_ms_progressbar_ctrl.c
+- MS_MMI_Main\source\mmi_app\app\sample\h\sample_ms_progressbar_ctrl.h

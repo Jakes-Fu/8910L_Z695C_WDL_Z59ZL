@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Notice -->
+<!-- 1. <Time> must be configured for each rat:
+        1.1. "type" attribute has three optional value: Trace, FRC, Unilog
+             a. Trace : Time is from trace, need configure "text" and "time_pos" attributes
+             b. FRC   : Time is from FTC time, need not configure "text" and "time_pos" attributes
+             c. Unilog: Time is from Unilog Packet, need not configure "text" and "time_pos" attributes
+        1.2. "text" attribute is only for type="Trace", use to configure trace format
+        1.3. "time_pos" attribute is only for type="Trace", use to specify the time param postion in trace format, base on 0.  
+     2. <Format>
+        2.1. "text" is used to specify the trace format, it must be correct, logel tool uses this text string to find trace id in parser
+             a. "Control Characters" within the "text" string must be escaped as below:
+                a-1. "\t" (horizontal tab)  => "&#x0009;"
+                a-2. "\r" (carriage return) => "&#x000D;"
+                a-3. "\n" (new line)        => "&#x000A;"
+        2.2. "param_names" is used to configure param names which will be displayed in logel tool, separating with ','
+             a. each param name must be not more than 34 chars, otherwise it will be truncated
+             b. param names sequence must be same as them in the "text", 
+                e.g. text="output: %x,%x,%x" param_names="param0,parma1,param2"
+             c. only need list the param used for chart, set ohers empty, 
+                e.g. text="output: %x,%x,%x" param_names="param0,,param2", param1 is not used for chart and set it empty
+     3. <Group> is used to group the parameters, you can set the "name" a meaningfull name
+-->
+<Formats version="1.0">
+    <Rat name="gsm" />
+    <Rat name="wcdma" />
+    <Rat name="lte">
+        <Time type="Unilog" text="[LPHY-PLOT32: UNICLK] = %x" time_pos="0" />
+        <Group name="RTOS">
+        	<Format text="ISR_sfBegin():TP_RFT_SF_BEGIN2 %d,sfn %d, sf %d,&#x000D;&#x000A;" param_names=",sfn,sf" />
+        </Group>
+    </Rat>
+    <Rat name="nr" />
+</Formats>

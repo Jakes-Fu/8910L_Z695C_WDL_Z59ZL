@@ -1,0 +1,8 @@
+1.cmd输入，    》 LzmaUtil.exe cp.bin 65536
+
+cp.bin 压缩前文件，block size 为  65536
+
+2.生产 压缩文件  cp_lzma_zip.bin ， 和其他信息文件。
+
+3.cp_lzma_zip.bin 更名cp.bin 替换输入文件。 其它信息文件放入对应文件夹的cp_info.
+（\lib\modem\UIX8910_128X256_320X240\cp_info\）

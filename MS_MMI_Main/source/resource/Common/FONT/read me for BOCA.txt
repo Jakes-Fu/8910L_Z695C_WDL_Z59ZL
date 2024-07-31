@@ -1,0 +1,75 @@
+
+/******20160121********/
+Yoruba组合显示需求，新增字符0xf858\0xf859\0xf85d\0xf85e\0xf862\0xf863\0xf867\0xf868,更新latin矢量和店镇字库，
+Latin Font:
+         Max Brearing Y Delta: 4
+         Shrink Percent[50%-100%]: 92
+/******20160121********/
+
+
+/******20160120********/
+去除加粗后,hindi语字库baseline需要微调，否则会有显示不全问题
+Devanagari Font:
+         Max Brearing Y Delta: 4
+         Shrink Percent[50%-100%]: 92
+/******20160120********/
+
+/******20160114********/
+制作Latin_basic矢量字库:增加字符0x2432，用以显示thai的空格符号
+Thai font:删除字符0x25cc，不再显示虚线圈
+
+
+制作矢量字库设置说明
+/******20160113********/
+针对去除BOLD属性微调Latin点阵字库，解决Groupme叠加问题和显示不全问题。
+Latin Font:
+         Max Brearing Y Delta: 4
+         Shrink Percent[50%-100%]: 92
+/******20160113********/
+
+/******20160105********/
+针对去除BOLD属性微调字库，解决叠加问题和显示不全问题。
+Latin Font:
+         Max Brearing Y Delta: 4
+         Shrink Percent[50%-100%]: 92
+
+Arabic Font
+         Max Brearing Y Delta: 5
+         Shrink Percent[50%-100%]: 92
+
+Tamil Font
+	 Max Brearing Y Delta: 5
+         Shrink Percent[50%-100%]: 85
+/******20160105********/
+Latin bisic Font - 20151228
+使用font工具只调整Latin basic字库中字符0x22的显示间距为2个像素，不然由于加粗效果会使手机上显示不清晰
+
+Sinhala Font - 20151217
+update sinhala font with Max Brearing Y Delta: 3 Shrink Percent[50%-100%]: 95
+
+Latin Font --20151217
+增加0x0329
+使用微软原始字库，Max Brearing Y Delta: 2 Shrink Percent[50%-100%]: 92
+
+Latin Font --20151214
+add char 0x2019(for 511690) + greek char (for 498256)
+使用微软原始字库，Max Brearing Y Delta: 2 Shrink Percent[50%-100%]: 92
+
+Latin Font --20151211
+使用微软原始字库，Max Brearing Y Delta: 2 Shrink Percent[50%-100%]: 92
+
+Indic语言常用设置；
+         Max Brearing Y Delta: 5
+         Shrink Percent[50%-100%]: 92
+
+Kannada Font
+         Max Brearing Y Delta: 5
+         Shrink Percent[50%-100%]: 85
+
+Thai Font	
+         Max Brearing Y Delta: 2
+         Shrink Percent[50%-100%]: 92
+
+Tamil Font
+	 Max Brearing Y Delta: 2
+         Shrink Percent[50%-100%]: 92

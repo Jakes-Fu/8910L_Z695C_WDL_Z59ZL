@@ -1,0 +1,10 @@
+//[[define string information
+
+RES_ADD_STRING(TXT_MMIWK_TITILE, "WebKit")
+RES_ADD_STRING(TXT_MMIWK_GO, "Go")
+RES_ADD_STRING(TXT_MMIWK_OPTION, "Options")
+RES_ADD_STRING(TXT_MMIWK_EXIT, "Exit")
+RES_ADD_STRING(TXT_MMIWK_RETURN, "Return")
+RES_ADD_STRING(TXT_MMIWK_STXT_EDITBOX, "Editor")
+
+//[[define image information

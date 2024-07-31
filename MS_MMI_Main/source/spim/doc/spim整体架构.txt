@@ -1,0 +1,13 @@
+1 公共定义部分，包括类型定义和常数定义
+2 每个输入法有三个固定的组成，对外头文件、内部头文件和函数实现
+3 一些输入法共有的部分，则提出来单独做一个公共库，比如汉字的数据文件
+
+spim_type.h
+spim_general.h
+--n个
+spim_xx_yy.h
+spim_xx_yy.c
+spim_xx_yy_internal.h
+--
+spim_xx.h
+spim_xx.c

@@ -1,0 +1,45 @@
+# SpreadTrum NVEditor Project File, Format Version 1.0
+# WARNING: DO NOT EDIT OR DELETE THIS PROJECT FILE!
+
+################################################################################
+  PROJECT     =  NVitem
+  ALIGNMENT   =  4
+  TARGET      =  nvitem_release.bin
+  DESCRIPTION =  
+
+################################################################################
+
+# Begin Project Module
+
+  MODULE     =  audio_eq.nvm
+  MODULE     =  audio_sc6531efm_AEC.nvm
+  MODULE     =  audio_arm_6531efm.nvm
+  MODULE     =  audio_dsp_codec_6531efm_AEC.nvm
+  MODULE     =  audio_calib_VQE.nvm
+  MODULE     =  Calibrationparam_sc6531efm_AB_7182.nvm
+  MODULE     =  DownloadParam_sc6531efm_AB_7182.nvm
+  MODULE     =  nv_classmark.nvm
+  MODULE     =  BaseParam.nvm
+  MODULE     =  nv_type_uix8910.nvm
+  MODULE     =  ProductionParam_uix8910.nvm
+  MODULE     =  license.nvm
+  MODULE     =  modem_nv_cat1bis_uix8910_static.nvm
+  MODULE     =  modem_nv_cat1bis_uix8910_phy.nvm
+  MODULE     =  modem_nv_cat1bis_uix8910_dynamic.nvm
+  MODULE     =  modem_nv_cat1bis_uix8910_card2_static.nvm
+  MODULE     =  modem_nv_cat1bis_uix8910_card2_phy.nvm
+  MODULE     =  modem_nv_cat1bis_uix8910_card2_dynamic.nvm
+  MODULE     =  RF_calib.nvm
+  MODULE     =  Cfw_nv.nvm
+  MODULE     =  RF_nv.nvm
+  MODULE     =  golden_board_param.nvm
+  MODULE     =  ims_nv.nvm
+  MODULE     =  NV_VARIANT_CONFIG_APP.nvm
+  MODULE     =  NV_VARIANT_CONFIG_MESSAGES.nvm
+  MODULE     =  NV_VARIANT_CONFIG_OTHER.nvm
+  MODULE     =  NV_VARIANT_CONFIG_SETTINGS.nvm
+  MODULE     =  NV_VARIANT_CONFIG_TELE.nvm
+
+# End Project Module
+
+################################################################################
