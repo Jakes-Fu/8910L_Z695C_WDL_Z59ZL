@@ -2356,6 +2356,28 @@ PUBLIC BOOLEAN CTRLLABEL_SetTextScroll(
 
 }
 
+PUBLIC BOOLEAN CTRLLABEL_SetAlign (
+        MMI_CTRL_ID_T   ctrl_id,
+        GUILABEL_ALIGN_E align
+)
+{
+    BOOLEAN             result = FALSE;
+    CTRLLABEL_OBJ_T		*label_ctrl_ptr = PNULL;
+
+    //get label pointer by control id
+    label_ctrl_ptr = GetLabelPtr (ctrl_id);
+
+    if (PNULL != label_ctrl_ptr)
+    {
+        //set bg
+        label_ctrl_ptr->align= align;
+
+        result = TRUE;
+    }
+
+    return FALSE;
+}
+
 /*****************************************************************************/
 //  Description : set label rect
 //  Global resource dependence :

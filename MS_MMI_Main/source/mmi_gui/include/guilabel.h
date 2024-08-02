@@ -162,6 +162,7 @@ LabelÊÇ±êÇ©µÄÒâË¼£¬Ëù±êÊ¾µÄÄÚÈİÎŞĞè±à¼­¡¢ĞŞ¸Ä¡£¼ÙÉèÕâÑùµÄÇéĞÎ£¬µ±ÓÃ»§ĞèÒª±êÊ¾Ò»¸
 #define GUILABEL_SetIsTicker        CTRLLABEL_SetIsTicker
 #define GUILABEL_GetStrRect       CTRLLABEL_GetStrRect
 #define GUILABEL_SetTextScroll       CTRLLABEL_SetTextScroll
+#define GUILABEL_SetAlign           CTRLLABEL_SetAlign
 
 /**--------------------------------------------------------------------------*
  **                         Compiler Flag                                    *

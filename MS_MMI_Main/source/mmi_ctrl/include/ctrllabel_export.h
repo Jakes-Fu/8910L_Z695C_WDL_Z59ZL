@@ -466,6 +466,11 @@ PUBLIC BOOLEAN CTRLLABEL_SetTextScroll(
     BOOLEAN          is_scroll
                             );
 
+PUBLIC BOOLEAN CTRLLABEL_SetAlign (
+        MMI_CTRL_ID_T   ctrl_id,
+        GUILABEL_ALIGN_E align
+);
+
 /**--------------------------------------------------------------------------*
  **                         Compiler Flag                                    *
  **--------------------------------------------------------------------------*/
