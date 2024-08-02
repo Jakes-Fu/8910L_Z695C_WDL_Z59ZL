@@ -12,6 +12,8 @@
 #include "guilcd.h"
 #include "guistring.h"
 #include "guitext.h"
+#include "guires.h"
+#include "ui_layer.h"
 #include "mmi_textfun.h"
 #include "mmiacc_text.h"
 #include "mmicc_export.h"
@@ -80,7 +82,6 @@ HANZI_BOOK_INFO_T hanzi_book_info = {0};
 BOOLEAN is_open_auto_play = TRUE;
 LOCAL uint8 open_auto_play_timer = 0;
 LOCAL BOOLEAN is_open_new_hanzi = FALSE;
-LOCAL GUI_LCD_DEV_INFO hanzi_chapter_tip_layer = {0};
 LOCAL GUI_LCD_DEV_INFO hanzi_detail_tip_layer = {0};
 LOCAL int8 hanzi_is_display_tip = 0;
 LOCAL uint8 hanzi_tip_timer = 0;
@@ -97,8 +98,10 @@ LOCAL HANZI_LISTEN_INFO_T hanzi_listen_info = {0};
 LOCAL uint8 hanzi_listen_timer_id = 0;
 LOCAL uint16 hanzi_listen_set[HANZI_LISTEN_SET_SYMBOL_NUM] = {0};
 LOCAL uint16 hanzi_listen_idx[HANZI_CHAPTER_WORD_MAX] = {0};
+LOCAL int hanzi_listen_set_idx = 0;
 LOCAL int hanzi_click_btn = 0;
 
+LOCAL void MMI_CreateHanziTipsWin(int type);
 LOCAL MMI_RESULT_E MMI_CloseHanziWin(void);
 LOCAL MMI_RESULT_E MMI_CloseHanziChapterWin(void);
 LOCAL MMI_RESULT_E MMI_CloseHanziListenWin(void);
@@ -106,7 +109,6 @@ LOCAL MMI_RESULT_E MMI_CloseHanziListenInfoWin(void);
 LOCAL BOOLEAN MMI_IsOpenHanziListenWin(void);
 LOCAL void HanziListenWin_PlayAudioFail(void);
 LOCAL void HanziListenWin_CreateIntervalTimer(void);
-LOCAL void HanziDetail_ShowTip(void);
 
 LOCAL void Hanzi_DrawWinTitle(MMI_WIN_ID_T win_id, MMI_CTRL_ID_T ctrl_id,MMI_STRING_T text_string)
 {
@@ -188,7 +190,7 @@ LOCAL void Hanzi_InitListbox(MMI_WIN_ID_T win_id, MMI_CTRL_ID_T ctrl_id, GUI_REC
         GUILIST_SetMaxItem(ctrl_id, max_item, FALSE);
 
         GUILIST_SetListState(ctrl_id, GUILIST_STATE_SPLIT_LINE, TRUE);
-        GUILIST_SetListState(ctrl_id, GUILIST_STATE_NEED_HIGHTBAR, FALSE);
+        GUILIST_SetListState(ctrl_id, GUILIST_STATE_NEED_HIGHTBAR, TRUE);
         GUILIST_SetListState(ctrl_id, GUILIST_STATE_EFFECT_STR,TRUE);
         GUILIST_SetNeedPrgbarBlock(ctrl_id,FALSE);
         GUILIST_SetBgColor(ctrl_id, HANZI_WIN_BG_COLOR);
@@ -266,9 +268,18 @@ LOCAL void HanziPopupWin_FULL_PAINT(MMI_WIN_ID_T win_id)
     MMI_STRING_T str_left = {0};
     MMI_STRING_T str_right = {0};
     MMI_STRING_T tipstr = {0};
-    GUI_RECT_T rect = hanzi_msg_tips_rect;
+    GUI_RECT_T rect = {0};
+    GUI_RECT_T msg_tip_rect = hanzi_msg_tips_rect;
+    GUI_RECT_T msg_rect = hanzi_msg_rect;
     GUI_RECT_T tips_left_rect = hanzi_msg_tips_left_rect;
     GUI_RECT_T tips_right_rect = hanzi_msg_tips_right_rect;
+    int type = MMK_GetWinAddDataPtr(win_id);
+    
+    if(type == 0){
+        rect = msg_tip_rect;
+    }else{
+        rect = msg_rect;
+    }
 
     border.width = 1;
     border.color = MMI_WHITE_COLOR;
@@ -281,8 +292,22 @@ LOCAL void HanziPopupWin_FULL_PAINT(MMI_WIN_ID_T win_id)
     LCD_FillRoundedRect(&lcd_dev_info,rect,rect,MMI_WHITE_COLOR);
     
     GUI_DisplayBorder(rect,rect,&border,&lcd_dev_info);
-    rect.bottom = tips_left_rect.top;
-    MMI_GetLabelTextByLang(WORD_TIPS, &tipstr);
+    if(type == 0){
+        rect.bottom = tips_left_rect.top;
+        MMI_GetLabelTextByLang(HANZI_CONTINUE_TIPS, &tipstr);
+    }else if(type == 1){
+        MMI_GetLabelTextByLang(HANZI_OPEN_AUTOPLAY, &tipstr);
+    }else if(type == 2){
+        MMI_GetLabelTextByLang(HANZI_CLOSE_AUTOPLAY, &tipstr);
+    }else if(type == 3){
+        MMI_GetLabelTextByLang(HANZI_LOADING_WAIT, &tipstr);
+    }else if(type == 4){
+        MMI_GetLabelTextByLang(HANZI_NONE_AUDIO, &tipstr);
+    }else if(type == 5){
+        MMI_GetLabelTextByLang(HANZI_LOAD_FAIL_WAIT, &tipstr);
+    }else if(type == 6){
+        MMI_GetLabelTextByLang(HANZI_DELETING_WAIT, &tipstr);
+    }
     GUISTR_DrawTextToLCDInRect(
         (const GUI_LCD_DEV_INFO *)&lcd_dev_info,
         &rect,
@@ -292,43 +317,67 @@ LOCAL void HanziPopupWin_FULL_PAINT(MMI_WIN_ID_T win_id)
         GUISTR_STATE_ALIGN,
         GUISTR_TEXT_DIR_AUTO
     );
+    if(type == 0){
+        border.color = HANZI_WIN_BG_COLOR;
+        GUI_DisplayBorder(tips_left_rect,tips_left_rect,&border,&lcd_dev_info);
+        MMI_GetLabelTextByLang(WORD_TRUE,&str_left);
+        GUISTR_DrawTextToLCDInRect(
+            (const GUI_LCD_DEV_INFO *)&lcd_dev_info,
+            &tips_left_rect,
+            &tips_left_rect,
+            &str_left,
+            &text_style,
+            GUISTR_STATE_ALIGN,
+            GUISTR_TEXT_DIR_AUTO
+        );
 
-    border.color = HANZI_WIN_BG_COLOR;
-    GUI_DisplayBorder(tips_left_rect,tips_left_rect,&border,&lcd_dev_info);
-    MMI_GetLabelTextByLang(WORD_TRUE,&str_left);
-    GUISTR_DrawTextToLCDInRect(
-        (const GUI_LCD_DEV_INFO *)&lcd_dev_info,
-        &tips_left_rect,
-        &tips_left_rect,
-        &str_left,
-        &text_style,
-        GUISTR_STATE_ALIGN,
-        GUISTR_TEXT_DIR_AUTO
-    );
-
-    GUI_DisplayBorder(tips_right_rect,tips_right_rect,&border,&lcd_dev_info);
-    MMI_GetLabelTextByLang(WORD_FALSE,&str_right);
-    GUISTR_DrawTextToLCDInRect(
-        (const GUI_LCD_DEV_INFO *)&lcd_dev_info,
-        &tips_right_rect,
-        &tips_right_rect,
-        &str_right,
-        &text_style,
-        GUISTR_STATE_ALIGN,
-        GUISTR_TEXT_DIR_AUTO
-    );
+        GUI_DisplayBorder(tips_right_rect,tips_right_rect,&border,&lcd_dev_info);
+        MMI_GetLabelTextByLang(WORD_FALSE,&str_right);
+        GUISTR_DrawTextToLCDInRect(
+            (const GUI_LCD_DEV_INFO *)&lcd_dev_info,
+            &tips_right_rect,
+            &tips_right_rect,
+            &str_right,
+            &text_style,
+            GUISTR_STATE_ALIGN,
+            GUISTR_TEXT_DIR_AUTO
+        );
+    }
 }
 
 LOCAL void HanziPopupWin_TP_PRESS_UP(MMI_WIN_ID_T win_id, GUI_POINT_T point)
 {
-    GUI_RECT_T tips_left_rect = hanzi_msg_tips_left_rect;
-    GUI_RECT_T tips_right_rect = hanzi_msg_tips_right_rect;
-    if(GUI_PointIsInRect(point, tips_right_rect))
-    {
-        MMK_CloseWin(win_id);
+    int type = MMK_GetWinAddDataPtr(win_id);
+    if(type == 0){
+        GUI_RECT_T tips_left_rect = hanzi_msg_tips_left_rect;
+        GUI_RECT_T tips_right_rect = hanzi_msg_tips_right_rect;
+        if(GUI_PointIsInRect(point, tips_right_rect))
+        {
+            MMK_CloseWin(win_id);
+        }
+        else if(GUI_PointIsInRect(point, tips_left_rect))
+        {
+            MMK_CloseWin(win_id);
+            if(hanzi_learn_info != NULL)
+            {
+                uint8 i = 0;
+                for(i = 0;i < hanzi_book_count && i < HANZI_PUBLISH_BOOK_MAX;i++)
+                {
+                    if(hanzi_publish_info[i]->id == hanzi_learn_info->book_id){
+                        hanzi_book_info.cur_book_idx = i;
+                        MMI_CreateHanziChapterWin();
+                        break;
+                    }
+                }
+            }
+        }
     }
-    else if(GUI_PointIsInRect(point, tips_left_rect))
-    {
+}
+
+LOCAL void HanziPopupWin_APP_OK(MMI_WIN_ID_T win_id)
+{
+    int type = MMK_GetWinAddDataPtr(win_id);
+    if(type == 0){
         MMK_CloseWin(win_id);
         if(hanzi_learn_info != NULL)
         {
@@ -340,23 +389,6 @@ LOCAL void HanziPopupWin_TP_PRESS_UP(MMI_WIN_ID_T win_id, GUI_POINT_T point)
                     MMI_CreateHanziChapterWin();
                     break;
                 }
-            }
-        }
-    }
-}
-
-LOCAL void HanziPopupWin_APP_OK(MMI_WIN_ID_T win_id)
-{
-    MMK_CloseWin(win_id);
-    if(hanzi_learn_info != NULL)
-    {
-        uint8 i = 0;
-        for(i = 0;i < hanzi_book_count && i < HANZI_PUBLISH_BOOK_MAX;i++)
-        {
-            if(hanzi_publish_info[i]->id == hanzi_learn_info->book_id){
-                hanzi_book_info.cur_book_idx = i;
-                MMI_CreateHanziChapterWin();
-                break;
             }
         }
     }
@@ -416,14 +448,21 @@ WINDOW_TABLE(MMI_HANZI_TIPS_TAB) = {
     END_WIN
 };
 
-PUBLIC void MMI_CreateHanziTipsWin(void)
+LOCAL void MMI_CreateHanziTipsWin(int type)
 {
     MMI_HANDLE_T win_handle = 0;
-    GUI_RECT_T rect = hanzi_msg_tips_rect;
+    GUI_RECT_T rect = {0};
+    GUI_RECT_T msg_tip_rect = hanzi_msg_tips_rect;
+    GUI_RECT_T msg_rect = hanzi_msg_rect;
+    if(type == 0){
+        rect = msg_tip_rect;
+    }else{
+        rect = msg_rect;
+    }
     if(MMK_IsOpenWin(MMI_HANZI_MAIN_TIPS_WIN_ID)){
         MMK_CloseWin(MMI_HANZI_MAIN_TIPS_WIN_ID);
     }
-    win_handle = MMK_CreateWin((uint32 *)MMI_HANZI_TIPS_TAB, PNULL);
+    win_handle = MMK_CreateWin((uint32 *)MMI_HANZI_TIPS_TAB, (ADD_DATA)type);
     MMK_SetWinRect(win_handle,&rect);
 }
 
@@ -472,6 +511,8 @@ LOCAL void Hanzi_DisplayBookList(MMI_WIN_ID_T win_id, MMI_CTRL_ID_T ctrl_id)
         GUI_UTF8ToWstr(name_wchar, 50, hanzi_publish_info[index]->book_name, length);
         text_wchar.wstr_len = MMIAPICOM_Wstrlen(name_wchar);
         text_wchar.wstr_ptr = name_wchar;
+        item_data.item_content[2].is_default =TRUE;
+        item_data.item_content[2].font_color_id = MMITHEME_COLOR_LIGHT_WHITE;
         item_data.item_content[2].item_data_type = GUIITEM_DATA_TEXT_BUFFER;
         item_data.item_content[2].item_data.text_buffer = text_wchar;
 
@@ -479,6 +520,8 @@ LOCAL void Hanzi_DisplayBookList(MMI_WIN_ID_T win_id, MMI_CTRL_ID_T ctrl_id)
         GUI_UTF8ToWstr(name_str, 50, hanzi_publish_info[index]->publish_name, length);
         text_str.wstr_len = MMIAPICOM_Wstrlen(name_str);
         text_str.wstr_ptr = name_str;
+        item_data.item_content[3].is_default =TRUE;
+        item_data.item_content[3].font_color_id = MMITHEME_COLOR_LIGHT_WHITE;
         item_data.item_content[3].item_data_type = GUIITEM_DATA_TEXT_BUFFER;
         item_data.item_content[3].item_data.text_buffer = text_str;
 
@@ -517,10 +560,12 @@ LOCAL void HanziWin_FULL_PAINT(MMI_WIN_ID_T win_id)
 
 LOCAL void HanziWin_CTL_PENOK(MMI_WIN_ID_T win_id)
 {
+    if(hanzi_book_count > 0){
     uint16 cur_idx = GUILIST_GetCurItemIndex(MMI_ZMT_HANZI_MAIN_LIST_CTRL_ID);
     hanzi_book_info.cur_book_idx = cur_idx;
     SCI_TRACE_LOW("%s: hanzi_book_info.cur_book_idx = %d", __FUNCTION__, hanzi_book_info.cur_book_idx);
     MMI_CreateHanziChapterWin();
+    }
 }
 
 LOCAL void HanziWin_CLOSE_WINDOW(void)
@@ -548,7 +593,7 @@ LOCAL MMI_RESULT_E HandleHanziWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E msg_id
             {
                 HanziWin_FULL_PAINT(win_id);
                 if(hanzi_book_count > 0 && Hanzi_LoadLearnInfo()){
-                    MMI_CreateHanziTipsWin();
+                    MMI_CreateHanziTipsWin(0);
                 }
             }
             break;
@@ -560,6 +605,9 @@ LOCAL MMI_RESULT_E HandleHanziWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E msg_id
                 MMK_CloseWin(win_id);
             }
             break;
+        case MSG_CTL_MIDSK:
+        case MSG_APP_WEB:
+        case MSG_APP_OK:
         case MSG_CTL_OK:
         case MSG_CTL_PENOK:
             { 
@@ -601,46 +649,6 @@ PUBLIC void MMI_CreateHanziWin(void)
 }
 
 ////////////////////////////////////////////////////
-LOCAL void Hanzi_AutoDisplay_Tip_Show(uint8 type)
-{
-    UILAYER_APPEND_BLT_T append_layer = {0};	
-    GUISTR_STYLE_T text_style = {0};
-    MMI_STRING_T text_string = {0};
-    wchar text_str[35] = {0};
-    char count_str[35] = {0};
-    GUI_RECT_T tip_rect = hanzi_tip_rect;
-
-    append_layer.lcd_dev_info = hanzi_chapter_tip_layer;
-    append_layer.layer_level = UILAYER_LEVEL_HIGH;
-    UILAYER_AppendBltLayer(&append_layer);
-
-    LCD_FillRoundedRect(&hanzi_chapter_tip_layer, tip_rect, tip_rect, MMI_WHITE_COLOR);
-
-    text_style.align = ALIGN_HVMIDDLE;
-    text_style.font = DP_FONT_16;
-    text_style.font_color = HANZI_WIN_BG_COLOR;
-
-    if(type==1)
-    {
-        sprintf(count_str,"已开启自动发音");
-    }else
-    {
-        sprintf(count_str,"已关闭自动发音");
-    }
-    GUI_GBToWstr(text_str, count_str, strlen(count_str));
-    text_string.wstr_ptr = text_str;
-    text_string.wstr_len = MMIAPICOM_Wstrlen(text_string.wstr_ptr);
-    GUISTR_DrawTextToLCDInRect(
-        (const GUI_LCD_DEV_INFO *)&hanzi_chapter_tip_layer,
-        &tip_rect,
-        &tip_rect,
-        &text_string,
-        &text_style,
-        GUISTR_STATE_ALIGN,
-        GUISTR_TEXT_DIR_AUTO
-    );
-}
-
 LOCAL void Hanzi_AutoDisplay_Tip_Timeout(uint8 timer_id,uint32 param)
 {
     if(0 != open_auto_play_timer)
@@ -648,7 +656,9 @@ LOCAL void Hanzi_AutoDisplay_Tip_Timeout(uint8 timer_id,uint32 param)
         MMK_StopTimer(open_auto_play_timer);
         open_auto_play_timer = 0;
     }
-    UILAYER_RemoveBltLayer(&hanzi_chapter_tip_layer);
+    if(MMK_IsOpenWin(MMI_HANZI_MAIN_TIPS_WIN_ID)){
+        MMK_CloseWin(MMI_HANZI_MAIN_TIPS_WIN_ID);
+    }
 }
 
 LOCAL void Hanzi_AutoDisplay_Tip(uint8 type)
@@ -658,7 +668,7 @@ LOCAL void Hanzi_AutoDisplay_Tip(uint8 type)
         MMK_StopTimer(open_auto_play_timer);
         open_auto_play_timer = 0;
     }
-    Hanzi_AutoDisplay_Tip_Show(type);
+    MMI_CreateHanziTipsWin(type);
     open_auto_play_timer = MMK_CreateTimerCallback(2000, Hanzi_AutoDisplay_Tip_Timeout, PNULL, FALSE);
     MMK_StartTimerCallback(open_auto_play_timer, 2000, Hanzi_AutoDisplay_Tip_Timeout, PNULL, FALSE);
     
@@ -666,32 +676,36 @@ LOCAL void Hanzi_AutoDisplay_Tip(uint8 type)
 
 LOCAL MMI_RESULT_E Hanzi_clickAutoPlay()
 {
-	MMI_RESULT_E result = MMI_RESULT_TRUE;
-	is_open_auto_play = TRUE;
-	Hanzi_AutoDisplay_Tip(1);
-	MMK_SendMsg(MMI_HANZI_CHAPTER_WIN_ID, MSG_FULL_PAINT, PNULL);
-	return result;
+    MMI_RESULT_E result = MMI_RESULT_TRUE;
+    is_open_auto_play = TRUE;
+    MMK_SendMsg(MMI_HANZI_CHAPTER_WIN_ID, MSG_FULL_PAINT, PNULL);
+    Hanzi_AutoDisplay_Tip(1);
+    return result;
 }
 LOCAL MMI_RESULT_E Hanzi_clickDisAutoPlay()
 {
-	MMI_RESULT_E result = MMI_RESULT_TRUE;
-	is_open_auto_play = FALSE;
-	Hanzi_AutoDisplay_Tip(2);
-	MMK_SendMsg(MMI_HANZI_CHAPTER_WIN_ID, MSG_FULL_PAINT, PNULL);
-	return result;
+    MMI_RESULT_E result = MMI_RESULT_TRUE;
+    is_open_auto_play = FALSE;
+    MMK_SendMsg(MMI_HANZI_CHAPTER_WIN_ID, MSG_FULL_PAINT, PNULL);
+    Hanzi_AutoDisplay_Tip(2);
+    return result;
 }
 
 LOCAL void Hanzi_OpenNormalHanzi(void)
 {
-    is_open_new_hanzi = FALSE;
-    MMI_CreateHanziDetailWin();
+    if(hanzi_chapter_count > 0){
+        is_open_new_hanzi = FALSE;
+        MMI_CreateHanziDetailWin();
+    }
 }
 
 LOCAL void Hanzi_OpenNewHanzi(void)
 {
-    is_open_new_hanzi = TRUE;
-    cur_new_hanzi_page_idx = 0;
-    MMI_CreateHanziDetailWin();
+    if(hanzi_chapter_count > 0){
+        is_open_new_hanzi = TRUE;
+        cur_new_hanzi_page_idx = 0;
+        MMI_CreateHanziDetailWin();
+    }
 }
 
 LOCAL void Hanzi_DisplayChapterList(MMI_WIN_ID_T win_id, MMI_CTRL_ID_T ctrl_id)
@@ -734,6 +748,8 @@ LOCAL void Hanzi_DisplayChapterList(MMI_WIN_ID_T win_id, MMI_CTRL_ID_T ctrl_id)
             GUI_UTF8ToWstr(name_wchar, 100, hanzi_content_info[i]->chapter[j]->chapter_name, length);
             text_str.wstr_ptr = name_wchar;
             text_str.wstr_len = MMIAPICOM_Wstrlen(text_str.wstr_ptr);
+            item_data.item_content[0].is_default =TRUE;
+            item_data.item_content[0].font_color_id = MMITHEME_COLOR_LIGHT_WHITE;
             item_data.item_content[0].item_data_type = GUIITEM_DATA_TEXT_BUFFER;
             item_data.item_content[0].item_data.text_buffer = text_str;
         
@@ -774,20 +790,6 @@ LOCAL void HanziChapterWin_OPEN_WINDOW(MMI_WIN_ID_T win_id)
 
     Hanzi_InitButton(MMI_ZMT_HANZI_CHAPTER_RIGHT_CTRL_ID, right_rect, HANZI_NEW_WORD, ALIGN_HVMIDDLE, FALSE, Hanzi_OpenNewHanzi);
     Hanzi_InitButtonBg(MMI_ZMT_HANZI_CHAPTER_RIGHT_CTRL_ID);
-
-    if (UILAYER_IsMultiLayerEnable())
-    {
-        UILAYER_CREATE_T create_info = {0};
-        create_info.lcd_id = MAIN_LCD_ID;
-        create_info.owner_handle = win_id;
-        create_info.offset_x = tip_rect.left;
-        create_info.offset_y = tip_rect.top;
-        create_info.width = tip_rect.right - tip_rect.left;
-        create_info.height = tip_rect.bottom;
-        create_info.is_bg_layer = FALSE;
-        create_info.is_static_layer = FALSE;   
-        UILAYER_CreateLayer(&create_info, &hanzi_chapter_tip_layer);
-    }
 }
 
 LOCAL void HanziChapterWin_DrawTitle(MMI_WIN_ID_T win_id)
@@ -912,6 +914,7 @@ LOCAL MMI_RESULT_E HandleHanziChapterWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E
                 HanziChapterWin_FULL_PAINT(win_id);
             }
             break;
+        case MSG_APP_0:
         case MSG_APP_HASH:
         case MSG_KEYDOWN_UPSIDE:
         case MSG_KEYDOWN_VOL_UP:
@@ -1001,6 +1004,33 @@ LOCAL void Hanzi_StopPlayMp3Data(void)
     }
 }
 
+LOCAL BOOLEAN Hanzi_ListenPlayMp3DataNotify(MMISRV_HANDLE_T handle, MMISRVMGR_NOTIFY_PARAM_T *param)
+{
+    MMISRVAUD_REPORT_T *report_ptr = PNULL;
+
+    if(param != PNULL && handle > 0)
+    {
+        report_ptr = (MMISRVAUD_REPORT_T *)param->data;
+        if(report_ptr != PNULL && handle == hanzi_player_handle)
+        {
+            switch(report_ptr->report)
+                {
+                    case MMISRVAUD_REPORT_END:  
+                        {
+                            if(MMK_IsOpenWin(MMI_HANZI_LISTEN_WIN_ID))
+                            {
+                                HanziListenWin_CreateIntervalTimer();
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+        }
+    }
+    return TRUE;
+}
+
 LOCAL BOOLEAN Hanzi_ChatPlayMp3DataNotify(MMISRV_HANDLE_T handle, MMISRVMGR_NOTIFY_PARAM_T *param)
 {
     MMISRVAUD_REPORT_T *report_ptr = PNULL;
@@ -1014,12 +1044,7 @@ LOCAL BOOLEAN Hanzi_ChatPlayMp3DataNotify(MMISRV_HANDLE_T handle, MMISRVMGR_NOTI
                 {
                     case MMISRVAUD_REPORT_END:  
                         {
-                            Hanzi_StopPlayMp3Data();
-                            //SCI_TRACE_LOW("%s: hanzi_listen_info.status = %d", __FUNCTION__, hanzi_listen_info.status);
-                            if(MMI_IsOpenHanziListenWin() && hanzi_listen_info.status == HANZI_LISTEN_NOW)
-                            {
-                                HanziListenWin_CreateIntervalTimer();
-                            }
+                            
                         }
                         break;
                     default:
@@ -1038,8 +1063,13 @@ LOCAL void Hanzi_ChatPlayMp3Data(uint8 *data,uint32 data_len)
 
     Hanzi_StopPlayMp3Data();
 
-    req.is_auto_free = FALSE;
-    req.notify = Hanzi_ChatPlayMp3DataNotify;
+    if(MMK_IsOpenWin(MMI_HANZI_LISTEN_WIN_ID)){
+        req.is_auto_free = FALSE;
+        req.notify = Hanzi_ListenPlayMp3DataNotify;
+    }else{
+        req.is_auto_free = TRUE;
+        req.notify = Hanzi_ChatPlayMp3DataNotify;
+    }
     req.pri = MMISRVAUD_PRI_NORMAL;
 
     audio_srv.info.type = MMISRVAUD_TYPE_RING_BUF;
@@ -1143,7 +1173,9 @@ PUBLIC void HanziDetail_TipTimeout(uint8 timer_id,uint32 param)
         hanzi_tip_timer = 0;
     }
     hanzi_is_display_tip = 0;
-    HanziDetail_ShowTip();
+    if(MMK_IsOpenWin(MMI_HANZI_MAIN_TIPS_WIN_ID)){
+        MMK_CloseWin(MMI_HANZI_MAIN_TIPS_WIN_ID);
+    }
 }
 
 LOCAL void HanziDetail_DisplayTip(uint type)
@@ -1154,7 +1186,7 @@ LOCAL void HanziDetail_DisplayTip(uint type)
         hanzi_tip_timer = 0;
     }
     hanzi_is_display_tip = type;
-    HanziDetail_ShowTip();
+    MMI_CreateHanziTipsWin(type);
     hanzi_tip_timer = MMK_CreateTimerCallback(2000, HanziDetail_TipTimeout,(uint32)0, FALSE);
     MMK_StartTimerCallback(hanzi_tip_timer, 2000, HanziDetail_TipTimeout, (uint32)0, FALSE);
 }
@@ -1170,7 +1202,9 @@ PUBLIC void HanziDetail_PlayPinyinAudio(void)
         char file_path[30] = {0};
         sprintf(file_path, HANZI_CARD_WORD_AUDIO_PATH, hanzi_book_info.cur_book_idx+1, hanzi_detail_info[hanzi_detail_cur_idx]->pingy);
         if(zmt_file_exist(file_path)){
-            hanzi_detail_info[hanzi_detail_cur_idx]->audio_data = zmt_file_data_read(file_path, &hanzi_detail_info[hanzi_detail_cur_idx]->audio_len);
+            if(hanzi_detail_info[hanzi_detail_cur_idx]->audio_data == NULL){
+                hanzi_detail_info[hanzi_detail_cur_idx]->audio_data = zmt_file_data_read(file_path, &hanzi_detail_info[hanzi_detail_cur_idx]->audio_len);
+            }
             HanziDetail_PlayPinyinAudio();
         }else{
             if(hanzi_detail_info[hanzi_detail_cur_idx]->audio_uri != NULL){
@@ -1178,19 +1212,19 @@ PUBLIC void HanziDetail_PlayPinyinAudio(void)
                 MMIZDT_HTTP_AppSend(TRUE, hanzi_detail_info[hanzi_detail_cur_idx]->audio_uri, PNULL, 0, 1000, 0, 0, 6000, 0, 0, Hanzi_ParseMp3Response);
             }
         }
-        //HanziDetail_DisplayTip(1);
+        //HanziDetail_DisplayTip(3);
     }
     else if(hanzi_detail_info[hanzi_detail_cur_idx]->audio_len == -1)
     {
         //没有音频uri
-        HanziDetail_DisplayTip(2);
         HanziListenWin_PlayAudioFail();
+        HanziDetail_DisplayTip(4);
     }
     else if(hanzi_detail_info[hanzi_detail_cur_idx]->audio_len == -2)
     {
         //加载音频失败
-        HanziDetail_DisplayTip(3);
         HanziListenWin_PlayAudioFail();
+        HanziDetail_DisplayTip(5);
     }
     else
     {
@@ -1261,12 +1295,15 @@ LOCAL void HanziDetail_DeleteNewHanzi(void)
 {
     uint16 idx = cur_new_hanzi_page_idx * HANZI_CHAPTER_WORD_MAX + hanzi_detail_cur_idx;
     new_hanzi_haved_delete = TRUE;
-    HanziDetail_DisplayTip(4);
+    HanziDetail_DisplayTip(6);
     Hanzi_DeleteOneNewWord(idx, hanzi_detail_count);
 }
 
 LOCAL void HanziDetail_KeyLeft(void)
 {
+    if(hanzi_detail_count <= 0){
+        return;
+    }
     if(is_open_new_hanzi){
         int idx = cur_new_hanzi_page_idx * HANZI_CHAPTER_WORD_MAX + hanzi_detail_cur_idx;
         if(idx < hanzi_detail_count){
@@ -1285,6 +1322,9 @@ LOCAL void HanziDetail_KeyLeft(void)
 
 LOCAL void HanziDetail_KeyRight(void)
 {
+    if(hanzi_detail_count <= 0){
+        return;
+    }
     if(is_open_new_hanzi){
         int idx = cur_new_hanzi_page_idx * HANZI_CHAPTER_WORD_MAX + hanzi_detail_cur_idx;
         if(idx < hanzi_detail_count){
@@ -1302,59 +1342,6 @@ LOCAL void HanziDetail_KeyRight(void)
                 MMI_CloseHanziDetailWin();
             }
         }
-    }
-}
-
-LOCAL void HanziDetail_ShowTip(void)
-{
-    if(hanzi_is_display_tip != 0)
-    {
-        UILAYER_APPEND_BLT_T append_layer = {0};
-        GUISTR_STYLE_T text_style = {0};
-        MMI_STRING_T text_string = {0};
-        wchar text_str[35] = {0};
-        char count_str[35] = {0};
-        GUI_RECT_T msg_rect = hanzi_msg_rect;
-
-        append_layer.lcd_dev_info = hanzi_detail_tip_layer;
-        append_layer.layer_level = UILAYER_LEVEL_HIGH;
-        UILAYER_AppendBltLayer(&append_layer);
-
-        LCD_FillRoundedRect(&hanzi_detail_tip_layer, msg_rect, msg_rect, MMI_WHITE_COLOR);
-
-        text_style.align = ALIGN_HVMIDDLE;
-        text_style.font = DP_FONT_18;
-        text_style.font_color = HANZI_WIN_BG_COLOR;
-
-        if(hanzi_is_display_tip == 1)
-        {
-            sprintf(count_str,"正在加载，请稍后");
-        }else if(hanzi_is_display_tip == 2)
-        {
-            sprintf(count_str,"暂无音频");
-        }else if(hanzi_is_display_tip == 3)
-        {
-            sprintf(count_str,"音频加载失败，请重试");
-        }else if(hanzi_is_display_tip == 4)
-        {
-            sprintf(count_str,"正在删除，请稍等");
-        }
-        GUI_GBToWstr(text_str, count_str, strlen(count_str));
-        text_string.wstr_ptr = text_str;
-        text_string.wstr_len = MMIAPICOM_Wstrlen(text_string.wstr_ptr);
-        GUISTR_DrawTextToLCDInRect(
-            (const GUI_LCD_DEV_INFO *)&hanzi_detail_tip_layer,
-            &msg_rect,
-            &msg_rect,
-            &text_string,
-            &text_style,
-            GUISTR_STATE_ALIGN,
-            GUISTR_TEXT_DIR_AUTO
-        );
-    }
-    else
-    {
-        UILAYER_RemoveBltLayer(&hanzi_detail_tip_layer);
     }
 }
 
@@ -1481,19 +1468,6 @@ LOCAL void HanziDetailWin_OPEN_WINDOW(MMI_WIN_ID_T win_id)
         Hanzi_InitButton(MMI_ZMT_HANZI_DETAIL_RIGHT_CTRL_ID, right_rect, NULL, ALIGN_HVMIDDLE, FALSE, HanziDetail_RightDetail);
         Hanzi_InitButtonBg(MMI_ZMT_HANZI_DETAIL_LEFT_CTRL_ID);
         Hanzi_InitButtonBg(MMI_ZMT_HANZI_DETAIL_RIGHT_CTRL_ID);
-    }
-    if (UILAYER_IsMultiLayerEnable())
-    {
-        UILAYER_CREATE_T create_info = {0};
-        create_info.lcd_id = MAIN_LCD_ID;
-        create_info.owner_handle = win_id;
-        create_info.offset_x = msg_rect.left;
-        create_info.offset_y = msg_rect.top;
-        create_info.width = msg_rect.right - msg_rect.left;
-        create_info.height = msg_rect.bottom;
-        create_info.is_bg_layer = FALSE;
-        create_info.is_static_layer = FALSE;
-        UILAYER_CreateLayer(&create_info, &hanzi_detail_tip_layer);
     }
 }
 
@@ -2030,9 +2004,6 @@ LOCAL void HanziListenSetWin_OPEN_WINDOW(MMI_WIN_ID_T win_id)
     GUISTR_STYLE_T text_style = {0};
     wchar text_str[50] = {0};
     uint8 i,j = 0;
-    MMI_TEXT_ID_T symbol_text[HANZI_LISTEN_SET_SYMBOL_NUM] = {
-        WORD_LISTENING_STYLE, WORD_LISTENING_TIMES, WORD_LISTENING_REPEAT
-    };
 
     memset(hanzi_listen_set, 0, sizeof(hanzi_listen_set));
     if(hanzi_listen_info.interval == 0){
@@ -2045,76 +2016,19 @@ LOCAL void HanziListenSetWin_OPEN_WINDOW(MMI_WIN_ID_T win_id)
     hanzi_listen_info.listen_idx = 0;
     hanzi_listen_set[0] = hanzi_listen_info.style;
     hanzi_listen_set[1] = hanzi_listen_info.interval;
-    hanzi_listen_set[2] = hanzi_listen_info.repeat;
-
-    text_style.align = ALIGN_HVMIDDLE;
-    text_style.font = DP_FONT_22;
-    text_style.font_color = MMI_WHITE_COLOR;
-
-    form_bg.color = bg_color;
-    GUIFORM_SetBg(MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID, &form_bg);
-    GUIFORM_SetRect(MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID, &form_rect);
-    GUIFORM_PermitChildBg(MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID,FALSE);
-    GUIFORM_PermitChildFont(MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID,FALSE);
-    GUIFORM_PermitChildBorder(MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID, FALSE);
-    GUIFORM_SetDisplayScrollBar(MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID, FALSE);
-    for(i = 0;i < HANZI_LISTEN_SET_SYMBOL_NUM;i++)
-    {
-        form_ctrl_id = MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_CTRL_ID + i;
-        GUIFORM_SetBg(form_ctrl_id, &form_bg);
-        GUIFORM_SetRect(form_ctrl_id, &form_rect);
-        GUIFORM_PermitChildBorder(form_ctrl_id, FALSE);
-        for(j = 0;j < HANZI_LISTEN_SET_SYMBOL_NUM;j++)
-        {
-            label_ctrl_id = MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_LABEL_CTRL_ID + j;
-            GUILABEL_SetTextById(label_ctrl_id, symbol_text[j], TRUE);
-            GUILABEL_SetFont(label_ctrl_id, text_style.font, text_style.font_color);
-            list_ctrl_height.type = GUIFORM_CHILD_HEIGHT_FIXED;
-            list_ctrl_height.add_data = HANZI_CARD_LINE_HIGHT;
-            GUIFORM_SetChildHeight(form_ctrl_id, label_ctrl_id, &list_ctrl_height);
-            list_ctrl_width.type = GUIFORM_CHILD_WIDTH_FIXED;
-            list_ctrl_width.add_data = form_rect.right - form_rect.left;
-            GUIFORM_SetChildWidth(form_ctrl_id, label_ctrl_id, &list_ctrl_width);
-            
-            list_ctrl_id = MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_LIST_CTRL_ID + j;
-            GUILIST_SetListState(list_ctrl_id, GUILIST_STATE_SPLIT_LINE, FALSE);
-            GUILIST_SetNeedHiLightBar(list_ctrl_id,FALSE);
-            
-            GUILIST_SetNeedPrgbarBlock(list_ctrl_id,FALSE);
-            GUILIST_SetUserBg(list_ctrl_id,TRUE);
-            GUILIST_SetBgColor(list_ctrl_id,HANZI_WIN_BG_COLOR);
-            GUILIST_SetTextFont(list_ctrl_id, DP_FONT_18, MMI_WHITE_COLOR);
-            GUILIST_PermitBorder(list_ctrl_id, FALSE);
-            GUILIST_SetSlideState(list_ctrl_id, FALSE);
-            list_ctrl_height.type = GUIFORM_CHILD_HEIGHT_FIXED;
-            if(j == 0){
-                list_ctrl_height.add_data = 3* HANZI_CARD_LINE_HIGHT + 5;
-                GUILIST_SetMaxItem(list_ctrl_id, HANZI_LISTEN_SET_SYMBOL_NUM-1, FALSE);
-            }else{
-                list_ctrl_height.add_data = 4* HANZI_CARD_LINE_HIGHT + 15;
-                GUILIST_SetMaxItem(list_ctrl_id, HANZI_LISTEN_SET_SYMBOL_NUM, FALSE);
-            }
-            GUIFORM_SetChildHeight(form_ctrl_id, list_ctrl_id, &list_ctrl_height);
-            list_ctrl_width.type = GUIFORM_CHILD_WIDTH_FIXED;
-            list_ctrl_width.add_data = form_rect.right - form_rect.left;
-            GUIFORM_SetChildWidth(form_ctrl_id, list_ctrl_id, &list_ctrl_width);
-        }
-    }
-    //GUIFORM_SetActiveChild(MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_CTRL_ID);
+    hanzi_listen_set[2] = hanzi_listen_info.repeat;    
 }
 
-LOCAL void HanziListenSetWin_DisplayOption( MMI_WIN_ID_T win_id)
+LOCAL void HanziListenSetWin_DrawList(MMI_WIN_ID_T win_id)
 {
-    MMI_CTRL_ID_T form_ctrl_id = MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID;
-    MMI_CTRL_ID_T list_ctrl_id = 0;
-    MMI_CTRL_ID_T label_ctrl_id = 0;
-    GUI_BG_T form_bg = {GUI_BG_COLOR, GUI_SHAPE_ROUNDED_RECT, 0, HANZI_WIN_BG_COLOR, FALSE};
-    GUI_RECT_T form_rect = {0};
-    MMI_HANDLE_T ctrl_handle = 0;
-    MMI_STRING_T text_string = {0};
-    wchar text_str[50] = {0};
-    uint8 i = 0;
-    uint8 j = 0;
+    MMI_CTRL_ID_T ctrl_id = MMI_ZMT_HANZI_LISTEN_SET_LIST_CTRL_ID;
+    GUI_RECT_T list_rect = hanzi_form_rect;
+    GUILIST_ITEM_T item_info = {0};
+    GUILIST_ITEM_DATA_T item_data= {0};
+    uint8 i,j = 0;
+    MMI_TEXT_ID_T item_title_text[HANZI_LISTEN_SET_SYMBOL_NUM]= {
+        WORD_LISTENING_STYLE, WORD_LISTENING_TIMES, WORD_LISTENING_REPEAT
+    };
     MMI_TEXT_ID_T item_text[HANZI_LISTEN_SET_SYMBOL_NUM][HANZI_LISTEN_SET_SYMBOL_NUM] = {
         {WORD_LISTENING_NORMAL, WORD_LISTENING_RANDOM, WORD_LISTENING_RANDOM},
         {WORD_LISTENING_3S, WORD_LISTENING_5S, WORD_LISTENING_10S},
@@ -2126,36 +2040,29 @@ LOCAL void HanziListenSetWin_DisplayOption( MMI_WIN_ID_T win_id)
         {HANZI_LISTEN_SET_REPEAT_1, HANZI_LISTEN_SET_REPEAT_3, HANZI_LISTEN_SET_REPEAT_5}
     };
     
+    Hanzi_InitListbox(win_id, ctrl_id, list_rect, HANZI_LISTEN_SET_SYMBOL_NUM);
     for(i = 0;i < HANZI_LISTEN_SET_SYMBOL_NUM;i++)
     {
-        GUILIST_ITEM_T item_info = {0};
-        GUILIST_ITEM_DATA_T item_data= {0};
-        uint8 list_num = 0;
-        if(i == 0){
-            list_num = HANZI_LISTEN_SET_SYMBOL_NUM-1;
-        }else{
-            list_num = HANZI_LISTEN_SET_SYMBOL_NUM;
-        }
-        list_ctrl_id = MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_LIST_CTRL_ID + i;
-        GUILIST_RemoveAllItems(list_ctrl_id);
-        for(j = 0;j < list_num;j++)
-        {
-            item_info.item_style = GUIITEM_SYTLE_ZMT_UNIT_LIST_MS;
-            item_info.item_data_ptr = &item_data;
+        item_info.item_style = GUIITEM_SYTLE_ZMT_LISTEN_SET_MS;
+        item_info.item_data_ptr = &item_data;
 
-            memset(&text_str, 0, 50);
-            item_data.item_content[0].item_data_type = GUIITEM_DATA_TEXT_ID;
-            item_data.item_content[0].item_data.text_id= item_text[i][j];
+        item_data.item_content[0].is_default =TRUE;
+        item_data.item_content[0].font_color_id = MMITHEME_COLOR_LIGHT_WHITE;
+        item_data.item_content[0].item_data_type = GUIITEM_DATA_TEXT_ID;
+        item_data.item_content[0].item_data.text_id= item_title_text[i];
 
-            item_data.item_content[1].item_data_type = GUIITEM_DATA_IMAGE_ID;
+        item_data.item_content[1].is_default =TRUE;
+        item_data.item_content[1].font_color_id = MMITHEME_COLOR_LIGHT_WHITE;
+        item_data.item_content[1].item_data_type = GUIITEM_DATA_TEXT_ID;
+        for(j = 0; j < HANZI_LISTEN_SET_SYMBOL_NUM;j++){
             if(item_num[i][j] == hanzi_listen_set[i]){
-                item_data.item_content[1].item_data.image_id = IMG_ZMT_SELECTED;
-            }else{
-                item_data.item_content[1].item_data.image_id = IMG_ZMT_UNSELECTED;
+                item_data.item_content[1].item_data.text_id = item_text[i][j];
+                break;
             }
-            GUILIST_AppendItem(list_ctrl_id, &item_info);
         }
+        GUILIST_AppendItem(ctrl_id, &item_info);
     }
+    GUILIST_SetCurItemIndex(ctrl_id, hanzi_listen_set_idx);
 }
 
 LOCAL void HanziListenSetWin_FULL_PAINT(MMI_WIN_ID_T win_id)
@@ -2175,7 +2082,7 @@ LOCAL void HanziListenSetWin_FULL_PAINT(MMI_WIN_ID_T win_id)
     MMIRES_GetText(WORD_LISTENING_SETTING, win_id, &text_string);
     Hanzi_DrawWinTitle(win_id, 0, text_string);
 
-    HanziListenSetWin_DisplayOption(win_id);
+    HanziListenSetWin_DrawList(win_id);
 
     text_style.font = DP_FONT_20;
     GUIRES_DisplayImg(PNULL, &lef_button_rect, PNULL, win_id, FORMULA_BOTTOM_BG_IMG, &lcd_dev_info);
@@ -2207,29 +2114,12 @@ LOCAL void HanziListenSetWin_FULL_PAINT(MMI_WIN_ID_T win_id)
 
 LOCAL void HanziListenSetWin_CTL_PENOK(MMI_WIN_ID_T win_id, DPARAM param)
 {
-    uint16 cur_idx = 0;
-    uint8 cur_ctrl_id_idx = 0;
-    MMI_CTRL_ID_T ctrl_id = ((MMI_NOTIFY_T *)param)->src_id;
-    uint16 interval[HANZI_LISTEN_SET_SYMBOL_NUM] = {HANZI_LISTEN_SET_INTERVAL_3, HANZI_LISTEN_SET_INTERVAL_5, HANZI_LISTEN_SET_INTERVAL_10};
-    uint8 repeat[HANZI_LISTEN_SET_SYMBOL_NUM] = {HANZI_LISTEN_SET_REPEAT_1, HANZI_LISTEN_SET_REPEAT_3, HANZI_LISTEN_SET_REPEAT_5};
-
-    cur_idx = GUILIST_GetCurItemIndex(ctrl_id);
-    cur_ctrl_id_idx = ctrl_id - MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_LIST_CTRL_ID;
-    if(cur_ctrl_id_idx == 0)
-    {
-        hanzi_listen_set[0]  = cur_idx;
-    }
-    else if(cur_ctrl_id_idx == 1)
-    {
-        hanzi_listen_set[1] = interval[cur_idx];
-    }
-    else if(cur_ctrl_id_idx == 2)
-    {
-        hanzi_listen_set[2] = repeat[cur_idx];
-    }
-    SCI_TRACE_LOW("%s: style = %d, interval = %d, repeat = %d", __FUNCTION__,
-        hanzi_listen_set[0], hanzi_listen_set[1], hanzi_listen_set[2]);
-    MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+    hanzi_listen_info.style = hanzi_listen_set[0];
+    hanzi_listen_info.interval = hanzi_listen_set[1];
+    hanzi_listen_info.repeat = hanzi_listen_set[2];
+    hanzi_listen_info.listen_idx = 0;
+    hanzi_listen_cur_idx = 0;
+    MMK_CloseWin(win_id);
 }
 
 LOCAL void HanziListenSetWin_TP_PRESS_UP(MMI_WIN_ID_T win_id, GUI_POINT_T point)
@@ -2253,14 +2143,101 @@ LOCAL void HanziListenSetWin_TP_PRESS_UP(MMI_WIN_ID_T win_id, GUI_POINT_T point)
 
 LOCAL void HanziListenSetWin_KeyLeftRight(MMI_WIN_ID_T win_id, BOOLEAN is_left)
 {
-    if(is_left){
-        hanzi_listen_info.style = hanzi_listen_set[0];
-        hanzi_listen_info.interval = hanzi_listen_set[1];
-        hanzi_listen_info.repeat = hanzi_listen_set[2];
-        hanzi_listen_info.listen_idx = 0;
-        hanzi_listen_cur_idx = 0;
+    if(is_left)
+    {
+        switch(hanzi_listen_set_idx)
+        {
+            case 0:
+            {
+                if(hanzi_listen_set[0] == 0){
+                    hanzi_listen_set[0] = 1;
+                }else{
+                    hanzi_listen_set[0] = 0;
+                }
+            }
+            break;
+            case 1:
+            {
+                if(hanzi_listen_set[1] == HANZI_LISTEN_SET_INTERVAL_3){
+                    hanzi_listen_set[1] = HANZI_LISTEN_SET_INTERVAL_10;
+                }else if(hanzi_listen_set[1] == HANZI_LISTEN_SET_INTERVAL_10){
+                    hanzi_listen_set[1] = HANZI_LISTEN_SET_INTERVAL_5;
+                }else if(hanzi_listen_set[1] == HANZI_LISTEN_SET_INTERVAL_5){
+                    hanzi_listen_set[1] = HANZI_LISTEN_SET_INTERVAL_3;
+                }
+            }
+            break;
+            case 2:
+            {
+                if(hanzi_listen_set[2] == HANZI_LISTEN_SET_REPEAT_1){
+                    hanzi_listen_set[2] = HANZI_LISTEN_SET_REPEAT_5;
+                }else if(hanzi_listen_set[2] == HANZI_LISTEN_SET_REPEAT_5){
+                    hanzi_listen_set[2] = HANZI_LISTEN_SET_REPEAT_3;
+                }else if(hanzi_listen_set[2] == HANZI_LISTEN_SET_REPEAT_3){
+                    hanzi_listen_set[2] = HANZI_LISTEN_SET_REPEAT_1;
+                }
+            }
+            break;
+        }
     }
-    MMK_CloseWin(win_id);
+    else
+    {
+        switch(hanzi_listen_set_idx)
+        {
+            case 0:
+            {
+                if(hanzi_listen_set[0] == 0){
+                    hanzi_listen_set[0] = 1;
+                }else{
+                    hanzi_listen_set[0] = 0;
+                }
+            }
+            break;
+            case 1:
+            {
+                if(hanzi_listen_set[1] == HANZI_LISTEN_SET_INTERVAL_3){
+                    hanzi_listen_set[1] = HANZI_LISTEN_SET_INTERVAL_5;
+                }else if(hanzi_listen_set[1] == HANZI_LISTEN_SET_INTERVAL_5){
+                    hanzi_listen_set[1] = HANZI_LISTEN_SET_INTERVAL_10;
+                }else if(hanzi_listen_set[1] == HANZI_LISTEN_SET_INTERVAL_10){
+                    hanzi_listen_set[1] = HANZI_LISTEN_SET_INTERVAL_3;
+                }
+            }
+            break;
+            case 2:
+            {
+                if(hanzi_listen_set[2] == HANZI_LISTEN_SET_REPEAT_1){
+                    hanzi_listen_set[2] = HANZI_LISTEN_SET_REPEAT_3;
+                }else if(hanzi_listen_set[2] == HANZI_LISTEN_SET_REPEAT_3){
+                    hanzi_listen_set[2] = HANZI_LISTEN_SET_REPEAT_5;
+                }else if(hanzi_listen_set[2] == HANZI_LISTEN_SET_REPEAT_5){
+                    hanzi_listen_set[2] = HANZI_LISTEN_SET_REPEAT_1;
+                }
+            }
+            break;
+        }
+    }
+    MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+}
+
+LOCAL void HanziListenSetWin_KeyUpDown(MMI_WIN_ID_T win_id, BOOLEAN is_up)
+{
+    if(is_up)
+    {
+        if(hanzi_listen_set_idx == 0){
+            hanzi_listen_set_idx = 2;
+        }else{
+            hanzi_listen_set_idx--;
+        }
+    }
+    else
+    {
+        if(hanzi_listen_set_idx == 2){
+            hanzi_listen_set_idx = 0;
+        }else{
+            hanzi_listen_set_idx++;
+        }
+    }
 }
 
 LOCAL MMI_RESULT_E HandleHanziListenSetWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E msg_id, DPARAM param)
@@ -2290,7 +2267,6 @@ LOCAL MMI_RESULT_E HandleHanziListenSetWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID
                 }
             }
             break;
-        case MSG_APP_OK:
         case MSG_APP_LEFT:
             {
                 HanziListenSetWin_KeyLeftRight(win_id, TRUE);
@@ -2301,6 +2277,20 @@ LOCAL MMI_RESULT_E HandleHanziListenSetWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID
                 HanziListenSetWin_KeyLeftRight(win_id, FALSE);
             }
             break;
+        case MSG_KEYUP_UP:
+            {
+                HanziListenSetWin_KeyUpDown(win_id, FALSE);
+            }
+            break;
+        case MSG_KEYUP_DOWN:
+            {
+                HanziListenSetWin_KeyUpDown(win_id, FALSE);
+            }
+            break;
+        case MSG_APP_OK:
+        case MSG_APP_WEB:
+        case MSG_CTL_MIDSK:
+        case MSG_CTL_OK:
         case MSG_CTL_PENOK:
             {
                 HanziListenSetWin_CTL_PENOK(win_id, param);
@@ -2317,6 +2307,7 @@ LOCAL MMI_RESULT_E HandleHanziListenSetWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID
         case MSG_CLOSE_WINDOW:
             {
                 memset(hanzi_listen_set, 0, sizeof(hanzi_listen_set));
+                hanzi_listen_set_idx = 0;
             }
             break;
         default:
@@ -2329,16 +2320,6 @@ LOCAL MMI_RESULT_E HandleHanziListenSetWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID
 WINDOW_TABLE(MMI_HANZI_LISTEN_SET_WIN_TAB) = {
     WIN_ID(MMI_HANZI_LISTEN_SET_WIN_ID),
     WIN_FUNC((uint32)HandleHanziListenSetWinMsg),
-    CREATE_FORM_CTRL(GUIFORM_LAYOUT_ORDER,MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID),
-        CHILD_FORM_CTRL(TRUE,GUIFORM_LAYOUT_ORDER,MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_CTRL_ID,MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID),
-            CHILD_LABEL_CTRL(GUILABEL_ALIGN_LEFT, TRUE, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_LABEL_CTRL_ID, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_CTRL_ID),
-            CHILD_LIST_CTRL(TRUE, GUILIST_TYPE_TEXT_ID, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_LIST_CTRL_ID, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_1_CTRL_ID),
-        CHILD_FORM_CTRL(TRUE,GUIFORM_LAYOUT_ORDER,MMI_ZMT_HANZI_LISTEN_FORM_CHILD_2_CTRL_ID,MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID),
-            CHILD_LABEL_CTRL(GUILABEL_ALIGN_LEFT, TRUE, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_2_LABEL_CTRL_ID, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_2_CTRL_ID),
-            CHILD_LIST_CTRL(TRUE, GUILIST_TYPE_TEXT_ID, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_2_LIST_CTRL_ID, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_2_CTRL_ID),
-        CHILD_FORM_CTRL(TRUE,GUIFORM_LAYOUT_ORDER,MMI_ZMT_HANZI_LISTEN_FORM_CHILD_3_CTRL_ID,MMI_ZMT_HANZI_LISTEN_FORM_CTRL_ID),
-            CHILD_LABEL_CTRL(GUILABEL_ALIGN_LEFT, TRUE, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_3_LABEL_CTRL_ID, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_3_CTRL_ID),
-            CHILD_LIST_CTRL(TRUE, GUILIST_TYPE_TEXT_ID, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_3_LIST_CTRL_ID, MMI_ZMT_HANZI_LISTEN_FORM_CHILD_3_CTRL_ID),
     WIN_HIDE_STATUS,
     END_WIN
 };
@@ -2442,7 +2423,7 @@ LOCAL void HanziListenWin_IntervalTimerCallback(uint8 timer_id, uint32 param)
         }
         if(listen_idx < hanzi_detail_count){
             if(MMK_IsFocusWin(MMI_HANZI_LISTEN_WIN_ID)){
-            HanziDetail_PlayPinyinAudio();
+                HanziDetail_PlayPinyinAudio();
             }
         }
     }
@@ -2562,11 +2543,17 @@ LOCAL void HanziListenWin_OPEN_WINDOW(MMI_WIN_ID_T win_id)
     Hanzi_InitButton(MMI_ZMT_HANZI_LISTEN_BUTTON_STATUS_CTRL_ID, bottom_rect, NULL, ALIGN_HVMIDDLE, TRUE, HanziListenWin_BottomActionFunc);
     Hanzi_InitButtonBg(MMI_ZMT_HANZI_LISTEN_BUTTON_STATUS_CTRL_ID);
 
-    Hanzi_InitButton(MMI_ZMT_HANZI_LISTEN_LEFT_CTRL_ID, left_rect, WORD_LISTENING_EXIT, ALIGN_HVMIDDLE, FALSE, MMI_CloseHanziListenWin);
+    Hanzi_InitButton(MMI_ZMT_HANZI_LISTEN_LEFT_CTRL_ID, left_rect, WORD_LISTENING_AGAIN, ALIGN_HVMIDDLE, FALSE, HanziListenWin_ListenAgainFunc);
     Hanzi_InitButtonBg(MMI_ZMT_HANZI_LISTEN_LEFT_CTRL_ID);
-    Hanzi_InitButton(MMI_ZMT_HANZI_LISTEN_RIGHT_CTRL_ID, right_rect, WORD_LISTENING_AGAIN, ALIGN_HVMIDDLE, FALSE, HanziListenWin_ListenAgainFunc);
+    Hanzi_InitButton(MMI_ZMT_HANZI_LISTEN_RIGHT_CTRL_ID, right_rect, WORD_LISTENING_EXIT, ALIGN_HVMIDDLE, FALSE, MMI_CloseHanziListenWin);
     Hanzi_InitButtonBg(MMI_ZMT_HANZI_LISTEN_RIGHT_CTRL_ID);
 
+    if(hanzi_listen_info.interval == 0){
+        hanzi_listen_info.interval = HANZI_LISTEN_SET_INTERVAL_3;
+    }
+    if(hanzi_listen_info.repeat == 0){
+        hanzi_listen_info.repeat =HANZI_LISTEN_SET_REPEAT_1;
+    }
     hanzi_listen_info.status = 0;
     hanzi_listen_info.listen_idx = 0;
 }
@@ -2664,7 +2651,6 @@ LOCAL void HanziListenWin_CLOSE_WINDOW(void)
     hanzi_listen_cur_idx = 0;
     hanzi_detail_cur_idx = 0;
     hanzi_listen_repeat_count = 0;
-    hanzi_listen_info.status = 0;
     hanzi_listen_info.listen_idx = 0;
     memset(hanzi_listen_idx, 0, sizeof(hanzi_listen_idx));
     Hanzi_StopPlayMp3Data();
