@@ -854,6 +854,31 @@ LOCAL THEMELIST_ITEM_STYLE_T const zmt_unit_list_item =
         {0},
     },
 };
+//GUIITEM_SYTLE_ZMT_LISTEN_SET_MS,
+LOCAL THEMELIST_ITEM_STYLE_T const zmt_listen_set_list_item =
+{
+    2.5*ZMT_LIST_LINE_HIGHT, 2.5*ZMT_LIST_LINE_HIGHT,
+    {
+        {
+            0,
+            { 5, 0,  MMI_MAINSCREEN_WIDTH, 1.5*ZMT_LIST_LINE_HIGHT },       /* 2 */
+            { 5, 0,  MMI_MAINSCREEN_WIDTH, 1.5*ZMT_LIST_LINE_HIGHT },       /* 2 */
+            SONG_FONT_24, SONG_FONT_24,
+            0, 100
+        },
+        {
+            0,
+            { 5, 1.5*ZMT_LIST_LINE_HIGHT, MMI_MAINSCREEN_WIDTH, 2.5*ZMT_LIST_LINE_HIGHT},     /* 2 */
+            { 5, 1.5*ZMT_LIST_LINE_HIGHT, MMI_MAINSCREEN_WIDTH, 2.5*ZMT_LIST_LINE_HIGHT},     /* 2 */
+            SONG_FONT_20, SONG_FONT_20,
+            0, 100
+        },
+        {0},
+        {0},
+        {0},
+        {0},
+    },
+};
 //GUIITEM_STYLE_POETRY_GRADE_LIST_MS
 LOCAL THEMELIST_ITEM_STYLE_T const s_item_style_poetry_grade_list_ms =
 {
@@ -871,7 +896,7 @@ LOCAL THEMELIST_ITEM_STYLE_T const s_item_style_poetry_grade_list_ms =
             0,
             {1.4*ZMT_LIST_LINE_WIDTH, 0, MMI_MAINSCREEN_WIDTH, 2*ZMT_LIST_LINE_HIGHT},
             {1.4*ZMT_LIST_LINE_WIDTH, 0, MMI_MAINSCREEN_WIDTH, 2*ZMT_LIST_LINE_HIGHT},
-            SONG_FONT_16, SONG_FONT_16,
+            SONG_FONT_24, SONG_FONT_24,
             0, 0
         },    
         {0},
@@ -899,7 +924,7 @@ LOCAL THEMELIST_ITEM_STYLE_T const s_item_style_poetry_item_list_ms =
             GUIITEM_CONTENT_STATE_TEXT_M_ALIGN,
             {0.2*ZMT_LIST_LINE_WIDTH, 0, MMI_MAINSCREEN_WIDTH - 0.2*ZMT_LIST_LINE_WIDTH, 2*ZMT_LIST_LINE_HIGHT},
             {0.2*ZMT_LIST_LINE_WIDTH, 0, MMI_MAINSCREEN_WIDTH - 0.2*ZMT_LIST_LINE_WIDTH, 2*ZMT_LIST_LINE_HIGHT},
-            SONG_FONT_20, SONG_FONT_20,
+            SONG_FONT_24, SONG_FONT_24,
             0, 0
         },   
         {0},
@@ -963,7 +988,7 @@ LOCAL THEMELIST_ITEM_STYLE_T const s_item_style_class_main_list_ms =
             GUIITEM_CONTENT_STATE_MULTILINE,
             {2*ZMT_LIST_LINE_WIDTH, 0, MMI_MAINSCREEN_WIDTH-10, 2.5*ZMT_LIST_LINE_HIGHT},
             {2*ZMT_LIST_LINE_WIDTH, 0, MMI_MAINSCREEN_WIDTH-10, 2.5*ZMT_LIST_LINE_HIGHT},
-            SONG_FONT_18, SONG_FONT_18,
+            SONG_FONT_24, SONG_FONT_24,
             0, 0
         },   
         {0},
@@ -6127,6 +6152,7 @@ LOCAL THEMELIST_STYLE_TABLE_T const s_style_table[] =
     {GUIITEM_SYTLE_ZMT_PUBLISH_LIST_MS, &zmt_publish_list_item},
     {GUIITEM_SYTLE_ZMT_BOOK_LIST_MS, &zmt_book_list_item},
     {GUIITEM_SYTLE_ZMT_UNIT_LIST_MS, &zmt_unit_list_item},
+    {GUIITEM_SYTLE_ZMT_LISTEN_SET_MS, &zmt_listen_set_list_item},
     {GUIITEM_STYLE_POETRY_GRADE_LIST_MS, &s_item_style_poetry_grade_list_ms},
     {GUIITEM_STYLE_POETRY_ITEM_LIST_MS, &s_item_style_poetry_item_list_ms},
     {GUIITEM_STYLE_FORMULA_ITEM_LIST_MS, &s_item_style_formula_item_list_ms},
@@ -6423,6 +6449,7 @@ const GUI_COLOR_T s_item_content_color[MMITHEME_COLOR_MAX] =
     GUI_RGB2RGB565(40, 107, 197),
     //zmt add start
     GUI_RGB2RGB565(80, 162, 254),
+    GUI_RGB2RGB565(255, 255, 255),
     //zmt add end
     /*lint -e572*//*lint -e778*/
 };
