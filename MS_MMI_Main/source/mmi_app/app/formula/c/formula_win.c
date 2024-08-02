@@ -48,7 +48,7 @@ LOCAL GUI_RECT_T formula_multi_text_rect = {0, 3*FORMULA_LINE_HIGHT, MMI_MAINSCR
 LOCAL GUI_RECT_T formula_action_play_rect = {2.5*FORMULA_LINE_WIDTH, 6*FORMULA_LINE_HIGHT, 4*FORMULA_LINE_WIDTH, 8*FORMULA_LINE_HIGHT};
 LOCAL GUI_RECT_T formula_action_stop_rect = {FORMULA_LINE_WIDTH, 6*FORMULA_LINE_HIGHT, 3*FORMULA_LINE_WIDTH, 8*FORMULA_LINE_HIGHT};
 LOCAL GUI_RECT_T formula_action_reset_rect = {4*FORMULA_LINE_WIDTH, 6*FORMULA_LINE_HIGHT, 6*FORMULA_LINE_WIDTH, 8*FORMULA_LINE_HIGHT};
-LOCAL GUI_RECT_T formula_action_pratice_rect = {9, 10*FORMULA_LIST_ITEM_HIGHT, 115, 11.5*FORMULA_LIST_ITEM_HIGHT};
+LOCAL GUI_RECT_T formula_action_pratice_rect = {8, 9.5*FORMULA_LIST_ITEM_HIGHT, MMI_MAINSCREEN_WIDTH-8, 11.5*FORMULA_LIST_ITEM_HIGHT - 5};
 LOCAL GUI_RECT_T formula_action_table_rect = {125, 10*FORMULA_LIST_ITEM_HIGHT, MMI_MAINSCREEN_WIDTH-9, 11.5*FORMULA_LIST_ITEM_HIGHT};
 LOCAL GUI_RECT_T formula_multi_table_rect = {0, FORMULA_LINE_HIGHT, MMI_MAINSCREEN_WIDTH, MMI_MAINSCREEN_HEIGHT - 1.5*FORMULA_LINE_HIGHT};
 LOCAL GUI_RECT_T formula_multi_left_list_rect = {0, FORMULA_LINE_HIGHT, 3*FORMULA_LINE_WIDTH, MMI_MAINSCREEN_HEIGHT - 1.5*FORMULA_LINE_HIGHT};
@@ -99,6 +99,7 @@ LOCAL void FormulaWin_PlayAudioData(uint8 *data,uint32 data_len);
 LOCAL void FormulaWin_PlayAudio(void);
 LOCAL void FormulaWin_ShowMultiText(MMI_WIN_ID_T win_id);
 LOCAL void FormulaTableTipWin_UpdateButton(BOOLEAN status);
+
 LOCAL void Formula_ReleaseTextInfo(void)
 {
     uint8 i = 0;
@@ -248,7 +249,7 @@ LOCAL BOOLEAN FormulaWin_PlayRingCallback(MMISRV_HANDLE_T handle, MMISRVMGR_NOTI
                                 if(MMK_IsFocusWin(FORMULA_WIN_ID)){
                                     MMK_SendMsg(FORMULA_WIN_ID, MSG_FULL_PAINT, PNULL);
                                 }
-                                MMI_CreateFormulaTableWin();
+                                //MMI_CreateFormulaTableWin();
                             }else{
                                 formula_play_info.play_idx++;
                             #if FORMULA_AUDIO_USE_OFF_DATA != 0
@@ -492,7 +493,7 @@ LOCAL void FormulaWin_FULL_PAINT(MMI_WIN_ID_T win_id, GUI_LCD_DEV_INFO lcd_dev_i
     GUI_FillRect(&lcd_dev_info, formula_title_rect, GUI_RGB2RGB565(108, 181, 255));
 
     text_style.align = ALIGN_HVMIDDLE;
-    text_style.font = DP_FONT_22;
+    text_style.font = DP_FONT_24;
     text_style.font_color = MMI_WHITE_COLOR;
 
     MMIRES_GetText(TXT_FORMULA_TITLE, win_id, &text_string);
@@ -537,7 +538,7 @@ LOCAL void FormulaWin_FULL_PAINT(MMI_WIN_ID_T win_id, GUI_LCD_DEV_INFO lcd_dev_i
     text_style.font = DP_FONT_20;
     text_style.font_color = GUI_RGB2RGB565(80, 162, 254);
 
-    GUIRES_DisplayImg(PNULL, &formula_action_pratice_rect, PNULL, win_id, FORMULA_BOTTOM_BG_IMG, &lcd_dev_info);
+    GUIRES_DisplayImg(PNULL, &formula_action_pratice_rect, PNULL, win_id, MATH_COUNT_ACTION_BG, &lcd_dev_info);
     MMIRES_GetText(TXT_FORMULA_TO_PRATCIE, win_id, &text_string);
     GUISTR_DrawTextToLCDInRect(
         (const GUI_LCD_DEV_INFO *)&lcd_dev_info,
@@ -549,7 +550,7 @@ LOCAL void FormulaWin_FULL_PAINT(MMI_WIN_ID_T win_id, GUI_LCD_DEV_INFO lcd_dev_i
         GUISTR_TEXT_DIR_AUTO
     );
 
-    GUIRES_DisplayImg(PNULL, &formula_action_table_rect, PNULL, win_id, FORMULA_BOTTOM_BG_IMG, &lcd_dev_info);
+    /*GUIRES_DisplayImg(PNULL, &formula_action_table_rect, PNULL, win_id, FORMULA_BOTTOM_BG_IMG, &lcd_dev_info);
     MMIRES_GetText(TXT_FORMULA_TABLE, win_id, &text_string);
     GUISTR_DrawTextToLCDInRect(
         (const GUI_LCD_DEV_INFO *)&lcd_dev_info,
@@ -559,7 +560,7 @@ LOCAL void FormulaWin_FULL_PAINT(MMI_WIN_ID_T win_id, GUI_LCD_DEV_INFO lcd_dev_i
         &text_style,
         text_state,
         GUISTR_TEXT_DIR_AUTO
-    );
+    );*/
 
     text_style.font_color = MMI_WHITE_COLOR;
     switch(formula_play_info.play_status)
@@ -633,9 +634,9 @@ LOCAL void FormulaWin_FULL_PAINT(MMI_WIN_ID_T win_id, GUI_LCD_DEV_INFO lcd_dev_i
     }
     if(formula_click_btn == 2){
         borde_rect = formula_action_pratice_rect;
-    }else if(formula_click_btn == 3){
+    }/*else if(formula_click_btn == 3){
         borde_rect = formula_action_table_rect;
-    }
+    }*/
     borde_rect.left -= 5;
     borde_rect.right += 5;
     borde_rect.top -= 5;
@@ -766,7 +767,7 @@ LOCAL void FormulaWin_KeyUpLeftDownRight(MMI_WIN_ID_T win_id, MMI_MESSAGE_ID_E m
         case 2:
             {
                 if(formula_click_btn == 0){
-                    formula_click_btn = 3;
+                    formula_click_btn = 2;
                 }else{
                     if(formula_play_info.play_status == FORMULA_ACTION_NONE && formula_click_btn == 2){
                         formula_click_btn--;
@@ -778,7 +779,7 @@ LOCAL void FormulaWin_KeyUpLeftDownRight(MMI_WIN_ID_T win_id, MMI_MESSAGE_ID_E m
         case 1:
         case 3:
             {
-                if(formula_click_btn == 3){
+                if(formula_click_btn == 2){
                     formula_click_btn = 0;
                 }else{
                     if(formula_play_info.play_status == FORMULA_ACTION_NONE && formula_click_btn == 0){
@@ -1406,7 +1407,7 @@ LOCAL MMI_RESULT_E HandleFormulaTableWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E
                 FormulaTableWin_FULL_PAINT(win_id, lcd_dev_info);
             }
             break;
-        case MSG_KEYUP_UP:
+        /*case MSG_KEYUP_UP:
             {
                 FormulaTableWin_KeyUpDown(win_id, param, TRUE);
                 recode = MMI_RESULT_FALSE;
@@ -1417,7 +1418,7 @@ LOCAL MMI_RESULT_E HandleFormulaTableWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E
                 FormulaTableWin_KeyUpDown(win_id, param, FALSE);
                 recode = MMI_RESULT_FALSE;
             }
-            break;
+            break;*/
         case MSG_KEYUP_LEFT:
             {
                 FormulaTableWin_KeyLeftRight(win_id, TRUE);
@@ -1428,10 +1429,14 @@ LOCAL MMI_RESULT_E HandleFormulaTableWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E
                 FormulaTableWin_KeyLeftRight(win_id, FALSE);
             }
             break;
+        case MSG_APP_OK: 
+            {
+                MMIZMT_CreateMathCountWin(1);
+            }
+            break;
         case MSG_APP_WEB:
         case MSG_CTL_OK:
         case MSG_CTL_PENOK:
-        case MSG_APP_OK:
         case MSG_CTL_MIDSK:
             {
                 FormulaTableWin_APP_OK(win_id);
@@ -1535,6 +1540,8 @@ LOCAL void FormulaMnemonicWin_OPEN_WINDOW(MMI_WIN_ID_T win_id)
         item_data.item_content[1].item_data_type = GUIITEM_DATA_IMAGE_ID;
         item_data.item_content[1].item_data.image_id = img_id[i];
 
+        item_data.item_content[2].is_default =TRUE;
+        item_data.item_content[2].font_color_id = MMITHEME_COLOR_LIGHT_BLUE;
         item_data.item_content[2].item_data_type = GUIITEM_DATA_TEXT_ID;
         item_data.item_content[2].item_data.text_id = text_id[i];
 
@@ -1544,13 +1551,12 @@ LOCAL void FormulaMnemonicWin_OPEN_WINDOW(MMI_WIN_ID_T win_id)
     list_rect = formula_win_rect;
     list_rect.top = FORMULA_LINE_HIGHT + 10;
     GUILIST_SetListState(ctrl_id, GUILIST_STATE_SPLIT_LINE, FALSE);
-    GUILIST_SetListState(ctrl_id, GUILIST_STATE_NEED_HIGHTBAR, FALSE);
+    GUILIST_SetListState(ctrl_id, GUILIST_STATE_NEED_HIGHTBAR, TRUE);
+    GUILIST_SetListState(ctrl_id, GUILIST_STATE_EFFECT_STR,TRUE);
     GUILIST_SetNeedPrgbarBlock(ctrl_id,FALSE);
-    GUILIST_SetBgColor(ctrl_id,GUI_RGB2RGB565(80, 162, 254));
-    GUILIST_SetTextFont(ctrl_id, DP_FONT_24, GUI_RGB2RGB565(80, 162, 254));
     GUILIST_SetSlideState(ctrl_id, FALSE);
     GUILIST_SetRect(ctrl_id, &list_rect);
-    
+    GUILIST_SetBgColor(ctrl_id, GUI_RGB2RGB565(80, 162, 254));
     MMK_SetAtvCtrl(win_id, ctrl_id);
 }
 
@@ -1565,7 +1571,7 @@ LOCAL void FormulaMnemonicWin_FULL_PAINT(MMI_WIN_ID_T win_id, GUI_LCD_DEV_INFO l
     GUI_FillRect(&lcd_dev_info, formula_title_rect, GUI_RGB2RGB565(108, 181, 255));
 
     text_style.align = ALIGN_HVMIDDLE;
-    text_style.font = DP_FONT_22;
+    text_style.font = DP_FONT_24;
     text_style.font_color = MMI_WHITE_COLOR;
 
     MMIRES_GetText(TXT_FORMULA_MNEMONIC_TITLE, win_id, &text_string);
@@ -1607,7 +1613,11 @@ LOCAL MMI_RESULT_E HandleFormulaMnemonicWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_I
                 FormulaMnemonicWin_FULL_PAINT(win_id, lcd_dev_info);
             }
             break;
+        case MSG_CTL_MIDSK:
+        case MSG_CTL_OK:
         case MSG_CTL_PENOK:
+        case MSG_APP_WEB:
+        case MSG_APP_OK:
             {
                 FormulaMnemonicWin_CTL_PENOK(win_id);
             }

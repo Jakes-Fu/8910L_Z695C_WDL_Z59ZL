@@ -1057,19 +1057,19 @@ LOCAL void CountingWin_KeyNumUp(MMI_WIN_ID_T win_id, MMI_MESSAGE_ID_E msg_id)
     GUI_POINT_T point = {0};
     GUI_LCD_DEV_INFO lcd_dev_info = {GUI_MAIN_LCD_ID, GUI_BLOCK_MAIN};
     int click_num = 0;
-    if(msg_id != MSG_KEYUP_0){
-        click_num = msg_id - MSG_KEYUP_1;
-        if(click_num > 2 && click_num < 7){
-            click_num += 1;
-        }else if(click_num > 7){
-            click_num += 2;
+    if(msg_id != MSG_KEYDOWN_0){
+        if(msg_id >= MSG_KEYDOWN_1 && msg_id < MSG_KEYDOWN_4){
+            click_num = msg_id - MSG_KEYDOWN_1 + 1;
+        }else if(msg_id >= MSG_KEYDOWN_4 && msg_id < MSG_KEYDOWN_7){
+            click_num = msg_id - MSG_KEYDOWN_4 + 5;
+        }else if(msg_id >= MSG_KEYDOWN_7 && msg_id < MSG_KEYDOWN_0){
+            click_num = msg_id - MSG_KEYDOWN_7 + 9;
         }
     }else{
-        if(msg_id == MSG_KEYUP_0){
-            click_num = 3;
+        if(msg_id == MSG_KEYDOWN_0){
+            click_num = 4;
         }
     }
-    click_num += 1;
     CountingWin_TP_PRESS_UP(win_id, point, TRUE, click_num);
 }
 LOCAL void CountingWin_KeyNumOkReduce(MMI_WIN_ID_T win_id, MMI_MESSAGE_ID_E msg_id)
@@ -1167,16 +1167,16 @@ LOCAL MMI_RESULT_E HandleCountingWinMsg(
                 }
             }
             break;
-        case MSG_KEYUP_0:
-        case MSG_KEYUP_1:
-        case MSG_KEYUP_2:
-        case MSG_KEYUP_3:
-        case MSG_KEYUP_4:
-        case MSG_KEYUP_5:
-        case MSG_KEYUP_6:
-        case MSG_KEYUP_7:
-        case MSG_KEYUP_8:
-        case MSG_KEYUP_9:
+        case MSG_KEYDOWN_0:
+        case MSG_KEYDOWN_1:
+        case MSG_KEYDOWN_2:
+        case MSG_KEYDOWN_3:
+        case MSG_KEYDOWN_4:
+        case MSG_KEYDOWN_5:
+        case MSG_KEYDOWN_6:
+        case MSG_KEYDOWN_7:
+        case MSG_KEYDOWN_8:
+        case MSG_KEYDOWN_9:
             {
                 CountingWin_KeyNumUp(win_id, msg_id);
             }
@@ -1859,7 +1859,6 @@ LOCAL void MathCountWin_TP_PRESS_UP(MMI_WIN_ID_T win_id, GUI_POINT_T point)
                 MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
             }
         }
-    #if OPEN_CHENGFA_CHUFA
         else if(GUI_PointIsInRect(point, set_multi_but_rect))
         {
             if(choose_multi_symbol)
@@ -1885,7 +1884,6 @@ LOCAL void MathCountWin_TP_PRESS_UP(MMI_WIN_ID_T win_id, GUI_POINT_T point)
                 MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
             }
         }
-    #endif
     }
 }
 
@@ -1894,24 +1892,60 @@ LOCAL void MathCountWin_Key1234(MMI_WIN_ID_T win_id, MMI_MESSAGE_ID_E msg_id)
     GUI_POINT_T point = {0};
     switch(msg_id)
     {
-        case MSG_APP_1:
-            point.x = set_add_but_rect.left + 10;
-            point.y = set_add_but_rect.top + 10;
+        case MSG_KEYDOWN_1:
+            if(choose_add_symbol){
+                if(choose_minus_symbol||choose_multi_symbol||choose_division_symbol){
+                    choose_add_symbol = 0;
+                    MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+                }
+            }else{
+                choose_add_symbol = 1;
+                MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+            }
             break;
-        case MSG_APP_2:
-            point.x = set_minus_but_rect.left + 10;
-            point.y = set_minus_but_rect.top + 10;
+        case MSG_KEYDOWN_2:
+            {
+                if(choose_minus_symbol){
+                    if(choose_add_symbol||choose_multi_symbol||choose_division_symbol){
+                        choose_minus_symbol = 0;
+                        MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+                    }
+                }else{
+                    choose_minus_symbol = 1;
+                    MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+                }
+            }
             break;
-         case MSG_APP_3:
-            point.x = set_multi_but_rect.left + 10;
-            point.y = set_multi_but_rect.top + 10;
+         case MSG_KEYDOWN_3:
+            {
+                if(choose_multi_symbol)
+                {
+                    if(choose_add_symbol||choose_minus_symbol||choose_division_symbol){
+                        choose_multi_symbol = 0;
+                        MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+                    }
+                }else{
+                    choose_multi_symbol = 1;
+                    MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+                }
+            }
             break;
-         case MSG_APP_4:
-            point.x = set_division_but_rect.left + 10;
-            point.y = set_division_but_rect.top + 10;
+         case MSG_KEYDOWN_4:
+            {
+                if(choose_division_symbol){
+                    if(choose_add_symbol||choose_minus_symbol||choose_multi_symbol){
+                        choose_division_symbol = 0;
+                        MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+                    }
+                }else{
+                    choose_division_symbol = 1;
+                    MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+                }
+            }
+            break;
+         default:
             break;
     }
-    MathCountWin_TP_PRESS_UP(win_id, point);
 }
 
 LOCAL void MathCountWin_KeyUpLeftDownRight(MMI_WIN_ID_T win_id, MMI_MESSAGE_ID_E msg_id)
@@ -1978,10 +2012,10 @@ LOCAL MMI_RESULT_E HandleMathCountWinMsg(
                 MathCountWin_FULL_PAINT(win_id);
             }
             break;
-        case MSG_APP_1:
-        case MSG_APP_2:
-        case MSG_APP_3:
-        case MSG_APP_4:
+        case MSG_KEYDOWN_1:
+        case MSG_KEYDOWN_2:
+        case MSG_KEYDOWN_3:
+        case MSG_KEYDOWN_4:
             {
                 MathCountWin_Key1234(win_id, msg_id);
             }
