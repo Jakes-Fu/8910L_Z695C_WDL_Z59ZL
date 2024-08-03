@@ -1562,7 +1562,6 @@ LOCAL void FormulaMnemonicWin_OPEN_WINDOW(MMI_WIN_ID_T win_id)
 
 LOCAL void FormulaMnemonicWin_FULL_PAINT(MMI_WIN_ID_T win_id, GUI_LCD_DEV_INFO lcd_dev_info)
 {
-    
     GUISTR_STATE_T text_state = GUISTR_STATE_ALIGN | GUISTR_STATE_WORDBREAK;
     GUISTR_STYLE_T text_style = {0};
     MMI_STRING_T text_string = {0};

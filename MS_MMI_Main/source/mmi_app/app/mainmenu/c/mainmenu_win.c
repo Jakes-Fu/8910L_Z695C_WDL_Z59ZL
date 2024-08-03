@@ -248,6 +248,27 @@
 #include "mmi_lebao.h"
 #endif
 
+//zmt add staart
+#ifdef FORMULA_SUPPORT
+#include "zmt_formula_api.h"
+#endif
+#ifdef WORD_CARD_SUPPORT
+#include "zmt_word_api.h"
+#endif
+#ifdef HANZI_CARD_SUPPORT
+#include "zmt_hanzi_api.h"
+#endif
+#ifdef ZMT_PINYIN_SUPPORT
+#include "zmt_pinyin_api.h"
+#endif
+#ifdef ZMT_YINBIAO_SUPPORT
+#include "zmt_yinbiao_api.h"
+#endif
+#ifdef POETRY_LISTEN_SUPPORT
+ #include "zmt_poetry_api.h"
+#endif
+//zmt add end
+
 /**--------------------------------------------------------------------------*
  **                         MACRO DEFINITION                                 *
  **--------------------------------------------------------------------------*/
@@ -5279,6 +5300,169 @@ PUBLIC void MMIAPIMENU_EnterMusicKing(void)
     MMK_CreateWin((uint32 *)MAINMENU_MUSIC_KING_WIN_TAB,PNULL);
 }
 #endif
+
+//zmt add start
+typedef void(*STARTAPPHANDLE)(void);
+typedef struct
+{
+    MMI_TEXT_ID_T   text_id;
+    STARTAPPHANDLE start_handle;
+}STUDY_APP_ITEM_T;
+
+static const STUDY_APP_ITEM_T study_app_item_data[] =
+{
+#ifdef FORMULA_SUPPORT
+    {TXT_STUDY_APP_FORMULA, MMI_CreateMathMnemonicWin},
+#endif
+#ifdef WORD_CARD_SUPPORT
+    {TXT_STUDY_APP_WORD, MMI_CreateWordWin},
+#endif
+#ifdef HANZI_CARD_SUPPORT
+    {TXT_STUDY_APP_HANZI, MMI_CreateHanziWin},
+#endif
+#ifdef ZMT_PINYIN_SUPPORT
+    {TXT_STUDY_APP_PINYIN, MMI_CreatePinyinMainWin},
+#endif
+#ifdef ZMT_YINBIAO_SUPPORT
+    {TXT_STUDY_APP_YINBIAO, MMI_CreateYinbiaoMainWin},
+#endif
+#ifdef POETRY_LISTEN_SUPPORT
+    {TXT_STUDY_APP_POETRY, MMI_CreatePoetryWin},
+#endif
+};
+
+LOCAL uint8 ZMT_STUDY_APP_SIZE = sizeof(study_app_item_data)/sizeof(STUDY_APP_ITEM_T);
+
+LOCAL void StudyAppWin_OPEN_WINDOW(MMI_WIN_ID_T win_id)
+{
+    MMI_CTRL_ID_T ctrl_id = MAINMENUWIN_STUDY_APP_LIST_CTRL_ID;
+    GUILIST_ITEM_T item_t = {0};
+    GUIITEM_STATE_T item_state = {0};
+    GUILIST_ITEM_DATA_T item_data = {0};
+    GUI_RECT_T list_rect = {0, MMI_TITLE_THEME_HEIGHT, MMI_MAINSCREEN_WIDTH, MMI_MAINSCREEN_HEIGHT-MMI_LIST_ITEM_HEIGHT};
+    uint8 i = 0;
+    
+    GUILIST_SetMaxItem(ctrl_id, ZMT_STUDY_APP_SIZE, FALSE);
+    for(i = 0; i < ZMT_STUDY_APP_SIZE;i++)
+    {
+        item_t.item_style = GUIITEM_STYLE_ONE_LINE_TEXT;
+        item_t.item_data_ptr = &item_data;
+        item_t.item_state = GUIITEM_STATE_SELFADAPT_RECT|GUIITEM_STATE_CONTENT_CHECK;
+
+        item_data.item_content[0].item_data_type = GUIITEM_DATA_TEXT_ID;
+        item_data.item_content[0].item_data.text_id = study_app_item_data[i].text_id;
+
+        GUILIST_AppendItem(ctrl_id, &item_t);
+    }
+    GUILIST_SetListState(ctrl_id, GUILIST_STATE_SPLIT_LINE, FALSE);
+    GUILIST_SetListState(ctrl_id, GUILIST_STATE_NEED_HIGHTBAR, TRUE);
+    GUILIST_SetListState(ctrl_id, GUILIST_STATE_EFFECT_STR,TRUE);
+    GUILIST_SetNeedPrgbarBlock(ctrl_id,FALSE);
+    GUILIST_SetSlideState(ctrl_id, FALSE);
+    GUILIST_SetRect(ctrl_id, &list_rect);
+    GUILIST_SetBgColor(ctrl_id, MMI_WHITE_COLOR);
+    MMK_SetAtvCtrl(win_id, ctrl_id);
+}
+
+LOCAL void StudyAppWin_FULL_PAINT(MMI_WIN_ID_T win_id)
+{
+    GUI_LCD_DEV_INFO lcd_dev_info = {GUI_MAIN_LCD_ID,GUI_BLOCK_MAIN};
+    GUI_RECT_T win_rect = {0, 0, MMI_MAINSCREEN_WIDTH, MMI_MAINSCREEN_HEIGHT};
+    GUI_RECT_T title_rect = {0, 0, MMI_MAINSCREEN_WIDTH, MMI_TITLE_THEME_HEIGHT};
+    GUISTR_STATE_T text_state = GUISTR_STATE_ALIGN | GUISTR_STATE_WORDBREAK;
+    GUISTR_STYLE_T text_style = {0};
+    MMI_STRING_T text_string = {0};
+
+    GUI_FillRect(&lcd_dev_info, win_rect, MMI_WHITE_COLOR);
+
+    text_style.align = ALIGN_HVMIDDLE;
+    text_style.font = SONG_FONT_36;
+    text_style.font_color = MMI_BLACK_COLOR;
+
+    MMIRES_GetText(TXT_STUDY_APP_TITLE, win_id, &text_string);
+    GUISTR_DrawTextToLCDInRect(
+        (const GUI_LCD_DEV_INFO *)&lcd_dev_info,
+        &title_rect,
+        &title_rect,
+        &text_string,
+        &text_style,
+        text_state,
+        GUISTR_TEXT_DIR_AUTO
+    );
+}
+
+LOCAL void StudyAppWin_CTL_PENOK(MMI_WIN_ID_T win_id)
+{
+    uint16 cur_idx = GUILIST_GetCurItemIndex(MAINMENUWIN_STUDY_APP_LIST_CTRL_ID);
+    if(cur_idx >= 0 && cur_idx < ZMT_STUDY_APP_SIZE){
+        study_app_item_data[cur_idx].start_handle();
+    }
+}
+
+LOCAL MMI_RESULT_E HandleStudyAppWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E msg_id, DPARAM param)
+{
+    GUI_LCD_DEV_INFO lcd_dev_info = {GUI_MAIN_LCD_ID,GUI_BLOCK_MAIN};
+    MMI_RESULT_E recode = MMI_RESULT_TRUE;
+    switch (msg_id) 
+    {
+        case MSG_OPEN_WINDOW:
+            {
+                StudyAppWin_OPEN_WINDOW(win_id);
+            }
+            break;
+        case MSG_FULL_PAINT:
+            {
+                StudyAppWin_FULL_PAINT(win_id);
+            }
+            break;
+        case MSG_CTL_MIDSK:
+        case MSG_CTL_OK:
+        case MSG_CTL_PENOK:
+        case MSG_APP_WEB:
+        case MSG_APP_OK:
+            {
+                StudyAppWin_CTL_PENOK(win_id);
+            }
+            break;
+        case MSG_KEYDOWN_CANCEL:
+            break;
+        case MSG_KEYUP_RED:
+        case MSG_KEYUP_CANCEL:
+            {
+                MMK_CloseWin(win_id);
+            }
+            break;
+        case MSG_CLOSE_WINDOW:
+            {
+                
+            }
+            break;
+        default:
+            recode = MMI_RESULT_FALSE;
+            break;
+    }
+    return recode;
+}
+
+WINDOW_TABLE(MAINMENU_STUDY_APP_WIN_TAB) =
+{
+    WIN_ID(MAIN_MAINMENU_STUDY_APP_WIN_ID),
+    WIN_FUNC((uint32)HandleStudyAppWinMsg),
+    CREATE_LISTBOX_CTRL(GUILIST_TYPE_TEXT_ID, MAINMENUWIN_STUDY_APP_LIST_CTRL_ID),
+    WIN_SOFTKEY(TXT_COMMON_OK, TXT_NULL, STXT_RETURN),
+#ifndef MMI_ONLY_IDLE_DISP_STATUSBAR
+    WIN_STATUSBAR,
+#endif
+    END_WIN
+};
+
+PUBLIC void MMIAPIMENU_EnterStudyApp(void)
+{
+    MMK_CreateWin((uint32 *)MAINMENU_STUDY_APP_WIN_TAB,PNULL);
+}
+//zmt add end
+
+
 /*Edit by script, ignore 5 case. Fri Apr 27 09:38:51 2012*/ //IGNORE9527
 
 

@@ -562,24 +562,9 @@ PUBLIC void MMIMAINMENU_StartMusicKing(uint32 param1, uint32 param2);
 PUBLIC void MMIMAINMENU_StartLebao (uint32 param1, uint32 param2);
 #endif
 
-#ifdef FORMULA_SUPPORT
-PUBLIC void MMI_CreateMathMnemonicWin(void);
-#endif
-#ifdef WORD_CARD_SUPPORT
-PUBLIC void MMI_CreateWordWin(void);
-#endif
-#ifdef HANZI_CARD_SUPPORT
-PUBLIC void MMI_CreateHanziWin(void);
-#endif
-#ifdef ZMT_PINYIN_SUPPORT
-PUBLIC void MMI_CreatePinyinMainWin(void);
-#endif
-#ifdef ZMT_YINBIAO_SUPPORT
-PUBLIC void MMI_CreateYinbiaoMainWin(void);
-#endif
-#ifdef POETRY_LISTEN_SUPPORT
-PUBLIC void MMI_CreatePoetryWin(void);
-#endif
+//zmt add start
+PUBLIC void MMIAPIMENU_EnterStudyApp(void);
+//zmt add end
 
 /**--------------------------------------------------------------------------*
  **                         Compiler Flag                                    *
