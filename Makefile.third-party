@@ -1467,27 +1467,27 @@ ifeq ($(strip $(FOTA_SUPPORT)), ABUP)
 endif
 
 ##zmt add start
-ifeq ($(strip $(MATH_COUNT_SUPPORT)), TRUE)
-3RD_LIBS += Third-party/zmt_math/lib/zmt_math_z62.a
-endif
-ifeq ($(strip $(FORMULA_SUPPORT)), TRUE)
-3RD_LIBS += Third-party/zmt_formula/lib/zmt_formula_z62.a
-endif
-ifeq ($(strip $(WORD_CARD_SUPPORT)), TRUE)
-3RD_LIBS += Third-party/zmt_word/lib/zmt_word_z62.a
-endif
-ifeq ($(strip $(HANZI_CARD_SUPPORT)), TRUE)
-3RD_LIBS += Third-party/zmt_hanzi/lib/zmt_hanzi_z62.a
-endif
-ifeq ($(strip $(ZMT_PINYIN_SUPPORT)), TRUE)
-3RD_LIBS += Third-party/zmt_pinyin/lib/zmt_pinyin_z62.a
-endif
-ifeq ($(strip $(ZMT_YINBIAO_SUPPORT)), TRUE)
-3RD_LIBS += Third-party/zmt_yinbiao/lib/zmt_yinbiao_z62.a
-endif
-ifeq ($(strip $(POETRY_LISTEN_SUPPORT)), TRUE)
-3RD_LIBS += Third-party/zmt_poetry/lib/zmt_poetry_z62.a
-endif
+#ifeq ($(strip $(MATH_COUNT_SUPPORT)), TRUE)
+#3RD_LIBS += Third-party/zmt_math/lib/zmt_math_z62.a
+#endif
+#ifeq ($(strip $(FORMULA_SUPPORT)), TRUE)
+#3RD_LIBS += Third-party/zmt_formula/lib/zmt_formula_z62.a
+#endif
+#ifeq ($(strip $(WORD_CARD_SUPPORT)), TRUE)
+#3RD_LIBS += Third-party/zmt_word/lib/zmt_word_z62.a
+#endif
+#ifeq ($(strip $(HANZI_CARD_SUPPORT)), TRUE)
+#RD_LIBS += Third-party/zmt_hanzi/lib/zmt_hanzi_z62.a
+#endif
+#ifeq ($(strip $(ZMT_PINYIN_SUPPORT)), TRUE)
+#3RD_LIBS += Third-party/zmt_pinyin/lib/zmt_pinyin_z62.a
+#endif
+#ifeq ($(strip $(ZMT_YINBIAO_SUPPORT)), TRUE)
+#3RD_LIBS += Third-party/zmt_yinbiao/lib/zmt_yinbiao_z62.a
+#endif
+#ifeq ($(strip $(POETRY_LISTEN_SUPPORT)), TRUE)
+#3RD_LIBS += Third-party/zmt_poetry/lib/zmt_poetry_z62.a
+#endif
 ##zmt add end
 
 #==========================================================================================
