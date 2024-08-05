@@ -1263,6 +1263,7 @@ LOCAL void PoetryWin_HanldeTpUp(MMI_WIN_ID_T win_id, GUI_POINT_T point)
     {
         is_open_favorite = TRUE;
         where_open_favorite = 0;
+        poetry_click_btn = 2;
         Poetry_GetFavoritePoetry();
         MMI_CreatePoetryItemWin();
     }
@@ -1614,6 +1615,7 @@ LOCAL void PoetryItemWin_HanldeTpUp(MMI_WIN_ID_T win_id, GUI_POINT_T point)
         is_open_favorite = TRUE;
         poetry_is_favorite = TRUE;
         where_open_favorite = 1;
+        poetry_click_btn = 2;
         Poetry_GetFavoritePoetry();
         MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
     }

@@ -46,7 +46,7 @@ wchar test_yinbiao[8] = {0x02E9,0x02E7,0x02E5,0xE6,0x030d,0x03b7,0x0254 };
 #define yinbiao_win_rect {0, 0, MMI_MAINSCREEN_WIDTH, MMI_MAINSCREEN_HEIGHT}
 #define yinbiao_title_rect {0, 0, MMI_MAINSCREEN_WIDTH, YINBIAO_LINE_HIGHT}
 #define yinbiao_list_rect {0, YINBIAO_LINE_HIGHT, MMI_MAINSCREEN_WIDTH, MMI_MAINSCREEN_HEIGHT-5}
-#define yinbiao_yinbiao_rect {10, 2.5*YINBIAO_LINE_HIGHT, MMI_MAINSCREEN_WIDTH-10, 8*YINBIAO_LINE_HIGHT}
+#define yinbiao_yinbiao_rect {5, 2.5*YINBIAO_LINE_HIGHT, MMI_MAINSCREEN_WIDTH-5, 8*YINBIAO_LINE_HIGHT}
 #define yinbiao_msg_rect {YINBIAO_LINE_WIDTH, 3*YINBIAO_LINE_HIGHT, MMI_MAINSCREEN_WIDTH - YINBIAO_LINE_WIDTH, 7*YINBIAO_LINE_HIGHT}
 #define yinbiao_msg_tips_left_rect {1.2*YINBIAO_LINE_WIDTH, 5.5*YINBIAO_LINE_HIGHT, 2.7*YINBIAO_LINE_WIDTH, 7*YINBIAO_LINE_HIGHT}
 #define yinbiao_msg_tips_right_rect {3.3*YINBIAO_LINE_WIDTH, 5.5*YINBIAO_LINE_HIGHT, 4.8*YINBIAO_LINE_WIDTH, 7*YINBIAO_LINE_HIGHT}
@@ -545,7 +545,7 @@ LOCAL void YinbiaoTableTipWin_FULL_PAINT(MMI_WIN_ID_T win_id)
         GUI_UTF8ToWstr(text_wchar, 20, text, size);
         text_string.wstr_ptr = text_wchar;
         text_string.wstr_len = MMIAPICOM_Wstrlen(text_wchar);
-        text_style.font = DP_FONT_28;
+        text_style.font = SONG_FONT_36;
         YinbiaoTableTipWin_UpdateButton(yinbiao_table_play_status);
     }
     GUISTR_DrawTextToLCDInRect(
@@ -673,12 +673,13 @@ LOCAL void YinbiaoTableWin_OPEN_WINDOW(MMI_WIN_ID_T win_id)
     {
         list_ctrl_id = ZMT_YINBIAO_TABLE_FORM_LEFT_CTRL_ID + i;
         GUILIST_SetListState(list_ctrl_id, GUILIST_STATE_SPLIT_LINE, FALSE);
+        GUILIST_SetListState(list_ctrl_id, GUILIST_STATE_EFFECT_STR,TRUE);
         GUILIST_SetNeedHiLightBar(list_ctrl_id,FALSE);
         GUILIST_SetMaxItem(list_ctrl_id, 11, FALSE);
         GUILIST_SetNeedPrgbarBlock(list_ctrl_id,FALSE);
         GUILIST_SetUserBg(list_ctrl_id,TRUE);
         GUILIST_SetBgColor(list_ctrl_id,YINBIAO_WIN_BG_COLOR);
-        GUILIST_SetTextFont(list_ctrl_id, DP_FONT_24, YINBIAO_WIN_BG_COLOR);
+        GUILIST_SetTextFont(list_ctrl_id, DP_FONT_28, YINBIAO_WIN_BG_COLOR);
         GUILIST_PermitBorder(list_ctrl_id, FALSE);
         GUILIST_SetSlideState(list_ctrl_id, FALSE);
         list_ctrl_height.type = GUIFORM_CHILD_HEIGHT_FIXED;
@@ -738,6 +739,8 @@ LOCAL void YinbiaoTableWin_DisplayTableList(MMI_WIN_ID_T win_id)
             GUI_UTF8ToWstr(text_str, 20, text, size);
             text_string.wstr_ptr = text_str;
             text_string.wstr_len = MMIAPICOM_Wstrlen(text_str);
+            item_data.item_content[1].is_default =TRUE;
+            item_data.item_content[1].font_color_id = MMITHEME_COLOR_LIGHT_BLUE;
             item_data.item_content[1].item_data_type = GUIITEM_DATA_TEXT_BUFFER;
             item_data.item_content[1].item_data.text_buffer = text_string;
 
@@ -1203,7 +1206,7 @@ LOCAL void YinbiaoReadWin_DisplayYinbiaoTie(MMI_WIN_ID_T win_id)
     uint8 idx = MMK_GetWinAddDataPtr(win_id);
 
     text_style.align = ALIGN_HVMIDDLE;
-    text_style.font = DP_FONT_28;
+    text_style.font = SONG_FONT_60;
     text_style.font_color = MMI_WHITE_COLOR;
     
     LCD_FillRoundedRect(&lcd_dev_info, yinbiao_rect, yinbiao_rect, YINBIAO_TITLE_BG_COLOR);

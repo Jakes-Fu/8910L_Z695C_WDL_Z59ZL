@@ -107,6 +107,7 @@ typedef enum
     WORD_LISTEN_NOW,
     WORD_LISTEN_PAUSE,
     WORD_LISTEN_INFO,
+    WORD_LISTEN_END,
 }WORD_LISTEN_STAUS_TYPE_E;
 
 typedef struct

@@ -1715,8 +1715,11 @@ LOCAL MMI_RESULT_E HandleHanziDetailWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E 
                 HanziDetail_KeyRight();
             }
             break;
-        case MSG_APP_OK:
+        case MSG_CTL_OK:
+        case MSG_CTL_PENOK:
+        case MSG_CTL_MIDSK:
         case MSG_APP_WEB:
+        case MSG_APP_OK:
             {
                 if(is_open_new_hanzi){
                     int idx = cur_new_hanzi_page_idx * HANZI_CHAPTER_WORD_MAX + hanzi_detail_cur_idx;
@@ -2143,6 +2146,7 @@ LOCAL void HanziListenSetWin_TP_PRESS_UP(MMI_WIN_ID_T win_id, GUI_POINT_T point)
 
 LOCAL void HanziListenSetWin_KeyLeftRight(MMI_WIN_ID_T win_id, BOOLEAN is_left)
 {
+    hanzi_listen_set_idx = GUILIST_GetCurItemIndex(MMI_ZMT_HANZI_LISTEN_SET_LIST_CTRL_ID);
     if(is_left)
     {
         switch(hanzi_listen_set_idx)
@@ -2279,12 +2283,12 @@ LOCAL MMI_RESULT_E HandleHanziListenSetWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID
             break;
         case MSG_KEYUP_UP:
             {
-                HanziListenSetWin_KeyUpDown(win_id, FALSE);
+                //HanziListenSetWin_KeyUpDown(win_id, FALSE);
             }
             break;
         case MSG_KEYUP_DOWN:
             {
-                HanziListenSetWin_KeyUpDown(win_id, FALSE);
+                //HanziListenSetWin_KeyUpDown(win_id, FALSE);
             }
             break;
         case MSG_APP_OK:
@@ -2486,6 +2490,13 @@ LOCAL void HanziListenWin_BottomActionFunc(void)
         HanziListenWin_StopIntervalTimer();
         Hanzi_StopPlayMp3Data();
     }
+    else if(hanzi_listen_info.status == HANZI_LISTEN_END)
+    {
+        hanzi_listen_info.status = HANZI_LISTEN_NOW;
+        hanzi_listen_cur_idx = 0;
+        hanzi_detail_cur_idx = hanzi_listen_cur_idx;
+        HanziDetail_PlayPinyinAudio();
+    }
     MMK_SendMsg(MMI_HANZI_LISTEN_WIN_ID, MSG_FULL_PAINT, PNULL);
 }
 
@@ -2573,13 +2584,13 @@ LOCAL void HanziListenWin_DrawListenStatus(MMI_WIN_ID_T win_id, HANZI_LISTEN_STA
             break;
         case HANZI_LISTEN_NOW:
             {
-                label_text = WORD_LEARN_LISTENING_TIPS_2;
+                label_text = HANZI_LEARN_LISTENING_TIPS_2;
                 button_text = WORD_LEARN_LISTENING;
             }
             break;
         case HANZI_LISTEN_PAUSE:
             {
-                label_text = WORD_LEARN_LISTENING_TIPS_2;
+                label_text = HANZI_LEARN_LISTENING_TIPS_2;
                 button_text = WORD_LEARN_LISTENING_PAUSE;
             }
             break;
@@ -2643,6 +2654,8 @@ LOCAL void HanziListenWin_FULL_PAINT(MMI_WIN_ID_T win_id)
 
         GUIBUTTON_SetVisible(MMI_ZMT_HANZI_LISTEN_LEFT_CTRL_ID,TRUE,TRUE);
         GUIBUTTON_SetVisible(MMI_ZMT_HANZI_LISTEN_RIGHT_CTRL_ID,TRUE,TRUE);
+
+        hanzi_listen_info.status = HANZI_LISTEN_END;
     }
 }
 
@@ -2693,11 +2706,21 @@ LOCAL MMI_RESULT_E HandleHanziListenWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E 
                 HanziListenWin_SetClickFunc();
             }
             break;
-       case MSG_APP_OK:
+        case MSG_KEYDOWN_0:
+        case MSG_KEYDOWN_1:
+        case MSG_KEYDOWN_2:
+        case MSG_KEYDOWN_3:
+        case MSG_KEYDOWN_4:
+        case MSG_KEYDOWN_5:
+        case MSG_KEYDOWN_6:
+        case MSG_KEYDOWN_7:
+        case MSG_KEYDOWN_8:
+        case MSG_KEYDOWN_9:
             {
                 HanziListenWin_ImgClickFunc();
             }
             break;
+        case MSG_APP_OK:
         case MSG_APP_WEB:
         case MSG_CTL_MIDSK:
         case MSG_CTL_OK:

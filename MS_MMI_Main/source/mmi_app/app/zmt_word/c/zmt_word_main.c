@@ -1388,6 +1388,9 @@ LOCAL void WordDetail_NextChapterInfo(void)
         chapter_unmaster_count = 0;
         word_detail_cur_idx = 0;
         MMK_SendMsg(MMI_WORD_DETAIL_WIN_ID, MSG_FULL_PAINT, PNULL);
+        if(word_open_auto_play){
+            WordDetail_PlayPinyinAudio();
+        }
     }
 }
 
@@ -1515,16 +1518,17 @@ LOCAL void WordDetail_DisplayDtailInfo(
     }
     text_pinyin.wstr_ptr = wstr_pinyin;
     text_pinyin.wstr_len = MMIAPICOM_Wstrlen(text_pinyin.wstr_ptr);
-    if(width_rect < MMI_MAINSCREEN_WIDTH / 2 || 
+    if(width_rect < MMI_MAINSCREEN_WIDTH / 2.5 || 
         word_chapter_info[word_book_info.cur_chapter_idx]->detail[word_detail_cur_idx]->phonetic == NULL)
     {
         text_width_piex = GUI_CalculateStringPiexlNum(text_pinyin.wstr_ptr, text_pinyin.wstr_len, DP_FONT_20, 1);
         pinyin_rect = word_rect;
         pinyin_rect.left = word_rect.right;
-        pinyin_rect.right = pinyin_rect.left + text_width_piex;
+        pinyin_rect.right = pinyin_rect.left + 2*text_width_piex;
         GUILABEL_SetRect(ctrl_label_pinyin, &pinyin_rect, FALSE);
         audio_rect = pinyin_rect;
     }else{
+        pinyin_rect.right += 20;
         GUILABEL_SetRect(ctrl_label_pinyin, &pinyin_rects, FALSE);
         audio_rect = pinyin_rects;
     }
@@ -1854,8 +1858,11 @@ LOCAL MMI_RESULT_E HandleWordDetailWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E m
                 WordDetail_KeyRight();
             }
             break;
-        case MSG_APP_OK:
+        case MSG_CTL_OK:
+        case MSG_CTL_PENOK:
+        case MSG_CTL_MIDSK:
         case MSG_APP_WEB:
+        case MSG_APP_OK:
             {
                 if(is_open_new_word && word_detail_cur_idx < word_detail_count){
                     WordDetail_DeleteNewWord();
@@ -2281,6 +2288,7 @@ LOCAL void WordListenSetWin_TP_PRESS_UP(MMI_WIN_ID_T win_id, GUI_POINT_T point)
 
 LOCAL void WordListenSetWin_KeyLeftRight(MMI_WIN_ID_T win_id, BOOLEAN is_left)
 {
+    word_listen_set_idx = GUILIST_GetCurItemIndex(MMI_ZMT_WORD_LISTEN_SET_LIST_CTRL_ID);
     if(is_left)
     {
         switch(word_listen_set_idx)
@@ -2417,12 +2425,12 @@ LOCAL MMI_RESULT_E HandleWordListenSetWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_
             break;
         case MSG_KEYUP_UP:
             {
-                WordListenSetWin_KeyUpDown(win_id, FALSE);
+                //WordListenSetWin_KeyUpDown(win_id, FALSE);
             }
             break;
         case MSG_KEYUP_DOWN:
             {
-                WordListenSetWin_KeyUpDown(win_id, FALSE);
+                //WordListenSetWin_KeyUpDown(win_id, FALSE);
             }
             break;
         case MSG_APP_OK:
@@ -2626,6 +2634,13 @@ LOCAL void WordListenWin_BottomActionFunc(void)
         WordListenWin_StopIntervalTimer();
         Word_StopPlayMp3Data();
     }
+    else if(word_listen_info.status == WORD_LISTEN_END)
+    {
+        word_listen_info.status = WORD_LISTEN_NOW;
+        word_listen_cur_idx = 0;
+        word_detail_cur_idx = word_listen_cur_idx;
+        WordDetail_PlayPinyinAudio();
+    }
     MMK_SendMsg(MMI_WORD_LISTEN_WIN_ID, MSG_FULL_PAINT, PNULL);
 }
 
@@ -2779,6 +2794,8 @@ LOCAL void WordListenWin_FULL_PAINT(MMI_WIN_ID_T win_id)
 
         GUIBUTTON_SetVisible(MMI_ZMT_WORD_LISTEN_LEFT_CTRL_ID,TRUE,TRUE);
         GUIBUTTON_SetVisible(MMI_ZMT_WORD_LISTEN_RIGHT_CTRL_ID,TRUE,TRUE);
+
+        word_listen_info.status = WORD_LISTEN_END;
     }
 }
 
@@ -2830,11 +2847,21 @@ LOCAL MMI_RESULT_E HandleWordListenWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E m
                 WordListenWin_SetClickFunc();
             }
             break;
-        case MSG_APP_OK:
+        case MSG_KEYDOWN_0:
+        case MSG_KEYDOWN_1:
+        case MSG_KEYDOWN_2:
+        case MSG_KEYDOWN_3:
+        case MSG_KEYDOWN_4:
+        case MSG_KEYDOWN_5:
+        case MSG_KEYDOWN_6:
+        case MSG_KEYDOWN_7:
+        case MSG_KEYDOWN_8:
+        case MSG_KEYDOWN_9:
             {
                 WordListenWin_ImgClickFunc();
             }
             break;
+        case MSG_APP_OK:
         case MSG_APP_WEB:
         case MSG_CTL_MIDSK:
         case MSG_CTL_OK:

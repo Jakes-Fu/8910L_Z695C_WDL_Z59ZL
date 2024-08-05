@@ -249,6 +249,7 @@ LOCAL BOOLEAN FormulaWin_PlayRingCallback(MMISRV_HANDLE_T handle, MMISRVMGR_NOTI
                                 if(MMK_IsFocusWin(FORMULA_WIN_ID)){
                                     MMK_SendMsg(FORMULA_WIN_ID, MSG_FULL_PAINT, PNULL);
                                 }
+                                formula_click_btn = 0;
                                 //MMI_CreateFormulaTableWin();
                             }else{
                                 formula_play_info.play_idx++;
@@ -409,7 +410,7 @@ LOCAL void FormulaWin_ParseAudioResponse(BOOLEAN is_ok,uint8 * pRcv,uint32 Rcv_l
         }
         formula_audio_info[formula_play_info.play_idx]->audio_len = -2;
     }
-    if(MMK_IsFocusWin(FORMULA_WIN_ID) || MMK_IsFocusWin(FORMULA_TABLE_TIP_WIN_ID)){
+    if(MMK_IsOpenWin(FORMULA_WIN_ID) || MMK_IsOpenWin(FORMULA_TABLE_TIP_WIN_ID)){
         FormulaWin_PlayAudio();
     }
 }
@@ -734,6 +735,7 @@ LOCAL void FormulaWin_HANDLE_UP(MMI_WIN_ID_T win_id, GUI_POINT_T point)
     {
         formula_play_info.play_status = FORMULA_ACTION_NONE;
         formula_play_info.play_idx = 0;
+        formula_click_btn = 0;
         FormulaWin_StopRing();
         MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
     }
@@ -844,6 +846,7 @@ LOCAL MMI_RESULT_E HandleFormulaWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E msg_
         case MSG_OPEN_WINDOW:
             {
                 FormulaWin_OPEN_WINDOW(win_id);
+                WATCHCOM_Backlight(TRUE);
             }
             break;
         case MSG_FULL_PAINT:
@@ -908,6 +911,7 @@ LOCAL MMI_RESULT_E HandleFormulaWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E msg_
         case MSG_CLOSE_WINDOW:
             {
                 FormulaWin_CLOSE_WINDOW();
+                WATCHCOM_Backlight(FALSE);
             }
             break;
         default:
