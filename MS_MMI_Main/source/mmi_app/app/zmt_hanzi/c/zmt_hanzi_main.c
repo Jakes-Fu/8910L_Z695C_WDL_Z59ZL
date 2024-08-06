@@ -915,7 +915,15 @@ LOCAL MMI_RESULT_E HandleHanziChapterWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E
             }
             break;
         case MSG_APP_0:
-        case MSG_APP_HASH:
+        case MSG_APP_1:
+        case MSG_APP_2:
+        case MSG_APP_3:
+        case MSG_APP_4:
+        case MSG_APP_5:
+        case MSG_APP_6:
+        case MSG_APP_7:
+        case MSG_APP_8:
+        case MSG_APP_9:
         case MSG_KEYDOWN_UPSIDE:
         case MSG_KEYDOWN_VOL_UP:
         case MSG_KEYDOWN_DOWNSIDE:
@@ -1919,8 +1927,11 @@ LOCAL MMI_RESULT_E HandleHanziListenInfoWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_I
                 main_tp_down_y = MMK_GET_TP_Y(param);
             }
             break;
-        case MSG_APP_OK:
+        case MSG_CTL_MIDSK:
+        case MSG_CTL_OK:
         case MSG_APP_WEB:
+        case MSG_APP_OK:
+        case MSG_CTL_PENOK:
             {
                 MMK_CloseWin(win_id);
             }

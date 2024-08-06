@@ -2028,6 +2028,26 @@ LOCAL MMI_RESULT_E HandleMathCountWinMsg(
                 MathCountWin_KeyUpLeftDownRight(win_id, msg_id);
             }
             break;
+        case MSG_APP_7:
+            {
+                MathCount_SetTimeReduce();
+            }
+            break;
+        case MSG_APP_9:
+            {
+                MathCount_SetTimeAdd();
+            }
+            break;
+        case MSG_APP_STAR:
+            {
+                MathCount_SetRangeReduce();
+            }
+            break;
+        case MSG_APP_HASH:
+            {
+                MathCount_SetRangeAdd();
+            }
+            break;
         case MSG_APP_WEB:
         case MSG_APP_OK:
         case MSG_CTL_PENOK:

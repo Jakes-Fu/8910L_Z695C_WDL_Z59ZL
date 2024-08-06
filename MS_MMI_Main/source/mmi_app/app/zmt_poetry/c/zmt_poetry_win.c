@@ -1374,6 +1374,30 @@ LOCAL MMI_RESULT_E HandlePoetryWinMsg(
                     PoetryWin_KeyUpLeftDownRight(win_id, msg_id);
                 }
                 break;
+             case MSG_APP_1:
+             case MSG_APP_2:
+             case MSG_APP_3:
+             case MSG_APP_4:
+             case MSG_APP_5:
+                {
+                    GUI_POINT_T point = {0};
+                    point.x = poetry_play_rect.left + 10;
+                    point.y = poetry_play_rect.top + 10;
+                    PoetryWin_HanldeTpUp(win_id, point);
+                }
+                break;
+             case MSG_APP_0:
+             case MSG_APP_6:
+             case MSG_APP_7:
+             case MSG_APP_8:
+             case MSG_APP_9:
+                {
+                    GUI_POINT_T point = {0};
+                    point.x = poetry_favorite_rect.left + 10;
+                    point.y = poetry_favorite_rect.top + 10;
+                    PoetryWin_HanldeTpUp(win_id, point);
+                }
+                break;
              case MSG_CTL_MIDSK:
              case MSG_CTL_OK:
              case MSG_APP_WEB:
@@ -1729,6 +1753,7 @@ LOCAL void PoetryItemWin_CLOSE_WINDOW(MMI_WIN_ID_T win_id)
     grade_get_status = 0;
     where_open_favorite = 0;
     poetry_click_btn = 2;
+    poetery_info.poetry_idx = 0;
     MMIZDT_HTTP_Close();
 }
 
@@ -1758,6 +1783,32 @@ LOCAL MMI_RESULT_E HandlePoetryItemWinMsg(
         case MSG_CTL_PENOK:
             {              
                 PoetryItemWin_CTL_PENOK(win_id);
+            }
+            break;
+        case MSG_APP_1:
+        case MSG_APP_2:
+        case MSG_APP_3:
+        case MSG_APP_4:
+        case MSG_APP_5:
+            {
+                GUI_POINT_T point = {0};
+                point.x = poetry_play_rect.left + 10;
+                point.y = poetry_play_rect.top + 10;
+                PoetryItemWin_HanldeTpUp(win_id, point);
+            }
+            break;
+        case MSG_APP_0:
+        case MSG_APP_6:
+        case MSG_APP_7:
+        case MSG_APP_8:
+        case MSG_APP_9:
+            {
+                if(!is_open_favorite){
+                    GUI_POINT_T point = {0};
+                    point.x = poetry_favorite_rect.left + 10;
+                    point.y = poetry_favorite_rect.top + 10;
+                    PoetryItemWin_HanldeTpUp(win_id, point);
+                }
             }
             break;
         case MSG_TP_PRESS_UP:
@@ -2261,6 +2312,7 @@ LOCAL void PoetryDetailWin_CLOSE_WINDOW(MMI_WIN_ID_T win_id)
         }
     }
     poetery_info.detail_idx = 0;
+    poetry_audio_play_idx = 0;
     audio_download_progress = 0;
     audio_play_progress = 0;
     audio_play_now = FALSE;
@@ -2315,12 +2367,52 @@ LOCAL MMI_RESULT_E HandlePoetryDetailWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E
                 }
             }
             break;
-        case MSG_KEYUP_WEB:
-        case MSG_APP_WEB:
-        case MSG_APP_OK:
         case MSG_CTL_PENOK:
+        case MSG_CTL_OK:
+        case MSG_APP_OK:
+        case MSG_APP_WEB:
+        case MSG_CTL_MIDSK:
             {
                 PoetryDetailWin_KeyOk(win_id);
+            }
+            break;
+        case MSG_APP_1:
+        case MSG_APP_2:
+        case MSG_APP_3:
+        case MSG_APP_4:
+            {
+                uint8 idx = msg_id - MSG_APP_1;
+                poetery_info.detail_idx = idx;
+                MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+            }
+            break;
+        case MSG_APP_5:
+        case MSG_APP_6:
+        case MSG_APP_7:
+        case MSG_APP_8:
+        case MSG_APP_9:
+            {
+                if(poetery_info.detail_idx == 0){
+                    if(audio_play_now){
+                        auto_play_open_close_tip = 3;
+                        Poetry_AutoPlayTipTimer(win_id);
+                    }else{
+                        Poetry_PlayAudio();
+                    }
+                }
+            }
+            break;
+        case MSG_APP_STAR:
+        case MSG_APP_0:
+        case MSG_APP_HASH:
+            {
+                if(poetry_is_favorite){
+                    poetry_is_favorite = FALSE;
+                    MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+                }else{
+                    poetry_is_favorite = TRUE;
+                    MMK_SendMsg(win_id, MSG_FULL_PAINT, PNULL);
+                }
             }
             break;
         case MSG_KEYUP_LEFT:

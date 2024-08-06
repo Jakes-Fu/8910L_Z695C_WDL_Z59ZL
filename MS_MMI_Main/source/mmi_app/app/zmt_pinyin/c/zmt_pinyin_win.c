@@ -1359,6 +1359,34 @@ LOCAL MMI_RESULT_E HandlePinyinReadWinMsg(MMI_WIN_ID_T win_id,MMI_MESSAGE_ID_E m
                 PinyinReadWin_SingleCallback();
             }
             break;
+        case MSG_APP_1:
+        case MSG_APP_2:
+        case MSG_APP_3:
+            {
+                PinyinReadWin_TableCallback();
+            }
+            break;
+        case MSG_APP_4:
+        case MSG_APP_5:
+        case MSG_APP_6:
+            {
+                PinyinReadWin_CirculateCallback();
+            }
+            break;
+        case MSG_APP_7:
+        case MSG_APP_8:
+        case MSG_APP_9:
+            {
+                PinyinReadWin_SingleCallback();
+            }
+            break;
+        case MSG_APP_STAR:
+        case MSG_APP_0:
+        case MSG_APP_HASH:
+            {
+                PinyinReadWin_PlayCallback();
+            }
+            break;
         case MSG_APP_UP:
             {
                 PinyinReadWin_KeyUpDown(win_id, TRUE);

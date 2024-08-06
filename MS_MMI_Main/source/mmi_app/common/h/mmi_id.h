@@ -449,9 +449,9 @@ typedef enum
     MMILIVEWALLPAPER_ANIM_CTRL_ID,
     #endif
 	MMISERVER_INFO_CTRL_ID,
-
+	//zmt add start
     MAINMENUWIN_STUDY_APP_LIST_CTRL_ID,
-	
+	//zmt add end
 	TOTAL_CONTROL_ID_NUMBER         // 控件ID的总数目
 
 }MMI_COMMON_CTRL_ID_T;
