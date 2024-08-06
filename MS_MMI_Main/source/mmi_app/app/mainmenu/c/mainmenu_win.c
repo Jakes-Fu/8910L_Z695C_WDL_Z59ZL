@@ -5460,6 +5460,28 @@ PUBLIC void MMIAPIMENU_EnterStudyApp(void)
 {
     MMK_CreateWin((uint32 *)MAINMENU_STUDY_APP_WIN_TAB,PNULL);
 }
+
+PUBLIC void ZMTApp_CloseRecordAndPlayer(void)
+{
+#ifdef WORD_CARD_SUPPORT
+    ZMTWord_CloseWordPlayer();
+#endif
+#ifdef HANZI_CARD_SUPPORT
+    ZMTHanzi_CloseHanziPlayer();
+#endif
+#ifdef POETRY_LISTEN_SUPPORT
+    ZMTPoetry_ClosePoetryPlayer();
+#endif
+#ifdef FORMULA_SUPPORT
+    ZMTFormula_CloseFormulaPlayer();
+#endif
+#ifdef ZMT_PINYIN_SUPPORT
+    ZMTPinyin_ClosePlayerHandle();
+#endif
+#ifdef ZMT_YINBIAO_SUPPORT
+    ZMTYinbiao_ClosePlayerHandle();
+#endif
+}
 //zmt add end
 
 
